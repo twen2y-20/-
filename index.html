@@ -194,7 +194,6 @@
         .folder-add-btn { background: var(--box-btn); border: 1px dashed var(--text-dark); border-radius: 8px; padding: 6px; font-weight: bold; cursor: pointer; font-size: 13px; text-align: center; }
         .folder-add-btn:hover { background: #eee; }
 
-        /* 폴더 삭제 버튼 스타일 추가 */
         .folder-delete-btn-main { background: #fff5f5; color: #ff4d4d; border: 1px dashed #ff4d4d; border-radius: 8px; padding: 6px; font-weight: bold; cursor: pointer; font-size: 13px; text-align: center; }
         .folder-delete-btn-main:hover { background: #ffe3e3; }
 
@@ -222,7 +221,11 @@
             display: flex; flex-direction: column; cursor: default; aspect-ratio: 0.9 / 1.0; position: relative;
             overflow: visible; justify-content: space-between; transition: transform 0.1s;
         }
-        .part-item.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; }
+        
+        /* 드래그 상태일 때 내부 포인터 이벤트를 무시하여 부드러운 자리 바꿈을 유도합니다. */
+        .part-item.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; cursor: grabbing; z-index: 100; }
+        .part-item.dragging * { pointer-events: none; }
+        
         .part-item:hover, .saved-card:hover { transform: scale(1.02); }
         .part-item.selected { border: 2px solid var(--text-dark); background: #ededed; }
 
@@ -503,7 +506,6 @@
         switchCharacterFolder(cleanedName);
     }
 
-    /* 폴더 삭제 처리 함수 추가 */
     function deleteCurrentCharacterFolder() {
         if (characterFolders.length <= 1) {
             alert("작업을 위해 최소 한 개의 폴더는 존재해야 합니다.");
@@ -513,15 +515,12 @@
         if (confirm(`현재 선택된 폴더 [${activeFolder}]와 내부의 모든 파츠 배치/임시 저장 데이터가 완전히 삭제됩니다. 삭제하시겠습니까?`)) {
             const indexToRemove = characterFolders.indexOf(activeFolder);
             
-            // 메모리 객체 데이터 제거
             delete folderStorages[activeFolder];
             characterFolders.splice(indexToRemove, 1);
             
-            // 전환할 새로운 타겟 폴더 인덱스 계산
             const nextActiveIdx = indexToRemove >= characterFolders.length ? characterFolders.length - 1 : indexToRemove;
             const nextFolder = characterFolders[nextActiveIdx];
             
-            // 기존 폴더 구조 강제 언로드 후 타겟 폴더로 전환 및 새로고침
             activeFolder = null; 
             switchCharacterFolder(nextFolder);
         }
@@ -709,26 +708,47 @@
     let draggedItem = null;
     function setupDragAndDropEvents(element) {
         element.addEventListener('dragstart', (e) => {
-            if(e.target.tagName === 'INPUT') { e.preventDefault(); return; }
-            draggedItem = element; element.classList.add('dragging');
+            // 인풋박스나 삭제 버튼 클릭 시 드래그 방지
+            if(e.target.tagName === 'INPUT' || e.target.classList.contains('part-delete-btn')) { 
+                e.preventDefault(); 
+                return; 
+            }
+            draggedItem = element; 
+            // 잔상 효과를 자연스럽게 처리하기 위해 비동기로 클래스 추가
+            setTimeout(() => element.classList.add('dragging'), 0);
         });
 
         element.addEventListener('dragend', () => {
-            draggedItem.classList.remove('dragging'); draggedItem = null;
+            if (!draggedItem) return;
+            draggedItem.classList.remove('dragging'); 
+            draggedItem = null;
+            
             const reordered = [];
             document.querySelectorAll('#partsGrid .part-item').forEach((card, idx) => {
                 const assetObj = assets[currentCategory].find(a => a.id === card.getAttribute('data-id'));
-                if (assetObj) { assetObj.name = `(${idx + 1}) ${assetObj.name.replace(/^\(\d+\)\s/, '')}`; reordered.push(assetObj); }
+                if (assetObj) { 
+                    // 정규식 개선으로 앞부분 번호+공백 깔끔하게 치환
+                    assetObj.name = `(${idx + 1}) ${assetObj.name.replace(/^\(\d+\)\s*/, '')}`; 
+                    reordered.push(assetObj); 
+                }
             });
-            assets[currentCategory] = reordered; renderGrid();
+            assets[currentCategory] = reordered; 
+            renderGrid();
         });
 
         element.addEventListener('dragover', (e) => {
             e.preventDefault();
-            if (element !== draggedItem) {
-                const bounding = element.getBoundingClientRect();
-                if (e.clientY - bounding.top > bounding.height / 2) element.after(draggedItem);
-                else element.before(draggedItem);
+            const targetItem = e.target.closest('.part-item:not(.dragging)');
+            if (!targetItem || draggedItem === targetItem) return;
+
+            // 요소의 너비 및 현재 마우스 위치(X축)를 기준으로 전/후 삽입 위치 판별
+            const bounding = targetItem.getBoundingClientRect();
+            const isPastHalf = (e.clientX - bounding.left) > (bounding.width / 2);
+
+            if (isPastHalf) {
+                targetItem.after(draggedItem);
+            } else {
+                targetItem.before(draggedItem);
             }
         });
     }
@@ -740,7 +760,7 @@
             else if (selections[currentCategory]?.id === id) selections[currentCategory] = null;
             
             assets[currentCategory] = assets[currentCategory].filter(a => a.id !== id);
-            assets[currentCategory].forEach((a, idx) => a.name = `(${idx + 1}) ${a.name.replace(/^\(\d+\)\s/, '')}`);
+            assets[currentCategory].forEach((a, idx) => a.name = `(${idx + 1}) ${a.name.replace(/^\(\d+\)\s*/, '')}`);
             delete imageCache[id];
 
             renderGrid(); drawPipeline();
