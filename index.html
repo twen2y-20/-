@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="포트레이트 조합기">
-    <meta property="og:description" content="웹에서 간편하게 캐릭터 파츠를 조합하고 표정을 저장해보세요.">
-    <meta property="og:type" content="website">
-    
     <title>포트레이트 조합기</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
@@ -656,7 +652,7 @@
             
             div.innerHTML = `
                 <div class="part-delete-btn" onclick="deletePartElement(event, '${item.id}', '${item.name}')">×</div>
-                <img src="${item.imgSrc}" class="part-thumb" onclick="executeImageSelect(event, '${item.id}')">
+                <img src="${item.imgSrc}" class="part-thumb" draggable="false" onclick="executeImageSelect(event, '${item.id}')">
                 <div class="title-container-el">
                     <span class="part-name" onclick="enableInlineRename(event, '${item.id}', 'asset')">${item.name}</span>
                 </div>
@@ -713,6 +709,7 @@
         });
 
         element.addEventListener('dragend', () => {
+            if (!draggedItem) return;
             draggedItem.classList.remove('dragging'); draggedItem = null;
             const reordered = [];
             document.querySelectorAll('#partsGrid .part-item').forEach((card, idx) => {
@@ -724,7 +721,7 @@
 
         element.addEventListener('dragover', (e) => {
             e.preventDefault();
-            if (element !== draggedItem) {
+            if (draggedItem && element !== draggedItem) {
                 const bounding = element.getBoundingClientRect();
                 if (e.clientY - bounding.top > bounding.height / 2) element.after(draggedItem);
                 else element.before(draggedItem);
@@ -822,12 +819,12 @@
             cropOverlay.style.top = (canvas.offsetTop + savedCropConfig.relativeTop) + 'px';
             executeCaptureAndSave();
         } else {
-            alert("지정된 썸네일 크롭 영역이 없습니다.\n붉은 점선 상자의 크기와 위치를 조절한 뒤, 빈 공간을 클릭하여 크롭 구역을 확정해 주세요.");
-            const boxSize = Math.min(rect.width, rect.height) * 0.4;
+            // 캔버스 크기의 40%인 정사각형을 기본 크기로 설정하여 중앙에 배치합니다.
+            const boxSize = Math.min(canvas.offsetWidth, canvas.offsetHeight) * 0.4;
             cropOverlay.style.width = boxSize + 'px';
             cropOverlay.style.height = boxSize + 'px';
-            cropOverlay.style.left = (canvas.offsetLeft + (rect.width - boxSize) / 2) + 'px';
-            cropOverlay.style.top = (canvas.offsetTop + (rect.height - boxSize) / 2) + 'px';
+            cropOverlay.style.left = (canvas.offsetLeft + (canvas.offsetWidth - boxSize) / 2) + 'px';
+            cropOverlay.style.top = (canvas.offsetTop + (canvas.offsetHeight - boxSize) / 2) + 'px';
             setupAdvancedCropEvents();
         }
     }
@@ -835,7 +832,7 @@
     function setupAdvancedCropEvents() {
         resizeHandle.onmousedown = function(e) {
             isResizing = true; startX = e.clientX; startY = e.clientY;
-            startWidth = parseInt(cropOverlay.offsetWidth); startHeight = parseInt(cropOverlay.offsetHeight);
+            startWidth = parseInt(cropOverlay.offsetWidth);
             e.stopPropagation(); e.preventDefault();
         };
 
@@ -848,17 +845,29 @@
 
         window.onmousemove = function(e) {
             if (!isDragging && !isResizing) return;
-            const canvasRect = canvas.getBoundingClientRect();
+            
+            const cWidth = canvas.offsetWidth;
+            const cHeight = canvas.offsetHeight;
             
             if (isResizing) {
+                // X축 이동거리에 맞춰 1:1 비율(정사각형) 유지
                 let newSize = Math.max(50, startWidth + (e.clientX - startX));
-                if (parseInt(cropOverlay.style.left) + newSize > canvas.offsetLeft + canvasRect.width) newSize = (canvas.offsetLeft + canvasRect.width) - parseInt(cropOverlay.style.left);
-                if (parseInt(cropOverlay.style.top) + newSize > canvas.offsetTop + canvasRect.height) newSize = (canvas.offsetTop + canvasRect.height) - parseInt(cropOverlay.style.top);
-                cropOverlay.style.width = newSize + 'px'; cropOverlay.style.height = newSize + 'px';
+                
+                // 크기 조절 시 캔버스 바깥으로 나가지 않도록 최대 크기 제한
+                if (parseInt(cropOverlay.style.left) + newSize > canvas.offsetLeft + cWidth) {
+                    newSize = (canvas.offsetLeft + cWidth) - parseInt(cropOverlay.style.left);
+                }
+                if (parseInt(cropOverlay.style.top) + newSize > canvas.offsetTop + cHeight) {
+                    newSize = (canvas.offsetTop + cHeight) - parseInt(cropOverlay.style.top);
+                }
+                cropOverlay.style.width = newSize + 'px'; 
+                cropOverlay.style.height = newSize + 'px';
             } else if (isDragging) {
-                let newLeft = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + canvasRect.width - cropOverlay.offsetWidth, startLeft + (e.clientX - startX)));
-                let newTop = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + canvasRect.height - cropOverlay.offsetHeight, startTop + (e.clientY - startY)));
-                cropOverlay.style.left = newLeft + 'px'; cropOverlay.style.top = newTop + 'px';
+                // 부모 컨테이너 내부의 캔버스 위치 기준으로 경계선 설정 (이미지 전체를 자유롭게 다니도록)
+                let newLeft = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + cWidth - cropOverlay.offsetWidth, startLeft + (e.clientX - startX)));
+                let newTop = Math.max(canvas.offsetTop, Math.min(canvas.offsetTop + cHeight - cropOverlay.offsetHeight, startTop + (e.clientY - startY)));
+                cropOverlay.style.left = newLeft + 'px'; 
+                cropOverlay.style.top = newTop + 'px';
             }
         };
 
@@ -880,8 +889,11 @@
     function executeCaptureAndSave() {
         const rect = canvas.getBoundingClientRect();
         const scaleX = canvas.width / rect.width, scaleY = canvas.height / rect.height;
+        
+        // 썸네일 크롭 저장 (1:1 비율 정사각형)
         const thumbCanvas = document.createElement('canvas');
-        thumbCanvas.width = 450; thumbCanvas.height = 450;
+        thumbCanvas.width = 450; 
+        thumbCanvas.height = 450;
         
         thumbCanvas.getContext('2d').drawImage(canvas, 
             (parseInt(cropOverlay.style.left) - canvas.offsetLeft) * scaleX, 
