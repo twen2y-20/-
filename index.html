@@ -222,7 +222,6 @@
             display: flex; flex-direction: column; cursor: default; aspect-ratio: 0.9 / 1.0; position: relative;
             overflow: visible; justify-content: space-between; transition: transform 0.1s;
         }
-        .part-item.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; }
         .part-item:hover, .saved-card:hover { transform: scale(1.02); }
         .part-item.selected { border: 2px solid var(--text-dark); background: #ededed; }
 
@@ -651,9 +650,7 @@
             const isSelected = currentCategory.startsWith('etc') ? selections[currentCategory].some(a => a.id === item.id) : (selections[currentCategory]?.id === item.id);
 
             div.className = `part-item ${isSelected ? 'selected' : ''}`;
-            div.setAttribute('draggable', true);
             div.setAttribute('data-id', item.id);
-            setupDragAndDropEvents(div);
             
             div.innerHTML = `
                 <div class="part-delete-btn" onclick="deletePartElement(event, '${item.id}', '${item.name}')">×</div>
@@ -706,7 +703,7 @@
         input.onblur = commitRename;
     }
 
-       function deletePartElement(event, id, name) {
+    function deletePartElement(event, id, name) {
         event.stopPropagation();
         if (confirm(`${name} 파츠를 에셋 목록에서 완전히 삭제하시겠습니까?`)) {
             if (currentCategory.startsWith('etc')) selections[currentCategory] = selections[currentCategory].filter(a => a.id !== id);
