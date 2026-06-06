@@ -218,11 +218,11 @@
 
         .part-item, .saved-card {
             background: var(--box-btn); border: 1px solid var(--border); border-radius: 15px; padding: 8px;
-            display: flex; flex-direction: column; cursor: default; aspect-ratio: 0.9 / 1.0; position: relative;
+            display: flex; flex-direction: column; cursor: pointer; aspect-ratio: 0.9 / 1.0; position: relative;
             overflow: visible; justify-content: space-between; transition: transform 0.1s;
         }
         
-        /* 드래그 상태일 때 내부 포인터 이벤트를 무시하여 부드러운 자리 바꿈을 유도합니다. */
+        /* 드래그 상태일 때 내부 요소의 이벤트를 차단하여 버벅임 방지 */
         .part-item.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; cursor: grabbing; z-index: 100; }
         .part-item.dragging * { pointer-events: none; }
         
@@ -445,6 +445,7 @@
         renderFolderTabs();
         updateCanvasSize();
         setupGlobalKeyboardEvents();
+        setupGridDragAndDrop(); // 전체 그리드 드래그 위임 이벤트 초기화
     };
 
     function renderFolderTabs() {
@@ -641,6 +642,66 @@
         event.target.value = '';
     }
 
+    // ★ 이벤트 위임을 통한 통합 드래그 앤 드롭 관리 함수 (null 텍스트 생성 버그 해결)
+    let draggedItem = null;
+    function setupGridDragAndDrop() {
+        const partsGrid = document.getElementById('partsGrid');
+
+        partsGrid.addEventListener('dragstart', (e) => {
+            const item = e.target.closest('.part-item');
+            if (!item) return;
+
+            // 인풋박스나 삭제 버튼 클릭 시 드래그 취소
+            if (e.target.tagName === 'INPUT' || e.target.classList.contains('part-delete-btn')) {
+                e.preventDefault();
+                return;
+            }
+
+            draggedItem = item;
+            if (e.dataTransfer) {
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', item.getAttribute('data-id'));
+            }
+            setTimeout(() => item.classList.add('dragging'), 0);
+        });
+
+        partsGrid.addEventListener('dragend', (e) => {
+            if (!draggedItem) return;
+            draggedItem.classList.remove('dragging');
+            draggedItem = null;
+
+            const reordered = [];
+            document.querySelectorAll('#partsGrid .part-item').forEach((card, idx) => {
+                const assetObj = assets[currentCategory].find(a => a.id === card.getAttribute('data-id'));
+                if (assetObj) {
+                    assetObj.name = `(${idx + 1}) ${assetObj.name.replace(/^\(\d+\)\s*/, '')}`;
+                    reordered.push(assetObj);
+                }
+            });
+            assets[currentCategory] = reordered;
+            renderGrid();
+        });
+
+        partsGrid.addEventListener('dragover', (e) => {
+            e.preventDefault(); // 기본 요소 드롭 허용
+            
+            // ★ 중요 방어: 파츠가 아닌 바탕화면 파일, 기본 이미지 등을 드래그했을 때 null 삽입 방지
+            if (!draggedItem) return;
+
+            const targetItem = e.target.closest('.part-item:not(.dragging)');
+            if (!targetItem || draggedItem === targetItem) return;
+
+            const bounding = targetItem.getBoundingClientRect();
+            const isPastHalf = (e.clientX - bounding.left) > (bounding.width / 2);
+
+            if (isPastHalf) {
+                targetItem.after(draggedItem);
+            } else {
+                targetItem.before(draggedItem);
+            }
+        });
+    }
+
     function renderGrid() {
         const grid = document.getElementById('partsGrid');
         grid.innerHTML = '';
@@ -652,11 +713,11 @@
             div.className = `part-item ${isSelected ? 'selected' : ''}`;
             div.setAttribute('draggable', true);
             div.setAttribute('data-id', item.id);
-            setupDragAndDropEvents(div);
             
+            // 이미지 내부 드래그 시 브라우저 기본 동작 충돌을 막기 위해 draggable="false" 속성 추가
             div.innerHTML = `
                 <div class="part-delete-btn" onclick="deletePartElement(event, '${item.id}', '${item.name}')">×</div>
-                <img src="${item.imgSrc}" class="part-thumb" onclick="executeImageSelect(event, '${item.id}')">
+                <img src="${item.imgSrc}" class="part-thumb" draggable="false" onclick="executeImageSelect(event, '${item.id}')">
                 <div class="title-container-el">
                     <span class="part-name" onclick="enableInlineRename(event, '${item.id}', 'asset')">${item.name}</span>
                 </div>
@@ -703,54 +764,6 @@
 
         input.onkeydown = (e) => { if (e.key === 'Enter') commitRename(); if (e.key === 'Escape') type === 'asset' ? renderGrid() : renderSavedList(); };
         input.onblur = commitRename;
-    }
-
-    let draggedItem = null;
-    function setupDragAndDropEvents(element) {
-        element.addEventListener('dragstart', (e) => {
-            // 인풋박스나 삭제 버튼 클릭 시 드래그 방지
-            if(e.target.tagName === 'INPUT' || e.target.classList.contains('part-delete-btn')) { 
-                e.preventDefault(); 
-                return; 
-            }
-            draggedItem = element; 
-            // 잔상 효과를 자연스럽게 처리하기 위해 비동기로 클래스 추가
-            setTimeout(() => element.classList.add('dragging'), 0);
-        });
-
-        element.addEventListener('dragend', () => {
-            if (!draggedItem) return;
-            draggedItem.classList.remove('dragging'); 
-            draggedItem = null;
-            
-            const reordered = [];
-            document.querySelectorAll('#partsGrid .part-item').forEach((card, idx) => {
-                const assetObj = assets[currentCategory].find(a => a.id === card.getAttribute('data-id'));
-                if (assetObj) { 
-                    // 정규식 개선으로 앞부분 번호+공백 깔끔하게 치환
-                    assetObj.name = `(${idx + 1}) ${assetObj.name.replace(/^\(\d+\)\s*/, '')}`; 
-                    reordered.push(assetObj); 
-                }
-            });
-            assets[currentCategory] = reordered; 
-            renderGrid();
-        });
-
-        element.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            const targetItem = e.target.closest('.part-item:not(.dragging)');
-            if (!targetItem || draggedItem === targetItem) return;
-
-            // 요소의 너비 및 현재 마우스 위치(X축)를 기준으로 전/후 삽입 위치 판별
-            const bounding = targetItem.getBoundingClientRect();
-            const isPastHalf = (e.clientX - bounding.left) > (bounding.width / 2);
-
-            if (isPastHalf) {
-                targetItem.after(draggedItem);
-            } else {
-                targetItem.before(draggedItem);
-            }
-        });
     }
 
     function deletePartElement(event, id, name) {
