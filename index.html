@@ -222,6 +222,7 @@
             display: flex; flex-direction: column; cursor: default; aspect-ratio: 0.9 / 1.0; position: relative;
             overflow: visible; justify-content: space-between; transition: transform 0.1s;
         }
+        .part-item.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; }
         .part-item:hover, .saved-card:hover { transform: scale(1.02); }
         .part-item.selected { border: 2px solid var(--text-dark); background: #ededed; }
 
@@ -650,7 +651,9 @@
             const isSelected = currentCategory.startsWith('etc') ? selections[currentCategory].some(a => a.id === item.id) : (selections[currentCategory]?.id === item.id);
 
             div.className = `part-item ${isSelected ? 'selected' : ''}`;
+            div.setAttribute('draggable', true);
             div.setAttribute('data-id', item.id);
+            setupDragAndDropEvents(div);
             
             div.innerHTML = `
                 <div class="part-delete-btn" onclick="deletePartElement(event, '${item.id}', '${item.name}')">×</div>
@@ -701,6 +704,33 @@
 
         input.onkeydown = (e) => { if (e.key === 'Enter') commitRename(); if (e.key === 'Escape') type === 'asset' ? renderGrid() : renderSavedList(); };
         input.onblur = commitRename;
+    }
+
+    let draggedItem = null;
+    function setupDragAndDropEvents(element) {
+        element.addEventListener('dragstart', (e) => {
+            if(e.target.tagName === 'INPUT') { e.preventDefault(); return; }
+            draggedItem = element; element.classList.add('dragging');
+        });
+
+        element.addEventListener('dragend', () => {
+            draggedItem.classList.remove('dragging'); draggedItem = null;
+            const reordered = [];
+            document.querySelectorAll('#partsGrid .part-item').forEach((card, idx) => {
+                const assetObj = assets[currentCategory].find(a => a.id === card.getAttribute('data-id'));
+                if (assetObj) { assetObj.name = `(${idx + 1}) ${assetObj.name.replace(/^\(\d+\)\s/, '')}`; reordered.push(assetObj); }
+            });
+            assets[currentCategory] = reordered; renderGrid();
+        });
+
+        element.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (element !== draggedItem) {
+                const bounding = element.getBoundingClientRect();
+                if (e.clientY - bounding.top > bounding.height / 2) element.after(draggedItem);
+                else element.before(draggedItem);
+            }
+        });
     }
 
     function deletePartElement(event, id, name) {
