@@ -73,7 +73,7 @@
             object-fit: contain;
             background: transparent;
             image-rendering: auto;
-            border: 1px solid #d0d0d0; /* 추가된 연한 구분선 */
+            border: 1px solid #d0d0d0;
         }
 
         .nudge-controller-panel {
@@ -227,7 +227,7 @@
             display: flex; flex-direction: column; cursor: default; aspect-ratio: 0.9 / 1.0; position: relative;
             overflow: visible; justify-content: space-between; transition: transform 0.1s;
         }
-        .part-item.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; }
+        .part-item.dragging, .saved-card.dragging { opacity: 0.4; border: 2px dashed var(--text-dark); background: #e0e0e0; }
         .part-item:hover, .saved-card:hover { transform: scale(1.02); }
         .part-item.selected { border: 2px solid var(--text-dark); background: #ededed; }
 
@@ -734,6 +734,37 @@
         });
     }
 
+    function setupSavedDragAndDropEvents(element) {
+        element.addEventListener('dragstart', (e) => {
+            if(e.target.tagName === 'INPUT') { e.preventDefault(); return; }
+            draggedItem = element; 
+            element.classList.add('dragging');
+        });
+
+        element.addEventListener('dragend', () => {
+            draggedItem.classList.remove('dragging'); 
+            draggedItem = null;
+            
+            const reordered = [];
+            document.querySelectorAll('#savedListGrid .saved-card').forEach((card) => {
+                const exprObj = savedExpressions.find(e => e.id === card.getAttribute('data-id'));
+                if (exprObj) reordered.push(exprObj);
+            });
+            
+            savedExpressions.splice(0, savedExpressions.length, ...reordered);
+            renderSavedList();
+        });
+
+        element.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (element !== draggedItem) {
+                const bounding = element.getBoundingClientRect();
+                if (e.clientY - bounding.top > bounding.height / 2) element.after(draggedItem);
+                else element.before(draggedItem);
+            }
+        });
+    }
+
     function deletePartElement(event, id, name) {
         event.stopPropagation();
         if (confirm(`${name} 파츠를 에셋 목록에서 완전히 삭제하시겠습니까?`)) {
@@ -808,10 +839,8 @@
         }
 
         if (savedCropConfig) {
-            // 이미 크롭 설정이 있다면 UI 렌더링 과정을 건너뛰고 비율 좌표를 바로 캡처하여 고정
             executeCaptureAndSave();
         } else {
-            // 초기 설정 시 UI 박스 노출
             cropOverlay.style.display = 'block';
             alert("지정된 썸네일 크롭 영역이 없습니다.\n붉은 점선 상자의 크기와 위치를 조절한 뒤, 빈 공간을 클릭하여 크롭 구역을 확정해 주세요.");
             const boxSize = Math.min(canvas.clientWidth, canvas.clientHeight) * 0.4;
@@ -849,7 +878,6 @@
                 cropOverlay.style.width = newSize + 'px'; 
                 cropOverlay.style.height = newSize + 'px';
             } else if (isDragging) {
-                // 상하좌우 offsetLeft, offsetTop을 캔버스의 실질적 여백(clientWidth/Height)으로 명확히 연동하여 범위 이탈 방지
                 let newLeft = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + canvas.clientWidth - cropOverlay.offsetWidth, startLeft + (e.clientX - startX)));
                 let newTop = Math.max(canvas.offsetTop, Math.min(canvas.offsetTop + canvas.clientHeight - cropOverlay.offsetHeight, startTop + (e.clientY - startY)));
                 cropOverlay.style.left = newLeft + 'px'; 
@@ -864,7 +892,6 @@
     function finishCropProcess() {
         window.onmousemove = null; window.onmouseup = null; canvasContainer.onmousedown = null;
         
-        // 캔버스의 스크린 상 크기 대비 크롭 박스의 비율을 계산하여 절대적인 내부 위치 값을 저장합니다.
         const cW = canvas.clientWidth;
         const cH = canvas.clientHeight;
         savedCropConfig = {
@@ -882,13 +909,11 @@
         let drawX, drawY, drawW, drawH;
 
         if (savedCropConfig && savedCropConfig.px !== undefined) {
-            // 저장된 비율 데이터를 원본 이미지 해상도에 반영하여 오차 없이 동일한 영역 고정 추출
             drawX = savedCropConfig.px * canvas.width;
             drawY = savedCropConfig.py * canvas.height;
             drawW = savedCropConfig.pw * canvas.width;
             drawH = savedCropConfig.ph * canvas.height;
         } else {
-            // 초기 설정이 없거나 구버전 호환 처리
             const scaleX = canvas.width / canvas.clientWidth;
             const scaleY = canvas.height / canvas.clientHeight;
             drawX = (parseInt(cropOverlay.style.left) - canvas.offsetLeft) * scaleX;
@@ -925,6 +950,9 @@
         savedExpressions.forEach((expr, index) => {
             const card = document.createElement('div');
             card.className = 'saved-card';
+            card.setAttribute('draggable', true);
+            card.setAttribute('data-id', expr.id);
+            setupSavedDragAndDropEvents(card);
             card.innerHTML = `
                 <div class="saved-delete-btn" onclick="deleteSnapshot(event, ${index}, '${expr.filename}')">×</div>
                 <img src="${expr.thumb}" class="saved-thumb" onclick="loadSnapshot(${index})">
@@ -1000,7 +1028,14 @@
 
     function deleteSnapshot(event, index, filename) {
         event.stopPropagation();
-        if (confirm(`${filename}을 삭제하시겠습니까?`)) { savedExpressions.splice(index, 1); renderSavedList(); }
+        if (confirm(`${filename}을 삭제하시겠습니까?`)) { 
+            savedExpressions.splice(index, 1); 
+            if (savedExpressions.length === 0) {
+                savedCropConfig = null;
+                folderStorages[activeFolder].savedCropConfig = null;
+            }
+            renderSavedList(); 
+        }
     }
 
     function resetExceptBody() {
