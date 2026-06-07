@@ -72,8 +72,8 @@
             max-height: 100%;
             object-fit: contain;
             background: transparent;
-            /* 원본 화질 유지를 위해 불필요한 속성 제거 및 기본값 설정 */
             image-rendering: auto;
+            border: 1px solid #d0d0d0; /* 추가된 연한 구분선 */
         }
 
         .nudge-controller-panel {
@@ -177,14 +177,14 @@
             border-top: 1px solid var(--border);
             padding-top: 8px; margin-top: 5px;
             display: flex; flex-direction: column; gap: 6px;
-            flex: 1; /* 남은 공간을 모두 차지하도록 설정 */
-            min-height: 0; /* Flex 자식 요소의 스크롤을 위한 필수 속성 */
+            flex: 1;
+            min-height: 0;
         }
         .folder-label-title { font-size: 11px; font-weight: bold; color: #555; padding-left: 2px; }
         .folder-list-wrapper { 
             display: flex; flex-direction: column; gap: 4px; 
-            flex: 1; /* 부모 영역만큼 확장 */
-            overflow-y: auto; /* 내용이 넘치면 스크롤 발생 */
+            flex: 1; 
+            overflow-y: auto; 
         }
         
         .folder-item-row { display: flex; gap: 4px; align-items: center; width: 100%; flex-shrink: 0; }
@@ -447,14 +447,6 @@
         renderFolderTabs();
         updateCanvasSize();
         setupGlobalKeyboardEvents();
-
-        // 윈도우 창 조절 시 크롭 박스가 캔버스에 맞춰 반응형으로 고정되도록 추가
-        window.addEventListener('resize', () => {
-            if (cropOverlay.style.display === 'block' && savedCropConfig) {
-                cropOverlay.style.left = (canvas.offsetLeft + savedCropConfig.relativeLeft) + 'px';
-                cropOverlay.style.top = (canvas.offsetTop + savedCropConfig.relativeTop) + 'px';
-            }
-        });
     };
 
     function renderFolderTabs() {
@@ -770,8 +762,6 @@
         const targetW = parseInt(document.getElementById('canvasWidthInput').value) || 480;
         const targetH = parseInt(document.getElementById('canvasHeightInput').value) || 720;
         
-        // 화질 및 속도 개선을 위해 불필요한 확대 렌더링 후 축소(TempCanvas) 로직 완전 제거
-        // 원본 품질을 그대로 살려 한 번만 그리도록 최적화
         canvas.width = targetW;
         canvas.height = targetH;
         
@@ -817,22 +807,18 @@
             return;
         }
 
-        const rect = canvas.getBoundingClientRect();
-        cropOverlay.style.display = 'block';
-
         if (savedCropConfig) {
-            cropOverlay.style.width = savedCropConfig.width + 'px';
-            cropOverlay.style.height = savedCropConfig.height + 'px';
-            cropOverlay.style.left = (canvas.offsetLeft + savedCropConfig.relativeLeft) + 'px';
-            cropOverlay.style.top = (canvas.offsetTop + savedCropConfig.relativeTop) + 'px';
+            // 이미 크롭 설정이 있다면 UI 렌더링 과정을 건너뛰고 비율 좌표를 바로 캡처하여 고정
             executeCaptureAndSave();
         } else {
+            // 초기 설정 시 UI 박스 노출
+            cropOverlay.style.display = 'block';
             alert("지정된 썸네일 크롭 영역이 없습니다.\n붉은 점선 상자의 크기와 위치를 조절한 뒤, 빈 공간을 클릭하여 크롭 구역을 확정해 주세요.");
-            const boxSize = Math.min(rect.width, rect.height) * 0.4;
+            const boxSize = Math.min(canvas.clientWidth, canvas.clientHeight) * 0.4;
             cropOverlay.style.width = boxSize + 'px';
             cropOverlay.style.height = boxSize + 'px';
-            cropOverlay.style.left = (canvas.offsetLeft + (rect.width - boxSize) / 2) + 'px';
-            cropOverlay.style.top = (canvas.offsetTop + (rect.height - boxSize) / 2) + 'px';
+            cropOverlay.style.left = (canvas.offsetLeft + (canvas.clientWidth - boxSize) / 2) + 'px';
+            cropOverlay.style.top = (canvas.offsetTop + (canvas.clientHeight - boxSize) / 2) + 'px';
             setupAdvancedCropEvents();
         }
     }
@@ -853,17 +839,21 @@
 
         window.onmousemove = function(e) {
             if (!isDragging && !isResizing) return;
-            const canvasRect = canvas.getBoundingClientRect();
             
             if (isResizing) {
                 let newSize = Math.max(50, startWidth + (e.clientX - startX));
-                if (parseInt(cropOverlay.style.left) + newSize > canvas.offsetLeft + canvasRect.width) newSize = (canvas.offsetLeft + canvasRect.width) - parseInt(cropOverlay.style.left);
-                if (parseInt(cropOverlay.style.top) + newSize > canvas.offsetTop + canvasRect.height) newSize = (canvas.offsetTop + canvasRect.height) - parseInt(cropOverlay.style.top);
-                cropOverlay.style.width = newSize + 'px'; cropOverlay.style.height = newSize + 'px';
+                if (parseInt(cropOverlay.style.left) + newSize > canvas.offsetLeft + canvas.clientWidth) 
+                    newSize = (canvas.offsetLeft + canvas.clientWidth) - parseInt(cropOverlay.style.left);
+                if (parseInt(cropOverlay.style.top) + newSize > canvas.offsetTop + canvas.clientHeight) 
+                    newSize = (canvas.offsetTop + canvas.clientHeight) - parseInt(cropOverlay.style.top);
+                cropOverlay.style.width = newSize + 'px'; 
+                cropOverlay.style.height = newSize + 'px';
             } else if (isDragging) {
-                let newLeft = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + canvasRect.width - cropOverlay.offsetWidth, startLeft + (e.clientX - startX)));
-                let newTop = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + canvasRect.height - cropOverlay.offsetHeight, startTop + (e.clientY - startY)));
-                cropOverlay.style.left = newLeft + 'px'; cropOverlay.style.top = newTop + 'px';
+                // 상하좌우 offsetLeft, offsetTop을 캔버스의 실질적 여백(clientWidth/Height)으로 명확히 연동하여 범위 이탈 방지
+                let newLeft = Math.max(canvas.offsetLeft, Math.min(canvas.offsetLeft + canvas.clientWidth - cropOverlay.offsetWidth, startLeft + (e.clientX - startX)));
+                let newTop = Math.max(canvas.offsetTop, Math.min(canvas.offsetTop + canvas.clientHeight - cropOverlay.offsetHeight, startTop + (e.clientY - startY)));
+                cropOverlay.style.left = newLeft + 'px'; 
+                cropOverlay.style.top = newTop + 'px';
             }
         };
 
@@ -873,25 +863,45 @@
 
     function finishCropProcess() {
         window.onmousemove = null; window.onmouseup = null; canvasContainer.onmousedown = null;
+        
+        // 캔버스의 스크린 상 크기 대비 크롭 박스의 비율을 계산하여 절대적인 내부 위치 값을 저장합니다.
+        const cW = canvas.clientWidth;
+        const cH = canvas.clientHeight;
         savedCropConfig = {
-            width: cropOverlay.offsetWidth, height: cropOverlay.offsetHeight,
-            relativeLeft: parseInt(cropOverlay.style.left) - canvas.offsetLeft,
-            relativeTop: parseInt(cropOverlay.style.top) - canvas.offsetTop
+            px: (parseInt(cropOverlay.style.left) - canvas.offsetLeft) / cW,
+            py: (parseInt(cropOverlay.style.top) - canvas.offsetTop) / cH,
+            pw: cropOverlay.offsetWidth / cW,
+            ph: cropOverlay.offsetHeight / cH
         };
+        
         folderStorages[activeFolder].savedCropConfig = savedCropConfig;
         executeCaptureAndSave();
     }
 
     function executeCaptureAndSave() {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width, scaleY = canvas.height / rect.height;
+        let drawX, drawY, drawW, drawH;
+
+        if (savedCropConfig && savedCropConfig.px !== undefined) {
+            // 저장된 비율 데이터를 원본 이미지 해상도에 반영하여 오차 없이 동일한 영역 고정 추출
+            drawX = savedCropConfig.px * canvas.width;
+            drawY = savedCropConfig.py * canvas.height;
+            drawW = savedCropConfig.pw * canvas.width;
+            drawH = savedCropConfig.ph * canvas.height;
+        } else {
+            // 초기 설정이 없거나 구버전 호환 처리
+            const scaleX = canvas.width / canvas.clientWidth;
+            const scaleY = canvas.height / canvas.clientHeight;
+            drawX = (parseInt(cropOverlay.style.left) - canvas.offsetLeft) * scaleX;
+            drawY = (parseInt(cropOverlay.style.top) - canvas.offsetTop) * scaleY;
+            drawW = cropOverlay.offsetWidth * scaleX;
+            drawH = cropOverlay.offsetHeight * scaleY;
+        }
+
         const thumbCanvas = document.createElement('canvas');
         thumbCanvas.width = 450; thumbCanvas.height = 450;
         
         thumbCanvas.getContext('2d').drawImage(canvas, 
-            (parseInt(cropOverlay.style.left) - canvas.offsetLeft) * scaleX, 
-            (parseInt(cropOverlay.style.top) - canvas.offsetTop) * scaleY, 
-            cropOverlay.offsetWidth * scaleX, cropOverlay.offsetHeight * scaleY, 0, 0, 450, 450
+            drawX, drawY, drawW, drawH, 0, 0, 450, 450
         );
         
         cropOverlay.style.display = 'none';
