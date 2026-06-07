@@ -231,6 +231,7 @@
         .part-item:hover, .saved-card:hover { transform: scale(1.02); }
         .part-item.selected { border: 2px solid var(--text-dark); background: #ededed; }
 
+        /* 이미지에 커서를 올렸을 때 드래그 가능한 느낌을 주기 위해 cursor 속성 유지 */
         .part-thumb, .saved-thumb { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: #e9e9e9; border-radius: 8px; cursor: pointer; }
         .title-container-el { display: flex; align-items: center; justify-content: center; margin-top: 4px; min-height: 18px; width: 100%; }
 
@@ -652,13 +653,15 @@
             const isSelected = currentCategory.startsWith('etc') ? selections[currentCategory].some(a => a.id === item.id) : (selections[currentCategory]?.id === item.id);
 
             div.className = `part-item ${isSelected ? 'selected' : ''}`;
-            div.setAttribute('draggable', true);
+            // 초기 드래그 속성은 false로 설정
+            div.setAttribute('draggable', 'false');
             div.setAttribute('data-id', item.id);
             setupDragAndDropEvents(div);
             
+            // 썸네일 이미지에 draggable="false"를 줘서 브라우저의 기본 이미지 드래그가 간섭하지 못하게 방지
             div.innerHTML = `
                 <div class="part-delete-btn" onclick="deletePartElement(event, '${item.id}', '${item.name}')">×</div>
-                <img src="${item.imgSrc}" class="part-thumb" onclick="executeImageSelect(event, '${item.id}')">
+                <img src="${item.imgSrc}" class="part-thumb" draggable="false" onclick="executeImageSelect(event, '${item.id}')">
                 <div class="title-container-el">
                     <span class="part-name" onclick="enableInlineRename(event, '${item.id}', 'asset')">${item.name}</span>
                 </div>
@@ -708,14 +711,28 @@
     }
 
     let draggedItem = null;
+
     function setupDragAndDropEvents(element) {
+        // 이미지(썸네일) 영역을 클릭했을 때만 상위 컨테이너의 드래그를 활성화
+        element.addEventListener('mousedown', (e) => {
+            if (e.target.classList.contains('part-thumb')) {
+                element.setAttribute('draggable', 'true');
+            } else {
+                element.setAttribute('draggable', 'false');
+            }
+        });
+
         element.addEventListener('dragstart', (e) => {
             if(e.target.tagName === 'INPUT') { e.preventDefault(); return; }
-            draggedItem = element; element.classList.add('dragging');
+            draggedItem = element; 
+            element.classList.add('dragging');
         });
 
         element.addEventListener('dragend', () => {
-            draggedItem.classList.remove('dragging'); draggedItem = null;
+            if (draggedItem) draggedItem.classList.remove('dragging'); 
+            draggedItem = null;
+            element.setAttribute('draggable', 'false'); // 드래그 종료 시 다시 비활성화
+
             const reordered = [];
             document.querySelectorAll('#partsGrid .part-item').forEach((card, idx) => {
                 const assetObj = assets[currentCategory].find(a => a.id === card.getAttribute('data-id'));
@@ -726,15 +743,29 @@
 
         element.addEventListener('dragover', (e) => {
             e.preventDefault();
-            if (element !== draggedItem) {
+            if (element !== draggedItem && draggedItem) {
                 const bounding = element.getBoundingClientRect();
-                if (e.clientY - bounding.top > bounding.height / 2) element.after(draggedItem);
-                else element.before(draggedItem);
+                // X좌표(마우스 좌우 위치) 기준으로 절반을 넘어갔는지 판단하여 요소를 앞, 뒤로 매끄럽게 재배치
+                const isAfter = (e.clientX > bounding.left + bounding.width / 2);
+                
+                if (isAfter) {
+                    element.after(draggedItem);
+                } else {
+                    element.before(draggedItem);
+                }
             }
         });
     }
 
     function setupSavedDragAndDropEvents(element) {
+        element.addEventListener('mousedown', (e) => {
+            if (e.target.classList.contains('saved-thumb')) {
+                element.setAttribute('draggable', 'true');
+            } else {
+                element.setAttribute('draggable', 'false');
+            }
+        });
+
         element.addEventListener('dragstart', (e) => {
             if(e.target.tagName === 'INPUT') { e.preventDefault(); return; }
             draggedItem = element; 
@@ -742,8 +773,9 @@
         });
 
         element.addEventListener('dragend', () => {
-            draggedItem.classList.remove('dragging'); 
+            if (draggedItem) draggedItem.classList.remove('dragging'); 
             draggedItem = null;
+            element.setAttribute('draggable', 'false');
             
             const reordered = [];
             document.querySelectorAll('#savedListGrid .saved-card').forEach((card) => {
@@ -757,10 +789,15 @@
 
         element.addEventListener('dragover', (e) => {
             e.preventDefault();
-            if (element !== draggedItem) {
+            if (element !== draggedItem && draggedItem) {
                 const bounding = element.getBoundingClientRect();
-                if (e.clientY - bounding.top > bounding.height / 2) element.after(draggedItem);
-                else element.before(draggedItem);
+                const isAfter = (e.clientX > bounding.left + bounding.width / 2);
+                
+                if (isAfter) {
+                    element.after(draggedItem);
+                } else {
+                    element.before(draggedItem);
+                }
             }
         });
     }
@@ -950,12 +987,14 @@
         savedExpressions.forEach((expr, index) => {
             const card = document.createElement('div');
             card.className = 'saved-card';
-            card.setAttribute('draggable', true);
+            card.setAttribute('draggable', 'false');
             card.setAttribute('data-id', expr.id);
             setupSavedDragAndDropEvents(card);
+            
+            // 썸네일 이미지에 draggable="false" 추가
             card.innerHTML = `
                 <div class="saved-delete-btn" onclick="deleteSnapshot(event, ${index}, '${expr.filename}')">×</div>
-                <img src="${expr.thumb}" class="saved-thumb" onclick="loadSnapshot(${index})">
+                <img src="${expr.thumb}" class="saved-thumb" draggable="false" onclick="loadSnapshot(${index})">
                 <div class="title-container-el">
                     <span class="saved-title-text" onclick="enableInlineRename(event, '${expr.id}', 'expression')">${expr.filename}</span>
                 </div>
