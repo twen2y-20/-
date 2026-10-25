@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth"><head>
+<html lang="ko" class="scroll-smooth">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>가공 샘플</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -30,7 +31,7 @@
       pointer-events: auto;
     }
   </style>
-<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.top-0{top:0px}.top-\[53px\]{top:53px}.right-2{right:0.5rem}.top-1{top:0.25rem}.top-2{top:0.5rem}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.z-10{z-index:10}.col-span-full{grid-column:1 / -1}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-1\.5{margin-bottom:0.375rem}.mb-2{margin-bottom:0.5rem}.ml-1\.5{margin-left:0.375rem}.mr-1\.5{margin-right:0.375rem}.ml-2{margin-left:0.5rem}.ml-\[-4px\]{margin-left:-4px}.mr-1{margin-right:0.25rem}.mr-2{margin-right:0.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-2{height:0.5rem}.h-3\.5{height:0.875rem}.max-h-\[45vh\]{max-height:45vh}.max-h-\[50vh\]{max-height:50vh}.max-h-\[55vh\]{max-height:55vh}.max-h-\[60vh\]{max-height:60vh}.max-h-\[90vh\]{max-height:90vh}.min-h-screen{min-height:100vh}.min-h-\[80px\]{min-height:80px}.w-2{width:0.5rem}.w-3\.5{width:0.875rem}.w-auto{width:auto}.w-full{width:100%}.w-8{width:2rem}.w-1\/3{width:33.333333%}.w-10{width:2.5rem}.w-16{width:4rem}.w-20{width:5rem}.max-w-4xl{max-width:56rem}.max-w-6xl{max-width:72rem}.max-w-2xl{max-width:42rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.cursor-default{cursor:default}.cursor-pointer{cursor:pointer}.scroll-mt-24{scroll-margin-top:6rem}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-1{gap:0.25rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.space-y-12 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.scroll-smooth{scroll-behavior:smooth}.whitespace-nowrap{white-space:nowrap}.whitespace-pre-wrap{white-space:pre-wrap}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-md{border-radius:0.375rem}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-gray-300{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.border-black{--tw-border-opacity:1;border-color:rgb(0 0 0 / var(--tw-border-opacity, 1))}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.border-emerald-200{--tw-border-opacity:1;border-color:rgb(167 243 208 / var(--tw-border-opacity, 1))}.border-rose-200{--tw-border-opacity:1;border-color:rgb(254 205 211 / var(--tw-border-opacity, 1))}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138 / var(--tw-border-opacity, 1))}.border-amber-300{--tw-border-opacity:1;border-color:rgb(252 211 77 / var(--tw-border-opacity, 1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-white\/80{background-color:rgb(255 255 255 / 0.8)}.bg-white\/90{background-color:rgb(255 255 255 / 0.9)}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229 / var(--tw-bg-opacity, 1))}.bg-emerald-50\/50{background-color:rgb(236 253 245 / 0.5)}.bg-rose-100{--tw-bg-opacity:1;background-color:rgb(255 228 230 / var(--tw-bg-opacity, 1))}.bg-rose-50\/50{background-color:rgb(255 241 242 / 0.5)}.bg-transparent{background-color:transparent}.bg-amber-200{--tw-bg-opacity:1;background-color:rgb(253 230 138 / var(--tw-bg-opacity, 1))}.bg-amber-50{--tw-bg-opacity:1;background-color:rgb(255 251 235 / var(--tw-bg-opacity, 1))}.bg-emerald-50{--tw-bg-opacity:1;background-color:rgb(236 253 245 / var(--tw-bg-opacity, 1))}.object-contain{object-fit:contain}.p-2{padding:0.5rem}.p-1\.5{padding:0.375rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-1{padding:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-8{padding-top:2rem;padding-bottom:2rem}.px-0\.5{padding-left:0.125rem;padding-right:0.125rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.pb-2{padding-bottom:0.5rem}.pb-20{padding-bottom:5rem}.pt-8{padding-top:2rem}.pb-3{padding-bottom:0.75rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.pt-3{padding-top:0.75rem}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-base{font-size:1rem;line-height:1.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-\[9px\]{font-size:9px}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-emerald-800{--tw-text-opacity:1;color:rgb(6 95 70 / var(--tw-text-opacity, 1))}.text-emerald-900{--tw-text-opacity:1;color:rgb(6 78 59 / var(--tw-text-opacity, 1))}.text-rose-800{--tw-text-opacity:1;color:rgb(159 18 57 / var(--tw-text-opacity, 1))}.text-rose-900{--tw-text-opacity:1;color:rgb(136 19 55 / var(--tw-text-opacity, 1))}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15 / var(--tw-text-opacity, 1))}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105 / var(--tw-text-opacity, 1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.accent-black{accent-color:#000}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.hover\:border-gray-300:hover{--tw-border-opacity:1;border-color:rgb(209 213 219 / var(--tw-border-opacity, 1))}.hover\:bg-gray-100:hover{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-200:hover{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-700:hover{--tw-bg-opacity:1;background-color:rgb(4 120 87 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-300:hover{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-800:hover{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.hover\:text-black:hover{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity, 1))}.hover\:text-red-500:hover{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.hover\:text-red-700:hover{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.hover\:opacity-80:hover{opacity:0.8}.hover\:opacity-85:hover{opacity:0.85}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.dark\:block:is(.dark *){display:block}.dark\:hidden:is(.dark *){display:none}.dark\:border-gray-700:is(.dark *){--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.dark\:border-gray-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(31 41 55 / var(--tw-border-opacity, 1))}.dark\:border-white:is(.dark *){--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.dark\:border-emerald-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(6 95 70 / var(--tw-border-opacity, 1))}.dark\:border-rose-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(159 18 57 / var(--tw-border-opacity, 1))}.dark\:border-amber-800:is(.dark *){--tw-border-opacity:1;border-color:rgb(146 64 14 / var(--tw-border-opacity, 1))}.dark\:bg-gray-800:is(.dark *){--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.dark\:bg-gray-900\/80:is(.dark *){background-color:rgb(17 24 39 / 0.8)}.dark\:bg-gray-900\/90:is(.dark *){background-color:rgb(17 24 39 / 0.9)}.dark\:bg-gray-950:is(.dark *){--tw-bg-opacity:1;background-color:rgb(3 7 18 / var(--tw-bg-opacity, 1))}.dark\:bg-white:is(.dark *){--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.dark\:bg-gray-700:is(.dark *){--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.dark\:bg-gray-800\/40:is(.dark *){background-color:rgb(31 41 55 / 0.4)}.dark\:bg-gray-800\/50:is(.dark *){background-color:rgb(31 41 55 / 0.5)}.dark\:bg-gray-900:is(.dark *){--tw-bg-opacity:1;background-color:rgb(17 24 39 / var(--tw-bg-opacity, 1))}.dark\:bg-emerald-950:is(.dark *){--tw-bg-opacity:1;background-color:rgb(2 44 34 / var(--tw-bg-opacity, 1))}.dark\:bg-emerald-950\/25:is(.dark *){background-color:rgb(2 44 34 / 0.25)}.dark\:bg-rose-950:is(.dark *){--tw-bg-opacity:1;background-color:rgb(76 5 25 / var(--tw-bg-opacity, 1))}.dark\:bg-rose-950\/25:is(.dark *){background-color:rgb(76 5 25 / 0.25)}.dark\:bg-amber-800:is(.dark *){--tw-bg-opacity:1;background-color:rgb(146 64 14 / var(--tw-bg-opacity, 1))}.dark\:bg-amber-950\/30:is(.dark *){background-color:rgb(69 26 3 / 0.3)}.dark\:text-black:is(.dark *){--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.dark\:text-gray-100:is(.dark *){--tw-text-opacity:1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.dark\:text-gray-300:is(.dark *){--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.dark\:text-gray-200:is(.dark *){--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.dark\:text-gray-400:is(.dark *){--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.dark\:text-gray-600:is(.dark *){--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.dark\:text-white:is(.dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.dark\:text-emerald-200:is(.dark *){--tw-text-opacity:1;color:rgb(167 243 208 / var(--tw-text-opacity, 1))}.dark\:text-rose-200:is(.dark *){--tw-text-opacity:1;color:rgb(254 205 211 / var(--tw-text-opacity, 1))}.dark\:text-amber-200:is(.dark *){--tw-text-opacity:1;color:rgb(253 230 138 / var(--tw-text-opacity, 1))}.dark\:text-emerald-300:is(.dark *){--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.dark\:text-emerald-400:is(.dark *){--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.dark\:accent-white:is(.dark *){accent-color:#fff}.dark\:hover\:border-gray-700:hover:is(.dark *){--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.dark\:hover\:bg-gray-700:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(55 65 81 / var(--tw-bg-opacity, 1))}.dark\:hover\:bg-gray-800:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.dark\:hover\:bg-gray-200:hover:is(.dark *){--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.dark\:hover\:text-white:hover:is(.dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:w-auto{width:auto}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}</style></head>
+</head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen pb-20 transition-colors duration-200" oncontextmenu="return false;">
 
   <!-- Header -->
@@ -51,7 +52,9 @@
           <svg id="moonIcon" class="w-3.5 h-3.5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
         </button>
         <div id="adminControls">
-          <button onclick="openAuthModal()" id="adminBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-300 dark:border-emerald-800"><i class="fa-solid fa-lock-open"></i> <span>편집 해제</span></button>
+          <button onclick="openAuthModal()" id="adminBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-lock"></i> <span>편집 모드</span>
+          </button>
         </div>
       </div>
     </div>
@@ -75,18 +78,7 @@
   <main class="max-w-6xl mx-auto px-4 pt-8 space-y-12">
 
     <!-- 백업/복원 기능 -->
-    <div id="backupSectionWrapper">
-          <div class="max-w-4xl mx-auto bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 text-xs flex justify-between items-center text-amber-900 dark:text-amber-200">
-            <span class="font-semibold"><i class="fa-solid fa-floppy-disk"></i> 데이터 관리 (백업/복원)</span>
-            <div class="flex gap-2">
-              <button onclick="exportDataJSON()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 다운로드</button>
-              <button onclick="document.getElementById('importJsonFile').click()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 불러오기</button>
-            </div>
-          </div>
-        </div>
-
-    <!-- 숨겨진 백업 불러오기 전용 File Input -->
-    <input type="file" id="importJsonFile" accept=".json" class="hidden" onchange="importDataJSON(event)">
+    <div id="backupSectionWrapper"></div>
 
     <!-- 1. 공지사항 -->
     <section id="section-notice" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
@@ -94,26 +86,13 @@
         <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <i class="fa-solid fa-circle-info text-gray-500 text-sm"></i> 공지사항
         </h2>
-        <div class="edit-only flex flex-wrap gap-1.5">
+        <div class="edit-only hidden flex flex-wrap gap-1.5">
           <button onclick="addBlock('text')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 텍스트</button>
           <button onclick="addBlock('image')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-image"></i> 이미지 블록</button>
           <button onclick="addBlock('spacer')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-arrows-up-down"></i> 여백</button>
         </div>
       </div>
-      <div id="noticeContainer" class="space-y-3"><div class="group relative p-3.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-sm text-gray-800 dark:text-gray-200 shadow-sm space-y-2"><input type="text" value="기본 공지" onchange="updateBlockTitle('1', this.value)" placeholder="블록 제목 입력" class="font-bold text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-2 py-0.5 text-xs w-full mb-1"><div contenteditable="true" onblur="updateBlockContent('1', this.innerText)" class="outline-none whitespace-pre-wrap">• 올려주신 구해요 글 링크와 함께 신청 문의 주시면 신청서 요청(타입 외) 보내드립니다.
-• 최소 1시간 ~ 최대 3일 소요됩니다.</div>
-            <div class="absolute right-2 top-2 flex gap-1 items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1.5 py-0.5 rounded shadow-sm z-10">
-              <button onclick="moveBlock(0, -1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="위로"><i class="fa-solid fa-arrow-up"></i></button>
-              <button onclick="moveBlock(0, 1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="아래로"><i class="fa-solid fa-arrow-down"></i></button>
-              <button onclick="deleteBlock('1')" class="text-red-500 hover:text-red-700 text-xs px-1" title="삭제"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          </div><div class="group relative border border-dashed border-gray-300 dark:border-gray-700 rounded bg-gray-50 dark:bg-gray-900 flex items-center justify-center" style="height: 20px;"><span class="text-[10px] text-gray-400">여백 (20px)</span>
-              <div class="absolute right-2 top-1 flex gap-1 items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1 rounded shadow-sm z-10">
-                <input type="text" value="20" onchange="updateSpacer('2', this.value)" class="w-10 text-xs border dark:border-gray-700 dark:bg-gray-900 rounded px-1 text-center">
-                <button onclick="moveBlock(1, -1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="위로"><i class="fa-solid fa-arrow-up"></i></button>
-                <button onclick="moveBlock(1, 1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="아래로"><i class="fa-solid fa-arrow-down"></i></button>
-                <button onclick="deleteBlock('2')" class="text-red-500 p-1 text-xs" title="삭제"><i class="fa-solid fa-trash"></i></button>
-              </div></div></div>
+      <div id="noticeContainer" class="space-y-3"></div>
     </section>
 
     <!-- 2. OK / NG -->
@@ -122,33 +101,9 @@
         <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <i class="fa-solid fa-list-check text-gray-500 text-sm"></i> OK / NG
         </h2>
-        <button onclick="addGenreItem()" class="edit-only text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 항목 추가</button>
+        <button onclick="addGenreItem()" class="edit-only hidden text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 항목 추가</button>
       </div>
-      <div id="genreContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3"><div class="p-3 rounded-lg border flex items-center justify-between text-xs shadow-sm bg-emerald-50/50 dark:bg-emerald-950/25 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200">
-            <div class="flex items-center gap-2 flex-1">
-              <select onchange="updateGenreStatus(0, this.value)" class="bg-white dark:bg-gray-800 border rounded px-1.5 py-0.5 text-xs">
-                <option value="ok" selected="">OK</option>
-                <option value="ng">NG</option>
-                <option value="main">주력</option>
-                <option value="hard">어려움</option>
-                <option value="extra">추가금</option>
-              </select>
-              <input type="text" value="1차, 2차, 드림, 쩜오디, 2D, 3D (장르 가림 없음)" onchange="updateGenreText(0, this.value)" class="bg-white dark:bg-gray-800 border rounded px-2 py-0.5 flex-1">
-            </div>
-            <button onclick="deleteGenre(0)" class="text-red-500 hover:text-red-700 ml-2"><i class="fa-solid fa-trash"></i></button>
-          </div><div class="p-3 rounded-lg border flex items-center justify-between text-xs shadow-sm bg-rose-50/50 dark:bg-rose-950/25 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200">
-            <div class="flex items-center gap-2 flex-1">
-              <select onchange="updateGenreStatus(1, this.value)" class="bg-white dark:bg-gray-800 border rounded px-1.5 py-0.5 text-xs">
-                <option value="ok">OK</option>
-                <option value="ng" selected="">NG</option>
-                <option value="main">주력</option>
-                <option value="hard">어려움</option>
-                <option value="extra">추가금</option>
-              </select>
-              <input type="text" value="지나친 고어, 메카닉 등 표현이 어려운 장르" onchange="updateGenreText(1, this.value)" class="bg-white dark:bg-gray-800 border rounded px-2 py-0.5 flex-1">
-            </div>
-            <button onclick="deleteGenre(1)" class="text-red-500 hover:text-red-700 ml-2"><i class="fa-solid fa-trash"></i></button>
-          </div></div>
+      <div id="genreContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
     </section>
 
     <!-- 3. 가격표 -->
@@ -164,73 +119,18 @@
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
             <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">쿠키</h3>
-            <button onclick="addPriceItem('cookie', 'base')" class="edit-only text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+            <button onclick="addPriceItem('cookie', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
           </div>
           <div>
             <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
-            <div id="price-cookie-base" class="space-y-2"><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <input type="text" value="일부분 파츠" onchange="editPrice('cookie', 'base', 0, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-          <div class="flex items-center gap-1 justify-end">
-            <input type="text" value="1,000p" onchange="editPrice('cookie', 'base', 0, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-20 text-right">
-            <button onclick="movePriceItem('cookie', 'base', 0, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('cookie', 'base', 0, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('cookie', 'base', 0)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <input type="text" value="인당 (기본 체형)" onchange="editPrice('cookie', 'base', 1, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-          <div class="flex items-center gap-1 justify-end">
-            <input type="text" value="2,000p" onchange="editPrice('cookie', 'base', 1, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-20 text-right">
-            <button onclick="movePriceItem('cookie', 'base', 1, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('cookie', 'base', 1, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('cookie', 'base', 1)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div></div>
+            <div id="price-cookie-base" class="space-y-2"></div>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
             <div class="flex justify-between items-center mb-2">
               <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
-              <button onclick="addPriceItem('cookie', 'extra')" class="edit-only text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+              <button onclick="addPriceItem('cookie', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
             </div>
-            <div id="price-cookie-extra" class="space-y-2"><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <div class="flex items-center gap-2 flex-1 mr-2">
-            <input type="text" value="동물화/소품 추가" onchange="editPrice('cookie', 'extra', 0, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-            <input type="text" value="500p" onchange="editPrice('cookie', 'extra', 0, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
-            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
-              <input type="checkbox" checked="" onchange="toggleExtraCountable('cookie', 0, this.checked)" class="accent-black dark:accent-white">
-            </label>
-          </div>
-          <div class="flex items-center gap-1 justify-end shrink-0">
-            <button onclick="movePriceItem('cookie', 'extra', 0, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('cookie', 'extra', 0, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('cookie', 'extra', 0)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <div class="flex items-center gap-2 flex-1 mr-2">
-            <input type="text" value="표정 변화" onchange="editPrice('cookie', 'extra', 1, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-            <input type="text" value="500p" onchange="editPrice('cookie', 'extra', 1, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
-            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
-              <input type="checkbox" checked="" onchange="toggleExtraCountable('cookie', 1, this.checked)" class="accent-black dark:accent-white">
-            </label>
-          </div>
-          <div class="flex items-center gap-1 justify-end shrink-0">
-            <button onclick="movePriceItem('cookie', 'extra', 1, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('cookie', 'extra', 1, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('cookie', 'extra', 1)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <div class="flex items-center gap-2 flex-1 mr-2">
-            <input type="text" value="지인 할인" onchange="editPrice('cookie', 'extra', 2, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-            <input type="text" value="-500p" onchange="editPrice('cookie', 'extra', 2, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
-            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
-              <input type="checkbox" onchange="toggleExtraCountable('cookie', 2, this.checked)" class="accent-black dark:accent-white">
-            </label>
-          </div>
-          <div class="flex items-center gap-1 justify-end shrink-0">
-            <button onclick="movePriceItem('cookie', 'extra', 2, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('cookie', 'extra', 2, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('cookie', 'extra', 2)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div></div>
+            <div id="price-cookie-extra" class="space-y-2"></div>
           </div>
         </div>
 
@@ -238,39 +138,18 @@
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
             <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">바게트</h3>
-            <button onclick="addPriceItem('baguette', 'base')" class="edit-only text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+            <button onclick="addPriceItem('baguette', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
           </div>
           <div>
             <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
-            <div id="price-baguette-base" class="space-y-2"><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <input type="text" value="인당 (기본 체형)" onchange="editPrice('baguette', 'base', 0, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-          <div class="flex items-center gap-1 justify-end">
-            <input type="text" value="2,000p" onchange="editPrice('baguette', 'base', 0, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-20 text-right">
-            <button onclick="movePriceItem('baguette', 'base', 0, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('baguette', 'base', 0, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('baguette', 'base', 0)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div></div>
+            <div id="price-baguette-base" class="space-y-2"></div>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
             <div class="flex justify-between items-center mb-2">
               <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
-              <button onclick="addPriceItem('baguette', 'extra')" class="edit-only text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+              <button onclick="addPriceItem('baguette', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
             </div>
-            <div id="price-baguette-extra" class="space-y-2"><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <div class="flex items-center gap-2 flex-1 mr-2">
-            <input type="text" value="소품 추가" onchange="editPrice('baguette', 'extra', 0, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-            <input type="text" value="500p" onchange="editPrice('baguette', 'extra', 0, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
-            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
-              <input type="checkbox" checked="" onchange="toggleExtraCountable('baguette', 0, this.checked)" class="accent-black dark:accent-white">
-            </label>
-          </div>
-          <div class="flex items-center gap-1 justify-end shrink-0">
-            <button onclick="movePriceItem('baguette', 'extra', 0, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('baguette', 'extra', 0, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('baguette', 'extra', 0)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div></div>
+            <div id="price-baguette-extra" class="space-y-2"></div>
           </div>
         </div>
 
@@ -278,39 +157,18 @@
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
             <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">팝콘</h3>
-            <button onclick="addPriceItem('popcorn', 'base')" class="edit-only text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+            <button onclick="addPriceItem('popcorn', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
           </div>
           <div>
             <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
-            <div id="price-popcorn-base" class="space-y-2"><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <input type="text" value="기본 체형" onchange="editPrice('popcorn', 'base', 0, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-          <div class="flex items-center gap-1 justify-end">
-            <input type="text" value="2,000p" onchange="editPrice('popcorn', 'base', 0, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-20 text-right">
-            <button onclick="movePriceItem('popcorn', 'base', 0, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('popcorn', 'base', 0, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('popcorn', 'base', 0)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div></div>
+            <div id="price-popcorn-base" class="space-y-2"></div>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
             <div class="flex justify-between items-center mb-2">
               <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
-              <button onclick="addPriceItem('popcorn', 'extra')" class="edit-only text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+              <button onclick="addPriceItem('popcorn', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
             </div>
-            <div id="price-popcorn-extra" class="space-y-2"><div class="flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800">
-          <div class="flex items-center gap-2 flex-1 mr-2">
-            <input type="text" value="표정 변경" onchange="editPrice('popcorn', 'extra', 0, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-            <input type="text" value="500p" onchange="editPrice('popcorn', 'extra', 0, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
-            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
-              <input type="checkbox" checked="" onchange="toggleExtraCountable('popcorn', 0, this.checked)" class="accent-black dark:accent-white">
-            </label>
-          </div>
-          <div class="flex items-center gap-1 justify-end shrink-0">
-            <button onclick="movePriceItem('popcorn', 'extra', 0, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('popcorn', 'extra', 0, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('popcorn', 'extra', 0)" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        </div></div>
+            <div id="price-popcorn-extra" class="space-y-2"></div>
           </div>
         </div>
       </div>
@@ -323,7 +181,7 @@
           <i class="fa-solid fa-images text-gray-500 text-sm"></i> 샘플
         </h2>
         <div class="flex gap-2 items-center">
-          <button onclick="openSampleUploadModal()" class="edit-only text-xs bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 샘플 추가</button>
+          <button onclick="openSampleUploadModal()" class="edit-only hidden text-xs bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 샘플 추가</button>
           <button onclick="toggleSamples()" id="sampleToggleBtn" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-1 rounded border border-gray-300 dark:border-gray-700">
             <i class="fa-solid fa-chevron-up"></i> 접기
           </button>
@@ -337,11 +195,11 @@
             <button onclick="switchSampleTab('baguette')" id="sample-tab-baguette" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">바게트</button>
             <button onclick="switchSampleTab('popcorn')" id="sample-tab-popcorn" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">팝콘</button>
           </div>
-          <button onclick="addSampleTagPrompt()" class="edit-only text-[11px] bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 mb-1"><i class="fa-solid fa-tag"></i> 태그 추가</button>
+          <button onclick="addSampleTagPrompt()" class="edit-only hidden text-[11px] bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 mb-1"><i class="fa-solid fa-tag"></i> 태그 추가</button>
         </div>
 
-        <div id="sampleTagFilterBar" class="flex flex-wrap gap-1.5 pt-1"><button class="text-[11px] px-2.5 py-1 rounded-md border transition bg-black text-white dark:bg-white dark:text-black border-transparent font-medium">전체</button><button class="text-[11px] px-2.5 py-1 rounded-md border transition bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700">기본 체형</button><button class="text-[9px] text-red-500 hover:text-red-700 ml-[-4px] mr-1 px-1"><i class="fa-solid fa-xmark"></i></button><button class="text-[11px] px-2.5 py-1 rounded-md border transition bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700">어린이 체형</button><button class="text-[9px] text-red-500 hover:text-red-700 ml-[-4px] mr-1 px-1"><i class="fa-solid fa-xmark"></i></button></div>
-        <div id="sampleGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2"><div class="col-span-full text-center py-8 text-xs text-gray-400">등록된 샘플이 없습니다.</div></div>
+        <div id="sampleTagFilterBar" class="flex flex-wrap gap-1.5 pt-1"></div>
+        <div id="sampleGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2"></div>
       </div>
     </section>
 
@@ -349,11 +207,11 @@
     <section id="section-delivery" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
       <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
         <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-file-arrow-down text-gray-500 text-sm"></i> 파일 전달 규격
+          <i class="fa-solid fa-file-arrow-down text-gray-500 text-sm"></i> 파일
         </h2>
       </div>
       <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm">
-        <div id="deliverySpecsContent" contenteditable="true" onblur="updateDeliverySpecs(this.innerText)" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none border border-dashed border-gray-300 dark:border-gray-700 p-2 rounded">• 기본 해상도: 300dpi<br>• 제공 파일: 기본 최종본 및 투명화 PNG 파일<br>• 파일명 규칙: 쿠키(바게트,팝콘)_기본(투명) / 다인 신청 시 A, B, C...</div>
+        <div id="deliverySpecsContent" contenteditable="false" onblur="updateDeliverySpecs(this.innerText)" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none"></div>
       </div>
     </section>
 
@@ -367,27 +225,27 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">쿠키</h3>
-          <div id="notice-cookie-content" contenteditable="true" onblur="updateNoticeTypeContent('cookie', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px] border border-dashed border-gray-300 dark:border-gray-700 p-1.5 rounded">• 쿠키 타입 참고사항을 입력해주세요.</div>
+          <div id="notice-cookie-content" contenteditable="false" onblur="updateNoticeTypeContent('cookie', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">바게트</h3>
-          <div id="notice-baguette-content" contenteditable="true" onblur="updateNoticeTypeContent('baguette', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px] border border-dashed border-gray-300 dark:border-gray-700 p-1.5 rounded">• 바게트 타입 참고사항을 입력해주세요.</div>
+          <div id="notice-baguette-content" contenteditable="false" onblur="updateNoticeTypeContent('baguette', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">팝콘</h3>
-          <div id="notice-popcorn-content" contenteditable="true" onblur="updateNoticeTypeContent('popcorn', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px] border border-dashed border-gray-300 dark:border-gray-700 p-1.5 rounded">• 팝콘 타입 참고사항을 입력해주세요.</div>
+          <div id="notice-popcorn-content" contenteditable="false" onblur="updateNoticeTypeContent('popcorn', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
       </div>
     </section>
 
-    <!-- 7. 예상 금액 계산기 & 신청서 폼 복사 -->
+    <!-- 7. 금액 계산기 & 신청서 폼 복사 -->
     <section id="section-calc" class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl p-6 space-y-5 max-w-2xl mx-auto scroll-mt-24">
       <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
-        <i class="fa-solid fa-calculator text-gray-500"></i> 예상 결제 금액 계산기
+        <i class="fa-solid fa-calculator text-gray-500"></i> 금액 계산기
       </h2>
 
       <!-- 계산기 참고 텍스트 (편집 가능) -->
-      <div id="calcNoticeText" contenteditable="true" onblur="updateCalcNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-b border-gray-200 dark:border-gray-800 pb-3 outline-none border border-dashed border-amber-300 p-2 rounded">대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^^_^;;!! 제가 잘못 계산했을 수도......)</div>
+      <div id="calcNoticeText" contenteditable="false" onblur="updateCalcNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-b border-gray-200 dark:border-gray-800 pb-3 outline-none"></div>
 
       <div class="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 rounded-lg p-4 space-y-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -401,35 +259,13 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">종류</label>
-            <select id="calcBaseSelect" class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-2.5 py-2 text-xs text-gray-900 dark:text-gray-100"><option value="1000" data-raw="1,000p" data-name="일부분 파츠">일부분 파츠 (1,000p)</option><option value="2000" data-raw="2,000p" data-name="인당 (기본 체형)">인당 (기본 체형) (2,000p)</option></select>
+            <select id="calcBaseSelect" class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-2.5 py-2 text-xs text-gray-900 dark:text-gray-100"></select>
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1.5">추가 / 할인 옵션</label>
-          <div id="calcExtraCheckboxGroup" class="flex flex-wrap gap-2"><label class="inline-flex items-center text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-2.5 py-1.5 cursor-pointer shadow-xs hover:border-gray-300 dark:hover:border-gray-700 transition">
-          <input type="checkbox" value="0" onchange="toggleExtraCountInput('cookie', 0, this.checked)" class="calc-extra-cb accent-black dark:accent-white rounded mr-1.5" data-name="동물화/소품 추가" data-price="500p">
-          <span class="text-gray-800 dark:text-gray-200">동물화/소품 추가 (500p)</span>
-          
-            <span id="extraCountContainer_cookie_0" class="hidden inline-flex items-center gap-1 ml-1.5 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded px-1.5 py-0.5">
-              <input type="number" id="extraCount_cookie_0" value="1" min="1" max="99" class="w-8 text-center text-xs bg-transparent text-gray-900 dark:text-gray-100 outline-none">
-              <span class="text-[10px] text-gray-500">개</span>
-            </span>
-          
-        </label><label class="inline-flex items-center text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-2.5 py-1.5 cursor-pointer shadow-xs hover:border-gray-300 dark:hover:border-gray-700 transition">
-          <input type="checkbox" value="1" onchange="toggleExtraCountInput('cookie', 1, this.checked)" class="calc-extra-cb accent-black dark:accent-white rounded mr-1.5" data-name="표정 변화" data-price="500p">
-          <span class="text-gray-800 dark:text-gray-200">표정 변화 (500p)</span>
-          
-            <span id="extraCountContainer_cookie_1" class="hidden inline-flex items-center gap-1 ml-1.5 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded px-1.5 py-0.5">
-              <input type="number" id="extraCount_cookie_1" value="1" min="1" max="99" class="w-8 text-center text-xs bg-transparent text-gray-900 dark:text-gray-100 outline-none">
-              <span class="text-[10px] text-gray-500">개</span>
-            </span>
-          
-        </label><label class="inline-flex items-center text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-2.5 py-1.5 cursor-pointer shadow-xs hover:border-gray-300 dark:hover:border-gray-700 transition">
-          <input type="checkbox" value="2" onchange="toggleExtraCountInput('cookie', 2, this.checked)" class="calc-extra-cb accent-black dark:accent-white rounded mr-1.5" data-name="지인 할인" data-price="-500p">
-          <span class="text-gray-800 dark:text-gray-200">지인 할인 (-500p)</span>
-          
-        </label></div>
+          <div id="calcExtraCheckboxGroup" class="flex flex-wrap gap-2"></div>
         </div>
 
         <div class="pt-2">
@@ -446,7 +282,7 @@
 
       <div class="border-t border-gray-200 dark:border-gray-800 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3">
         <div class="flex items-center gap-2">
-          <span class="text-sm font-medium text-gray-600 dark:text-gray-400">총 예상 금액:</span>
+          <span class="text-sm font-medium text-gray-600 dark:text-gray-400">총 금액:</span>
           <span id="cartTotal" class="text-xl font-bold text-gray-900 dark:text-gray-100">0 p</span>
         </div>
         <button onclick="copyApplicationForm()" class="w-full sm:w-auto text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2.5 rounded shadow-sm transition flex items-center justify-center gap-1.5">
@@ -462,23 +298,25 @@
           <i class="fa-solid fa-folder-open text-gray-500"></i> 파츠 자료집
         </h2>
         <div class="flex items-center gap-2">
-          <button id="downloadAllPartsBtn" onclick="downloadAllPartsZip()" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2.5 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition font-medium flex items-center gap-1">
+          <button id="downloadAllPartsBtn" onclick="downloadAllPartsZip()" class="hidden text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2.5 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition font-medium flex items-center gap-1">
             <i class="fa-solid fa-download"></i> 전체 다운로드
           </button>
-          <div id="partsUnlockContainer"><span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-check-circle"></i> 해제됨</span></div>
+          <div id="partsUnlockContainer">
+            <button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5 font-medium">
+              <i class="fa-solid fa-lock"></i> <span>자료집 열기</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- 배포 파츠 참고 텍스트 (편집 가능) -->
-      <div id="partsNoticeText" contenteditable="true" onblur="updatePartsNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed outline-none border border-dashed border-amber-300 p-2 rounded">토핑으로 추가하기엔 애매하나(덜 완성되었다던가, 업로드하기엔 부족한 것들...), 다용도로 잘 쓰일만한 파츠들을 등록해뒀습니다. 아직 조잡한 실력인지라 비밀번호를 걸어두었습니다만, 공개적인 곳에서의 게시만 아니라면 지인 사이에서 편히 공유해 주셔도 괜찮습니다. ^_^<div><br>또한 신청자분께서 요청 주신 파츠가 다용도로 쓰일만하다고 판단될 경우, 신청 금액을 할인드리고 배포 파츠 자료집에 등록하는 경우도 있을 것 같습니다. 등록 전 먼저 말씀드릴 예정이니 편히 거절해 주셔도 문제 없습니다.</div></div>
+      <div id="partsNoticeText" contenteditable="false" onblur="updatePartsNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed outline-none"></div>
 
-      <!-- 잠김 안내 메시지 -->
-      <div id="partsLockedNotice" class="text-center py-10 text-xs text-gray-500 dark:text-gray-400 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg space-y-2 hidden">
+      <div id="partsLockedNotice" class="text-center py-10 text-xs text-gray-500 dark:text-gray-400 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg space-y-2">
         <i class="fa-solid fa-lock text-2xl mb-1 text-gray-300 dark:text-gray-600 block"></i>
         <p>이전에 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다.</p>
       </div>
 
-      <div id="partsUnlockedContent" class="space-y-6">
+      <div id="partsUnlockedContent" class="hidden space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
             <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
@@ -486,9 +324,9 @@
                 <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">쿠키 파츠</h3>
                 <button onclick="downloadCategoryZip('cookie')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="쿠키 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
-              <button onclick="triggerPartsUpload('cookie')" class="edit-only text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
+              <button onclick="triggerPartsUpload('cookie')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
             </div>
-            <div id="parts-cookie-list" class="space-y-3"><div class="text-[11px] text-gray-400 py-3 text-center">등록된 파츠가 없습니다.</div></div>
+            <div id="parts-cookie-list" class="space-y-3"></div>
           </div>
           <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
             <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
@@ -496,9 +334,9 @@
                 <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">바게트 파츠</h3>
                 <button onclick="downloadCategoryZip('baguette')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="바게트 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
-              <button onclick="triggerPartsUpload('baguette')" class="edit-only text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
+              <button onclick="triggerPartsUpload('baguette')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
             </div>
-            <div id="parts-baguette-list" class="space-y-3"><div class="text-[11px] text-gray-400 py-3 text-center">등록된 파츠가 없습니다.</div></div>
+            <div id="parts-baguette-list" class="space-y-3"></div>
           </div>
           <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
             <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
@@ -506,9 +344,9 @@
                 <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">팝콘 파츠</h3>
                 <button onclick="downloadCategoryZip('popcorn')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="팝콘 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
-              <button onclick="triggerPartsUpload('popcorn')" class="edit-only text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
+              <button onclick="triggerPartsUpload('popcorn')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
             </div>
-            <div id="parts-popcorn-list" class="space-y-3"><div class="text-[11px] text-gray-400 py-3 text-center">등록된 파츠가 없습니다.</div></div>
+            <div id="parts-popcorn-list" class="space-y-3"></div>
           </div>
         </div>
       </div>
@@ -597,10 +435,10 @@
     </div>
   </div>
 
-  <input type="file" id="blockImageFileInput" accept="image/*" multiple="" class="hidden" onchange="handleBlockImagesAdd(event)">
+  <input type="file" id="blockImageFileInput" accept="image/*" multiple class="hidden" onchange="handleBlockImagesAdd(event)">
 
   <!-- 관리자 인증 모달 -->
-  <div id="authModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+  <div id="authModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
     <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-sm w-full space-y-4 shadow-xl">
       <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">편집 모드 인증</h3>
       <p class="text-xs text-gray-500 dark:text-gray-400">관리자 코드를 입력해주세요.</p>
@@ -643,7 +481,7 @@
         popcorn: '• 팝콘 타입 참고사항을 입력해주세요.'
       },
       partsNotice: "토핑으로 추가하기엔 애매하나(덜 완성되었다던가, 업로드하기엔 부족한 것들...), 다용도로 잘 쓰일만한 파츠들을 등록해뒀습니다. 아직 조잡한 실력인지라 비밀번호를 걸어두었습니다만, 공개적인 곳에서의 게시만 아니라면 지인 사이에서 편히 공유해 주셔도 괜찮습니다. ^_^\n또한 신청자분께서 요청 주신 파츠가 다용도로 쓰일만하다고 판단될 경우, 신청 금액을 할인드리고 배포 파츠 자료집에 등록하는 경우도 있을 것 같습니다. 등록 전 먼저 말씀드릴 예정이니 편히 거절해 주셔도 문제 없습니다.",
-      calcNotice: "대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^^_^;;!! 제가 잘못 계산했을 수도......)",
+      calcNotice: "대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^_^;;!! 제가 잘못 계산했을 수도......)",
       prices: {
         cookie: {
           base: [{ name: '일부분 파츠', price: '1,000p' }, { name: '인당 (기본 체형)', price: '2,000p' }],
@@ -668,18 +506,25 @@
         baguette: ['남성형', '여성형'],
         popcorn: ['기본형']
       },
-      distributionParts: {
-        cookie: [],
-        baguette: [],
-        popcorn: []
-      }
+      distributionParts: { cookie: [], baguette: [], popcorn: [] }
     };
 
     let appData = JSON.parse(localStorage.getItem('nanagom_v20_data')) || defaultData;
-    if(!appData.sampleTags) appData.sampleTags = defaultData.sampleTags;
-    if(!appData.distributionParts) appData.distributionParts = defaultData.distributionParts;
-    if(!appData.partsNotice) appData.partsNotice = defaultData.partsNotice;
-    if(!appData.calcNotice) appData.calcNotice = defaultData.calcNotice;
+
+    // data.json 파일 자동 동기화 로직
+    async function fetchExternalData() {
+      try {
+        const response = await fetch('data.json?v=' + Date.now());
+        if (response.ok) {
+          const remoteData = await response.json();
+          appData = remoteData;
+          localStorage.setItem('nanagom_v20_data', JSON.stringify(appData));
+        }
+      } catch (e) {
+        console.log('data.json 로드 취소 (로컬 스토리지 데이터 유지)');
+      }
+      initAppUI();
+    }
 
     function showToast(message) {
       let toast = document.getElementById('toastMsg');
@@ -711,9 +556,10 @@
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
       const dlAnchorElem = document.createElement('a');
       dlAnchorElem.setAttribute("href", dataStr);
-      dlAnchorElem.setAttribute("download", `nanagom_backup_${Date.now()}.json`);
+      dlAnchorElem.setAttribute("download", `data.json`);
       dlAnchorElem.click();
     }
+
     function importDataJSON(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -768,8 +614,9 @@
           <div class="max-w-4xl mx-auto bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 text-xs flex justify-between items-center text-amber-900 dark:text-amber-200">
             <span class="font-semibold"><i class="fa-solid fa-floppy-disk"></i> 데이터 관리 (백업/복원)</span>
             <div class="flex gap-2">
-              <button onclick="exportDataJSON()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 다운로드</button>
+              <button onclick="exportDataJSON()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 다운로드 (data.json)</button>
               <button onclick="document.getElementById('importJsonFile').click()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 불러오기</button>
+              <input type="file" id="importJsonFile" accept=".json" class="hidden" onchange="importDataJSON(event)">
             </div>
           </div>
         `;
@@ -1686,176 +1533,195 @@
         let countInputHtml = '';
         if (e.countable) {
           countInputHtml = `
-            <span id="extraCountContainer_${type}_${idx}" class="hidden inline-flex items-center gap-1 ml-1.5 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded px-1.5 py-0.5">
-              <input type="number" id="extraCount_${type}_${idx}" value="1" min="1" max="99" class="w-8 text-center text-xs bg-transparent text-gray-900 dark:text-gray-100 outline-none">
-              <span class="text-[10px] text-gray-500">개</span>
+            <span id="extraCountContainer_${type}_${idx}" class="hidden inline-flex items-center gap-1 ml-1.5 bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" onclick="event.stopPropagation()">
+              <button type="button" onclick="adjustExtraCount('${type}', ${idx}, -1)" class="w-4 h-4 text-[10px] bg-white dark:bg-gray-700 rounded shadow-xs flex items-center justify-center font-bold">-</button>
+              <span id="extraCountVal_${type}_${idx}" class="text-[11px] font-mono w-4 text-center">1</span>
+              <button type="button" onclick="adjustExtraCount('${type}', ${idx}, 1)" class="w-4 h-4 text-[10px] bg-white dark:bg-gray-700 rounded shadow-xs flex items-center justify-center font-bold">+</button>
             </span>
           `;
         }
-        
-        const label = document.createElement('label');
-        label.className = 'inline-flex items-center text-xs bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg px-2.5 py-1.5 cursor-pointer shadow-xs hover:border-gray-300 dark:hover:border-gray-700 transition';
-        label.innerHTML = `
-          <input type="checkbox" value="${idx}" onchange="toggleExtraCountInput('${type}', ${idx}, this.checked)" class="calc-extra-cb accent-black dark:accent-white rounded mr-1.5" data-name="${e.name}" data-price="${e.price}">
-          <span class="text-gray-800 dark:text-gray-200">${e.name} (${e.price})</span>
-          ${countInputHtml}
-        `;
-        extraGroup.appendChild(label);
+
+        extraGroup.innerHTML += `
+          <label class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-gray-800 dark:text-gray-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 shadow-xs select-none">
+            <input type="checkbox" value="${e.price}" data-name="${e.name}" data-idx="${idx}" onchange="toggleExtraCheck('${type}', ${idx}, this.checked)" class="calc-extra-cb accent-black dark:accent-white w-3.5 h-3.5">
+            <span>${e.name} (${e.price})</span>
+            ${countInputHtml}
+          </label>`;
       });
     }
 
-    function toggleExtraCountInput(type, idx, isChecked) {
+    function toggleExtraCheck(type, idx, checked) {
       const container = document.getElementById(`extraCountContainer_${type}_${idx}`);
-      if (container) {
-        if (isChecked) container.classList.remove('hidden');
+      if(container) {
+        if(checked) container.classList.remove('hidden');
         else container.classList.add('hidden');
       }
     }
 
+    function adjustExtraCount(type, idx, delta) {
+      const span = document.getElementById(`extraCountVal_${type}_${idx}`);
+      if(span) {
+        let val = parseInt(span.innerText, 10) + delta;
+        if(val < 1) val = 1;
+        span.innerText = val;
+      }
+    }
+
     function addToCart() {
-      const type = document.getElementById('calcType').value;
-      const typeName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
+      const typeKey = document.getElementById('calcType').value;
+      const typeName = typeKey === 'cookie' ? '쿠키' : typeKey === 'baguette' ? '바게트' : '팝콘';
+
       const baseSelect = document.getElementById('calcBaseSelect');
-      const selectedOption = baseSelect.options[baseSelect.selectedIndex];
+      const selectedBaseOpt = baseSelect.options[baseSelect.selectedIndex];
+      const baseName = selectedBaseOpt ? selectedBaseOpt.getAttribute('data-name') : '';
+      const baseRaw = selectedBaseOpt ? selectedBaseOpt.getAttribute('data-raw') : '0';
+      const baseParsed = parseItemPrice(baseRaw);
 
-      const baseName = selectedOption.getAttribute('data-name');
-      const baseRawPrice = selectedOption.getAttribute('data-raw');
+      let sum = baseParsed.value;
+      let multiplierFactor = 1;
+      let extras = [];
 
-      const checkedExtras = [];
-      const cbList = document.querySelectorAll('.calc-extra-cb:checked');
-      cbList.forEach(cb => {
-        const idx = cb.value;
-        const eName = cb.getAttribute('data-name');
-        const ePrice = cb.getAttribute('data-price');
-        const countInput = document.getElementById(`extraCount_${type}_${idx}`);
-        const count = countInput ? parseInt(countInput.value, 10) || 1 : 1;
+      document.querySelectorAll('#calcExtraCheckboxGroup input.calc-extra-cb:checked').forEach(cb => {
+        const name = cb.getAttribute('data-name');
+        const rawPrice = cb.value;
+        const itemIdx = cb.getAttribute('data-idx');
+        const typeKey = document.getElementById('calcType').value;
+        
+        let count = 1;
+        const countSpan = document.getElementById(`extraCountVal_${typeKey}_${itemIdx}`);
+        if (countSpan) {
+          count = parseInt(countSpan.innerText, 10) || 1;
+        }
 
-        checkedExtras.push({
-          name: eName,
-          priceStr: ePrice,
-          count: count
-        });
+        for (let i = 0; i < count; i++) {
+          const parsed = parseItemPrice(rawPrice, sum);
+          extras.push({ name, raw: rawPrice, parsed });
+
+          if (parsed.type === 'multiply') {
+            multiplierFactor = Math.max(multiplierFactor, parsed.factor);
+          } else {
+            sum += parsed.value;
+          }
+        }
       });
+
+      let itemTotal = sum * multiplierFactor;
 
       cart.push({
         id: Date.now().toString(),
-        type: type,
-        typeName: typeName,
-        baseName: baseName,
-        baseRawPrice: baseRawPrice,
-        extras: checkedExtras
+        typeName,
+        baseName,
+        baseRaw,
+        extras,
+        itemTotal
       });
 
-      renderCart();
-    }
-
-    function removeFromCart(id) {
-      cart = cart.filter(item => item.id !== id);
       renderCart();
     }
 
     function renderCart() {
       const container = document.getElementById('cartContainer');
       container.innerHTML = '';
-
-      if (cart.length === 0) {
-        container.innerHTML = `<div class="text-xs text-gray-400 text-center py-4 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg">담은 항목이 없습니다.</div>`;
-        document.getElementById('cartTotal').innerText = '0 p';
-        return;
-      }
-
       let grandTotal = 0;
 
-      cart.forEach((item, idx) => {
-        let itemBaseValue = parseItemPrice(item.baseRawPrice).value;
-        let itemSum = itemBaseValue;
+      if(cart.length === 0) {
+        container.innerHTML = `<div class="text-xs text-gray-400 py-3 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded">담긴 항목이 없습니다.</div>`;
+      } else {
+        cart.forEach((item, idx) => {
+          grandTotal += item.itemTotal;
+          const div = document.createElement('div');
+          div.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs p-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded gap-2';
 
-        let extrasTextArr = [];
-        item.extras.forEach(ex => {
-          let parsedEx = parseItemPrice(ex.priceStr, itemBaseValue);
-          if (parsedEx.type === 'multiply') {
-            itemSum *= parsedEx.factor;
-          } else {
-            itemSum += (parsedEx.value * ex.count);
-          }
-          let countStr = ex.count > 1 ? ` x${ex.count}` : '';
-          extrasTextArr.push(`${ex.name}(${ex.priceStr}${countStr})`);
-        });
+          let extraMap = {};
+          item.extras.forEach(e => {
+            let key = e.name + "_" + e.raw;
+            if(!extraMap[key]) extraMap[key] = { name: e.name, raw: e.raw, count: 0 };
+            extraMap[key].count++;
+          });
+          let groupedExtras = Object.values(extraMap);
+          const extraText = groupedExtras.length > 0 ? ` / 옵션: ${groupedExtras.map(e => e.count > 1 ? `${e.name}(${e.raw})(${e.count})` : `${e.name}(${e.raw})`).join(', ')}` : '';
 
-        grandTotal += itemSum;
-
-        const div = document.createElement('div');
-        div.className = 'bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 rounded-lg p-3 text-xs flex justify-between items-center gap-2';
-        
-        let extrasHtml = extrasTextArr.length > 0 ? `<div class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5">+ ${extrasTextArr.join(', ')}</div>` : '';
-
-        div.innerHTML = `
-          <div class="space-y-0.5">
-            <div class="font-bold text-gray-900 dark:text-gray-100 flex items-center gap-1.5">
-              <span class="px-1.5 py-0.5 rounded text-[10px] bg-black text-white dark:bg-white dark:text-black">${item.typeName}</span>
-              <span>${item.baseName} (${item.baseRawPrice})</span>
+          div.innerHTML = `
+            <div class="space-y-0.5 overflow-hidden">
+              <span class="font-bold text-gray-900 dark:text-gray-100">[${item.typeName}]</span>
+              <span class="text-gray-700 dark:text-gray-300 break-words">${item.baseName}${extraText}</span>
             </div>
-            ${extrasHtml}
-          </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <span class="font-bold text-gray-900 dark:text-gray-100">${itemSum.toLocaleString()} p</span>
-            <button onclick="removeFromCart('${item.id}')" class="text-gray-400 hover:text-red-500 text-xs p-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        `;
-        container.appendChild(div);
-      });
+            <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+              <span class="font-bold text-gray-900 dark:text-gray-100">${item.itemTotal.toLocaleString()}p</span>
+              <button onclick="removeFromCart(${idx})" class="text-gray-400 hover:text-red-500 p-1"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      }
 
       document.getElementById('cartTotal').innerText = `${grandTotal.toLocaleString()} p`;
     }
 
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+    }
+
     function copyApplicationForm() {
       if (cart.length === 0) {
-        alert('담은 항목이 없습니다. 항목을 먼저 담아주세요.');
+        alert('담긴 항목이 없습니다.');
         return;
       }
-
+      let text = "";
       let grandTotal = 0;
-      let textLines = ['[ 예상 금액 계산 내역 ]\n'];
 
-      cart.forEach((item, idx) => {
-        let itemBaseValue = parseItemPrice(item.baseRawPrice).value;
-        let itemSum = itemBaseValue;
-
-        let extrasTextArr = [];
-        item.extras.forEach(ex => {
-          let parsedEx = parseItemPrice(ex.priceStr, itemBaseValue);
-          if (parsedEx.type === 'multiply') {
-            itemSum *= parsedEx.factor;
+      cart.forEach((item) => {
+        grandTotal += item.itemTotal;
+        let optNames = item.extras.length > 0 ? item.extras.map(e => e.name).join(', ') : '없음';
+        
+        let formulaParts = [item.baseRaw];
+        item.extras.forEach(e => {
+          let raw = e.raw.trim().toLowerCase();
+          if (raw.includes('x2') || raw.includes('*2') || raw.includes('200%') || raw.includes('X2')) {
+            formulaParts.push('*2');
           } else {
-            itemSum += (parsedEx.value * ex.count);
+            formulaParts.push(e.raw);
           }
-          let countStr = ex.count > 1 ? ` x${ex.count}` : '';
-          extrasTextArr.push(`${ex.name}(${ex.priceStr}${countStr})`);
         });
 
-        grandTotal += itemSum;
+        let formulaStr = formulaParts.join('+');
+        formulaStr = formulaStr.replace(/\+\s*\*2/g, '*2');
+        formulaStr = formulaStr.replace(/\+\s*x2/g, '*2');
+        formulaStr = formulaStr.replace(/\+\s*-\s*/g, '-');
 
-        textLines.push(`${idx + 1}. [${item.typeName}] ${item.baseName} (${item.baseRawPrice})`);
-        if (extrasTextArr.length > 0) {
-          textLines.push(`   추가/할인: ${extrasTextArr.join(', ')}`);
-        }
-        textLines.push(`   소계: ${itemSum.toLocaleString()} p\n`);
+        text += `[${item.typeName}] (옵션: ${optNames}): ${formulaStr}=${item.itemTotal.toLocaleString()}p\n`;
       });
 
-      textLines.push(`---------------------------`);
-      textLines.push(`총 예상 결제 금액: ${grandTotal.toLocaleString()} p`);
+      if (cart.length > 1) {
+        text += `총 예상 금액: ${grandTotal.toLocaleString()} p`;
+      } else {
+        text = text.trim();
+      }
 
-      const fullText = textLines.join('\n');
-
-      navigator.clipboard.writeText(fullText).then(() => {
-        showToast("계산 내역이 클립보드에 복사되었습니다!");
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('예상 금액이 클립보드에 복사되었습니다!');
       }).catch(err => {
-        alert('복사에 실패했습니다. 구형 브라우저일 수 있습니다.');
+        console.error('Copy failed:', err);
+        alert('복사에 실패했습니다.');
       });
     }
 
-    // 초기화 실행
-    updateAdminUI();
-  </script>
+    function initAppUI() {
+      renderBlocks();
+      renderGenres();
+      renderPrices();
+      renderSampleTags();
+      renderSamples();
+      renderDeliverySpecs();
+      renderTypeNotices();
+      renderNoticesContent();
+      renderCalcFormOptions();
+    }
 
-</body></html>
+    window.onload = () => {
+      fetchExternalData();
+    };
+  </script>
+</body>
+</html>
