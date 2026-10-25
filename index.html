@@ -1,1 +1,1719 @@
-.
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가공 샘플</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {} }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+    body { font-family: 'Pretendard', sans-serif; }
+    .whitespace-pre-wrap { white-space: pre-wrap; }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; }
+    
+    img, .no-save {
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen pb-20 transition-colors duration-200" oncontextmenu="return false;">
+
+  <!-- Header -->
+  <header class="border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 backdrop-blur sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <h1 class="font-bold text-gray-900 dark:text-gray-100 text-base tracking-tight flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-black dark:bg-white"></span> 가공 샘플
+      </h1>
+      <div class="flex items-center gap-2">
+        <a href="https://kre.pe/pOPn" target="_blank" class="text-xs bg-black text-white dark:bg-white dark:text-black px-3 py-1.5 rounded-md hover:opacity-80 transition flex items-center gap-1.5 font-medium">
+          <i class="fa-solid fa-headset"></i> 문의 바로가기
+        </a>
+        <a href="https://panela.link/" target="_blank" class="text-xs bg-black text-white dark:bg-white dark:text-black px-3 py-1.5 rounded-md hover:opacity-80 transition flex items-center gap-1.5 font-medium">
+          <i class="fa-solid fa-link"></i> 파넬라 바로가기
+        </a>
+        <button onclick="toggleDarkMode()" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-2 rounded-md border border-gray-300 dark:border-gray-700 transition" title="다크/라이트 모드 전환">
+          <svg id="sunIcon" class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <svg id="moonIcon" class="w-3.5 h-3.5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+        </button>
+        <div id="adminControls">
+          <button onclick="openAuthModal()" id="adminBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5">
+            <i class="fa-solid fa-lock"></i> <span>편집 모드</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 퀵 내비게이션(목차) 바 -->
+  <nav class="bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800 sticky top-[53px] z-30 overflow-x-auto">
+    <div class="max-w-6xl mx-auto px-4 py-2 flex gap-2 whitespace-nowrap text-xs">
+      <a href="#section-notice" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">공지사항</a>
+      <a href="#section-genre" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">OK / NG</a>
+      <a href="#section-price" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">가격표</a>
+      <a href="#section-sample" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">샘플</a>
+      <a href="#section-delivery" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">파일</a>
+      <a href="#section-ref" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">신청시 참고사항</a>
+      <a href="#section-calc" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">금액 계산기</a>
+      <a href="#section-parts" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">파츠 자료집</a>
+    </div>
+  </nav>
+
+  <!-- 메인 컨테이너 -->
+  <main class="max-w-6xl mx-auto px-4 pt-8 space-y-12">
+
+    <!-- 백업/복원 기능 -->
+    <div id="backupSectionWrapper"></div>
+
+    <!-- 1. 공지사항 -->
+    <section id="section-notice" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-gray-500 text-sm"></i> 공지사항
+        </h2>
+        <div class="edit-only hidden flex flex-wrap gap-1.5">
+          <button onclick="addBlock('text')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 텍스트</button>
+          <button onclick="addBlock('image')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-image"></i> 이미지 블록</button>
+          <button onclick="addBlock('spacer')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-arrows-up-down"></i> 여백</button>
+        </div>
+      </div>
+      <div id="noticeContainer" class="space-y-3"></div>
+    </section>
+
+    <!-- 2. OK / NG -->
+    <section id="section-genre" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-gray-500 text-sm"></i> OK / NG
+        </h2>
+        <button onclick="addGenreItem()" class="edit-only hidden text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 항목 추가</button>
+      </div>
+      <div id="genreContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    </section>
+
+    <!-- 3. 가격표 -->
+    <section id="section-price" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="border-b border-gray-200 dark:border-gray-800 pb-2 flex justify-between items-center">
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-tags text-gray-500 text-sm"></i> 가격표
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 쿠키 -->
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
+          <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
+            <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">쿠키</h3>
+            <button onclick="addPriceItem('cookie', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
+            <div id="price-cookie-base" class="space-y-2"></div>
+          </div>
+          <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
+              <button onclick="addPriceItem('cookie', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+            </div>
+            <div id="price-cookie-extra" class="space-y-2"></div>
+          </div>
+        </div>
+
+        <!-- 바게트 -->
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
+          <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
+            <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">바게트</h3>
+            <button onclick="addPriceItem('baguette', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
+            <div id="price-baguette-base" class="space-y-2"></div>
+          </div>
+          <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
+              <button onclick="addPriceItem('baguette', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+            </div>
+            <div id="price-baguette-extra" class="space-y-2"></div>
+          </div>
+        </div>
+
+        <!-- 팝콘 -->
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
+          <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
+            <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">팝콘</h3>
+            <button onclick="addPriceItem('popcorn', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
+            <div id="price-popcorn-base" class="space-y-2"></div>
+          </div>
+          <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
+              <button onclick="addPriceItem('popcorn', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
+            </div>
+            <div id="price-popcorn-extra" class="space-y-2"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 샘플 -->
+    <section id="section-sample" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="border-b border-gray-200 dark:border-gray-800 pb-2 flex justify-between items-center">
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-images text-gray-500 text-sm"></i> 샘플
+        </h2>
+        <div class="flex gap-2 items-center">
+          <button onclick="openSampleUploadModal()" class="edit-only hidden text-xs bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 샘플 추가</button>
+          <button onclick="toggleSamples()" id="sampleToggleBtn" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-1 rounded border border-gray-300 dark:border-gray-700">
+            <i class="fa-solid fa-chevron-up"></i> 접기
+          </button>
+        </div>
+      </div>
+
+      <div id="sampleSectionContent" class="space-y-4">
+        <div class="flex border-b border-gray-200 dark:border-gray-800 gap-2 items-center justify-between">
+          <div class="flex gap-2">
+            <button onclick="switchSampleTab('cookie')" id="sample-tab-cookie" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-black dark:border-white text-black dark:text-white">쿠키</button>
+            <button onclick="switchSampleTab('baguette')" id="sample-tab-baguette" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">바게트</button>
+            <button onclick="switchSampleTab('popcorn')" id="sample-tab-popcorn" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">팝콘</button>
+          </div>
+          <button onclick="addSampleTagPrompt()" class="edit-only hidden text-[11px] bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 mb-1"><i class="fa-solid fa-tag"></i> 태그 추가</button>
+        </div>
+
+        <div id="sampleTagFilterBar" class="flex flex-wrap gap-1.5 pt-1"></div>
+        <div id="sampleGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2"></div>
+      </div>
+    </section>
+
+    <!-- 5. 파일 전달 규격 -->
+    <section id="section-delivery" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-file-arrow-down text-gray-500 text-sm"></i> 파일 전달 규격
+        </h2>
+      </div>
+      <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm">
+        <div id="deliverySpecsContent" contenteditable="false" onblur="updateDeliverySpecs(this.innerText)" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none"></div>
+      </div>
+    </section>
+
+    <!-- 6. 신청시 참고사항 -->
+    <section id="section-ref" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-gray-500 text-sm"></i> 신청시 참고사항
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">쿠키</h3>
+          <div id="notice-cookie-content" contenteditable="false" onblur="updateNoticeTypeContent('cookie', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+        </div>
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">바게트</h3>
+          <div id="notice-baguette-content" contenteditable="false" onblur="updateNoticeTypeContent('baguette', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+        </div>
+        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
+          <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">팝콘</h3>
+          <div id="notice-popcorn-content" contenteditable="false" onblur="updateNoticeTypeContent('popcorn', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 예상 금액 계산기 & 신청서 폼 복사 -->
+    <section id="section-calc" class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl p-6 space-y-5 max-w-2xl mx-auto scroll-mt-24">
+      <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
+        <i class="fa-solid fa-calculator text-gray-500"></i> 예상 결제 금액 계산기
+      </h2>
+
+      <!-- 계산기 참고 텍스트 (편집 가능) -->
+      <div id="calcNoticeText" contenteditable="false" onblur="updateCalcNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-b border-gray-200 dark:border-gray-800 pb-3 outline-none"></div>
+
+      <div class="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 rounded-lg p-4 space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">타입</label>
+            <select id="calcType" onchange="renderCalcFormOptions()" class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-2.5 py-2 text-xs text-gray-900 dark:text-gray-100">
+              <option value="cookie">쿠키</option>
+              <option value="baguette">바게트</option>
+              <option value="popcorn">팝콘</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">종류</label>
+            <select id="calcBaseSelect" class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-2.5 py-2 text-xs text-gray-900 dark:text-gray-100"></select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1.5">추가 / 할인 옵션</label>
+          <!-- 줄세우기(Flex wrap) 스타일 적용 -->
+          <div id="calcExtraCheckboxGroup" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="pt-2">
+          <button onclick="addToCart()" class="w-full sm:w-auto text-xs bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 dark:text-black text-white font-medium px-4 py-2 rounded transition">
+            + 항목 담기
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">담은 항목 목록</h3>
+        <div id="cartContainer" class="space-y-2"></div>
+      </div>
+
+      <div class="border-t border-gray-200 dark:border-gray-800 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-sm font-medium text-gray-600 dark:text-gray-400">총 예상 금액:</span>
+          <span id="cartTotal" class="text-xl font-bold text-gray-900 dark:text-gray-100">0 p</span>
+        </div>
+        <button onclick="copyApplicationForm()" class="w-full sm:w-auto text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2.5 rounded shadow-sm transition flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-copy"></i> 예상 금액 복사하기
+        </button>
+      </div>
+    </section>
+
+    <!-- 8. 파츠 자료집 (비밀번호: thx20) -->
+    <section id="section-parts" class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl p-6 space-y-5 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-3">
+        <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+          <i class="fa-solid fa-folder-open text-gray-500"></i> 파츠 자료집
+        </h2>
+        <div class="flex items-center gap-2">
+          <!-- 전체 다운로드 버튼 (해제 시에만 노출) -->
+          <button id="downloadAllPartsBtn" onclick="downloadAllPartsZip()" class="hidden text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2.5 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition font-medium flex items-center gap-1">
+            <i class="fa-solid fa-download"></i> 전체 다운로드
+          </button>
+          <div id="partsUnlockContainer">
+            <button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5 font-medium">
+              <i class="fa-solid fa-lock"></i> <span>자료집 열기</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 배포 파츠 참고 텍스트 (편집 가능) -->
+      <div id="partsNoticeText" contenteditable="false" onblur="updatePartsNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed outline-none"></div>
+
+      <!-- 잠김 안내 메시지 -->
+      <div id="partsLockedNotice" class="text-center py-10 text-xs text-gray-500 dark:text-gray-400 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg space-y-2">
+        <i class="fa-solid fa-lock text-2xl mb-1 text-gray-300 dark:text-gray-600 block"></i>
+        <p>이전에 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다.</p>
+      </div>
+
+      <div id="partsUnlockedContent" class="hidden space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">쿠키 파츠</h3>
+                <button onclick="downloadCategoryZip('cookie')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="쿠키 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
+              </div>
+              <button onclick="triggerPartsUpload('cookie')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
+            </div>
+            <div id="parts-cookie-list" class="space-y-3"></div>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">바게트 파츠</h3>
+                <button onclick="downloadCategoryZip('baguette')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="바게트 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
+              </div>
+              <button onclick="triggerPartsUpload('baguette')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
+            </div>
+            <div id="parts-baguette-list" class="space-y-3"></div>
+          </div>
+          <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+              <div class="flex items-center gap-2">
+                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">팝콘 파츠</h3>
+                <button onclick="downloadCategoryZip('popcorn')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="팝콘 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
+              </div>
+              <button onclick="triggerPartsUpload('popcorn')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
+            </div>
+            <div id="parts-popcorn-list" class="space-y-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 파츠 업로드 모달 -->
+  <div id="partsUploadModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-md w-full space-y-4 shadow-xl">
+      <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">배포 파츠 등록</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">파츠 제목 (ex. 모 시나리오 겉옷 파츠 - M)</label>
+          <input type="text" id="modalPartTitle" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-2 text-gray-900 dark:text-gray-100" placeholder="제목 입력">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">1. 실제 파일 (PSD, ZIP 등)</label>
+          <input type="file" id="modalPartMainFile" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">2. 미리보기 이미지 (선택)</label>
+          <input type="file" id="modalPartThumbFile" accept="image/*" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2 border-t border-gray-100 dark:border-gray-800">
+        <button onclick="closePartsUploadModal()" class="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">취소</button>
+        <button onclick="confirmUploadPart()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded hover:opacity-85 transition">등록</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 라이트박스 모달 (모바일 최적화) -->
+  <div id="lightboxModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
+    <div class="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-xl p-4 space-y-3 cursor-default shadow-2xl" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
+        <h3 id="lightboxTitle" class="text-sm font-bold text-gray-800 dark:text-gray-200">파츠 크게보기</h3>
+        <button onclick="closeLightbox()" class="text-gray-400 hover:text-black dark:hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      
+      <div id="lbSingleContainer" class="hidden flex flex-col items-center justify-center">
+        <div class="w-full max-h-[60vh] overflow-hidden rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center p-2">
+          <img id="lbSingleImg" src="" class="max-h-[55vh] w-auto object-contain no-save">
+        </div>
+      </div>
+
+      <div id="lbBeforeAfterContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="space-y-1">
+          <span class="text-xs font-bold text-gray-500 dark:text-gray-400 block text-center">원본 (Before)</span>
+          <div class="w-full max-h-[50vh] overflow-hidden rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center p-2">
+            <img id="lbBeforeImg" src="" class="max-h-[45vh] w-auto object-contain no-save">
+          </div>
+        </div>
+        <div class="space-y-1">
+          <span class="text-xs font-bold text-gray-500 dark:text-gray-400 block text-center">가공 (After)</span>
+          <div class="w-full max-h-[50vh] overflow-hidden rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center p-2">
+            <img id="lbAfterImg" src="" class="max-h-[45vh] w-auto object-contain no-save">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 샘플 업로드 모달 -->
+  <div id="sampleUploadModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-md w-full space-y-4 shadow-xl">
+      <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">샘플 추가</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">세부 태그 선택</label>
+          <select id="modalSampleTagSelect" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-2 text-gray-900 dark:text-gray-100"></select>
+        </div>
+        <div id="modalBeforeContainer">
+          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">1. 원본 (Before) 이미지</label>
+          <input type="file" id="modalBeforeFile" accept="image/*" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
+        </div>
+        <div>
+          <label id="modalLabelAfter" class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">2. 가공본 (After) 이미지</label>
+          <input type="file" id="modalAfterFile" accept="image/*" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2 border-t border-gray-100 dark:border-gray-800">
+        <button onclick="closeSampleUploadModal()" class="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">취소</button>
+        <button onclick="confirmUploadSample()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded hover:opacity-85 transition">등록</button>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="blockImageFileInput" accept="image/*" multiple class="hidden" onchange="handleBlockImagesAdd(event)">
+
+  <!-- 관리자 인증 모달 -->
+  <div id="authModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-sm w-full space-y-4 shadow-xl">
+      <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">편집 모드 인증</h3>
+      <p class="text-xs text-gray-500 dark:text-gray-400">관리자 코드를 입력해주세요.</p>
+      <input type="password" id="passInput" onkeydown="if(event.key==='Enter') verifyPass()" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none" placeholder="비밀번호 입력">
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeAuthModal()" class="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">취소</button>
+        <button onclick="verifyPass()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_CODE = "twenty2020";
+    let isAdmin = false;
+    let isPartsUnlocked = false;
+    let currentSampleTab = 'cookie';
+    let currentSampleSubTags = { cookie: '전체', baguette: '전체', popcorn: '전체' };
+    let isSamplesOpen = true;
+    let cart = [];
+    let activeImageBlockId = null;
+    let activeSlides = {};
+    let activePartsType = null;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    let defaultData = {
+      notices: [
+        { id: '1', type: 'text', title: '기본 공지', content: '• 올려주신 구해요 글 링크와 함께 신청 문의 주시면 신청서 요청(타입 외) 보내드립니다.\n• 최소 1시간 ~ 최대 3일 소요됩니다.' },
+        { id: '2', type: 'spacer', height: 20 }
+      ],
+      genres: [
+        { id: 'g1', text: '1차, 2차, 드림, 쩜오디, 2D, 3D (장르 가림 없음)', status: 'ok' },
+        { id: 'g2', text: '지나친 고어, 메카닉 등 표현이 어려운 장르', status: 'ng' }
+      ],
+      deliverySpecs: '• 기본 해상도: 300dpi\n• 제공 파일: 기본 최종본 및 투명화 PNG 파일\n• 파일명 규칙: 쿠키(바게트,팝콘)_기본(투명) / 다인 신청 시 A, B, C...',
+      typeNotices: {
+        cookie: '• 쿠키 타입 참고사항을 입력해주세요.',
+        baguette: '• 바게트 타입 참고사항을 입력해주세요.',
+        popcorn: '• 팝콘 타입 참고사항을 입력해주세요.'
+      },
+      partsNotice: "토핑으로 추가하기엔 애매하나(덜 완성되었다던가, 업로드하기엔 부족한 것들...), 다용도로 잘 쓰일만한 파츠들을 등록해뒀습니다. 아직 조잡한 실력인지라 비밀번호를 걸어두었습니다만, 공개적인 곳에서의 게시만 아니라면 지인 사이에서 편히 공유해 주셔도 괜찮습니다. ^_^\n또한 신청자분께서 요청 주신 파츠가 다용도로 쓰일만하다고 판단될 경우, 신청 금액을 할인드리고 배포 파츠 자료집에 등록하는 경우도 있을 것 같습니다. 등록 전 먼저 말씀드릴 예정이니 편히 거절해 주셔도 문제 없습니다.",
+      calcNotice: "대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^_^;;!! 제가 잘못 계산했을 수도......)",
+      prices: {
+        cookie: {
+          base: [{ name: '일부분 파츠', price: '1,000p' }, { name: '인당 (기본 체형)', price: '2,000p' }],
+          extra: [
+            { name: '동물화/소품 추가', price: '500p', countable: true },
+            { name: '표정 변화', price: '500p', countable: true },
+            { name: '지인 할인', price: '-500p', countable: false }
+          ]
+        },
+        baguette: {
+          base: [{ name: '인당 (기본 체형)', price: '2,000p' }],
+          extra: [{ name: '소품 추가', price: '500p', countable: true }]
+        },
+        popcorn: {
+          base: [{ name: '기본 체형', price: '2,000p' }],
+          extra: [{ name: '표정 변경', price: '500p', countable: true }]
+        }
+      },
+      samples: { cookie: [], baguette: [], popcorn: [] },
+      sampleTags: {
+        cookie: ['기본 체형', '어린이 체형'],
+        baguette: ['남성형', '여성형'],
+        popcorn: ['기본형']
+      },
+      distributionParts: {
+        cookie: [],
+        baguette: [],
+        popcorn: []
+      }
+    };
+
+    let appData = JSON.parse(localStorage.getItem('nanagom_v20_data')) || defaultData;
+    if(!appData.sampleTags) appData.sampleTags = defaultData.sampleTags;
+    if(!appData.distributionParts) appData.distributionParts = defaultData.distributionParts;
+    if(!appData.partsNotice) appData.partsNotice = defaultData.partsNotice;
+    if(!appData.calcNotice) appData.calcNotice = defaultData.calcNotice;
+
+    function showToast(message) {
+      let toast = document.getElementById('toastMsg');
+      if(!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastMsg';
+        toast.className = 'fixed bottom-5 right-5 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg text-xs shadow-xl transition-opacity duration-300 opacity-0 pointer-events-none z-50 font-medium';
+        document.body.appendChild(toast);
+      }
+      toast.innerText = message;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2000);
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem('nanagom_v20_data', JSON.stringify(appData));
+        showToast("변경사항이 자동 저장되었습니다.");
+      } catch (e) {
+        console.warn('LocalStorage Quota Exceeded');
+      }
+    }
+
+    function exportDataJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
+      const dlAnchorElem = document.createElement('a');
+      dlAnchorElem.setAttribute("href", dataStr);
+      dlAnchorElem.setAttribute("download", `nanagom_backup_${Date.now()}.json`);
+      dlAnchorElem.click();
+    }
+    function importDataJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          appData = JSON.parse(evt.target.result);
+          saveData();
+          location.reload();
+        } catch (err) {
+          alert('올바른 백업 JSON 파일이 아닙니다.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function initDarkMode() {
+      const isDark = localStorage.getItem('nanagom_dark_mode') === 'true';
+      if (isDark) document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+    }
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('nanagom_dark_mode', isDark);
+    }
+    initDarkMode();
+
+    function openAuthModal() {
+      if(isAdmin) { isAdmin = false; updateAdminUI(); return; }
+      document.getElementById('authModal').classList.remove('hidden');
+      document.getElementById('passInput').focus();
+    }
+    function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
+    function verifyPass() {
+      if(document.getElementById('passInput').value === ADMIN_CODE) {
+        isAdmin = true; closeAuthModal(); updateAdminUI();
+      } else { alert('비밀번호가 올바르지 않습니다.'); }
+      document.getElementById('passInput').value = '';
+    }
+
+    function updateAdminUI() {
+      const btn = document.getElementById('adminBtn');
+      const backupWrapper = document.getElementById('backupSectionWrapper');
+
+      if(isAdmin) {
+        isPartsUnlocked = true;
+        btn.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-300', 'dark:bg-emerald-950', 'dark:text-emerald-300', 'dark:border-emerald-800');
+        btn.innerHTML = '<i class="fa-solid fa-lock-open"></i> <span>편집 해제</span>';
+        document.querySelectorAll('.edit-only').forEach(e => e.classList.remove('hidden'));
+        
+        backupWrapper.innerHTML = `
+          <div class="max-w-4xl mx-auto bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 text-xs flex justify-between items-center text-amber-900 dark:text-amber-200">
+            <span class="font-semibold"><i class="fa-solid fa-floppy-disk"></i> 데이터 관리 (백업/복원)</span>
+            <div class="flex gap-2">
+              <button onclick="exportDataJSON()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 다운로드</button>
+              <button onclick="document.getElementById('importJsonFile').click()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 불러오기</button>
+            </div>
+          </div>
+        `;
+      } else {
+        isPartsUnlocked = false;
+        btn.classList.remove('bg-emerald-50', 'text-emerald-700', 'border-emerald-300', 'dark:bg-emerald-950', 'dark:text-emerald-300', 'dark:border-emerald-800');
+        btn.innerHTML = '<i class="fa-solid fa-lock"></i> <span>편집 모드</span>';
+        document.querySelectorAll('.edit-only').forEach(e => e.classList.add('hidden'));
+        backupWrapper.innerHTML = '';
+      }
+
+      updatePartsUnlockUI();
+      renderBlocks();
+      renderGenres();
+      renderPrices();
+      renderSampleTags();
+      renderSamples();
+      renderDeliverySpecs();
+      renderTypeNotices();
+      renderNoticesContent();
+      renderCalcFormOptions();
+    }
+
+    function updatePartsUnlockUI() {
+      const notice = document.getElementById('partsLockedNotice');
+      const content = document.getElementById('partsUnlockedContent');
+      const unlockContainer = document.getElementById('partsUnlockContainer');
+      const downloadAllBtn = document.getElementById('downloadAllPartsBtn');
+
+      if (isPartsUnlocked || isAdmin) {
+        notice.classList.add('hidden');
+        content.classList.remove('hidden');
+        downloadAllBtn.classList.remove('hidden');
+        unlockContainer.innerHTML = `<span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold"><i class="fa-solid fa-check-circle"></i> 해제됨</span>`;
+        renderDistributionParts();
+      } else {
+        notice.classList.remove('hidden');
+        content.classList.add('hidden');
+        downloadAllBtn.classList.add('hidden');
+        unlockContainer.innerHTML = `<button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5 font-medium"><i class="fa-solid fa-lock"></i> <span>자료집 열기</span></button>`;
+      }
+    }
+
+    function renderNoticesContent() {
+      const pEl = document.getElementById('partsNoticeText');
+      const cEl = document.getElementById('calcNoticeText');
+
+      if (pEl) {
+        pEl.innerText = appData.partsNotice || '';
+        pEl.setAttribute('contenteditable', isAdmin);
+        if (isAdmin) pEl.classList.add('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
+        else pEl.classList.remove('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
+      }
+      if (cEl) {
+        cEl.innerText = appData.calcNotice || '';
+        cEl.setAttribute('contenteditable', isAdmin);
+        if (isAdmin) cEl.classList.add('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
+        else cEl.classList.remove('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
+      }
+    }
+
+    function updatePartsNotice(text) {
+      appData.partsNotice = text;
+      saveData();
+    }
+    function updateCalcNotice(text) {
+      appData.calcNotice = text;
+      saveData();
+    }
+
+    function openPartsAuthModal() {
+      const code = prompt("배포 파츠 자료집 암호를 입력해주세요:");
+      if (code === "thx20") {
+        isPartsUnlocked = true;
+        updatePartsUnlockUI();
+        showToast("배포 파츠 자료집이 해제되었습니다.");
+      } else if (code !== null) {
+        alert("암호가 올바르지 않습니다.");
+      }
+    }
+
+    function triggerPartsUpload(type) {
+      activePartsType = type;
+      document.getElementById('modalPartTitle').value = '';
+      document.getElementById('modalPartMainFile').value = '';
+      document.getElementById('modalPartThumbFile').value = '';
+      document.getElementById('partsUploadModal').classList.remove('hidden');
+    }
+    function closePartsUploadModal() {
+      document.getElementById('partsUploadModal').classList.add('hidden');
+    }
+
+    function confirmUploadPart() {
+      const title = document.getElementById('modalPartTitle').value.trim();
+      const mainFileIn = document.getElementById('modalPartMainFile').files[0];
+      const thumbFileIn = document.getElementById('modalPartThumbFile').files[0];
+
+      if (!title || !mainFileIn) {
+        alert('파츠 제목과 실제 파일은 필수 입력입니다!');
+        return;
+      }
+
+      const mainReader = new FileReader();
+      mainReader.onload = function(mainEvt) {
+        const mainDataUrl = mainEvt.target.result;
+
+        if (thumbFileIn) {
+          const thumbReader = new FileReader();
+          thumbReader.onload = function(thumbEvt) {
+            savePartData(title, mainDataUrl, thumbEvt.target.result);
+          };
+          thumbReader.readAsDataURL(thumbFileIn);
+        } else {
+          let defaultThumb = mainDataUrl.startsWith('data:image') ? mainDataUrl : 'https://placehold.co/100x100?text=FILE';
+          savePartData(title, mainDataUrl, defaultThumb);
+        }
+      };
+      mainReader.readAsDataURL(mainFileIn);
+    }
+
+    function savePartData(title, fileData, thumbData) {
+      if(!appData.distributionParts[activePartsType]) appData.distributionParts[activePartsType] = [];
+      appData.distributionParts[activePartsType].push({
+        id: Date.now().toString(),
+        title: title,
+        fileData: fileData,
+        thumbData: thumbData
+      });
+      saveData();
+      renderDistributionParts();
+      closePartsUploadModal();
+    }
+
+    function deleteDistributionPart(type, id) {
+      appData.distributionParts[type] = appData.distributionParts[type].filter(p => p.id !== id);
+      saveData();
+      renderDistributionParts();
+    }
+
+    async function downloadCategoryZip(type) {
+      const list = appData.distributionParts[type] || [];
+      if (list.length === 0) { alert('다운로드할 파츠가 없습니다.'); return; }
+      const typeName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
+      const zip = new JSZip();
+      list.forEach((p) => {
+        if(p.fileData.includes(',')) {
+          const base64Data = p.fileData.split(',')[1];
+          zip.file(`${p.title}`, base64Data, {base64: true});
+        }
+      });
+      const content = await zip.generateAsync({type: "blob"});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(content);
+      link.download = `(스물)${typeName}_파츠.zip`;
+      link.click();
+    }
+
+    async function downloadAllPartsZip() {
+      const zip = new JSZip();
+      let totalCount = 0;
+      ['cookie', 'baguette', 'popcorn'].forEach(type => {
+        const list = appData.distributionParts[type] || [];
+        if(list.length > 0) {
+          const folder = zip.folder(type);
+          list.forEach(p => {
+            totalCount++;
+            if(p.fileData.includes(',')) {
+              const base64Data = p.fileData.split(',')[1];
+              folder.file(`${p.title}`, base64Data, {base64: true});
+            }
+          });
+        }
+      });
+      if (totalCount === 0) { alert('다운로드할 파츠가 없습니다.'); return; }
+      const content = await zip.generateAsync({type: "blob"});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(content);
+      link.download = `(스물)전체_파츠.zip`;
+      link.click();
+    }
+
+    function renderDistributionParts() {
+      ['cookie', 'baguette', 'popcorn'].forEach(type => {
+        const container = document.getElementById(`parts-${type}-list`);
+        container.innerHTML = '';
+        const list = appData.distributionParts[type] || [];
+        const typeName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
+        if (list.length === 0) {
+          container.innerHTML = `<div class="text-[11px] text-gray-400 py-3 text-center">등록된 파츠가 없습니다.</div>`;
+          return;
+        }
+        list.forEach(p => {
+          const div = document.createElement('div');
+          div.className = 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-2.5 flex items-center justify-between gap-2 shadow-xs';
+          const downloadFilename = `(스물)${typeName}_파츠_${p.title}`;
+          div.innerHTML = `
+            <div class="flex items-center gap-2.5 overflow-hidden">
+              <div class="w-10 h-10 shrink-0 rounded bg-gray-100 dark:bg-gray-800 border overflow-hidden flex items-center justify-center p-0.5 cursor-pointer" onclick="openPartsLightbox('${p.thumbData}', '${p.title}')" title="파츠 크게보기">
+                <img src="${p.thumbData}" class="w-full h-full object-contain no-save">
+              </div>
+              <span class="text-xs font-medium text-gray-800 dark:text-gray-200 truncate">${p.title}</span>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <a href="${p.fileData}" download="${downloadFilename}" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300 flex items-center gap-1" title="다운로드"><i class="fa-solid fa-download"></i></a>
+              ${isAdmin ? `<button onclick="deleteDistributionPart('${type}', '${p.id}')" class="text-red-500 hover:text-red-700 px-1 text-xs"><i class="fa-solid fa-trash"></i></button>` : ''}
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      });
+    }
+
+    function openPartsLightbox(imgSrc, title) {
+      document.getElementById('lbBeforeAfterContainer').classList.add('hidden');
+      document.getElementById('lbSingleContainer').classList.remove('hidden');
+      document.getElementById('lbSingleImg').src = imgSrc;
+      document.getElementById('lightboxTitle').innerText = "파츠 크게보기";
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+
+    function handleTouchStart(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+    function handleTouchEnd(blockId, maxLen, e) {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        changeSlide(blockId, 1, maxLen);
+      } else if (touchEndX - touchStartX > 50) {
+        changeSlide(blockId, -1, maxLen);
+      }
+    }
+
+    function renderBlocks() {
+      const container = document.getElementById('noticeContainer');
+      container.innerHTML = '';
+      appData.notices.forEach((n, index) => {
+        const div = document.createElement('div');
+
+        if(n.type === 'spacer') {
+          div.className = isAdmin ? 'group relative border border-dashed border-gray-300 dark:border-gray-700 rounded bg-gray-50 dark:bg-gray-900 flex items-center justify-center' : '';
+          div.style.height = `${n.height || 20}px`;
+          if (isAdmin) {
+            div.innerHTML = `<span class="text-[10px] text-gray-400">여백 (${n.height || 20}px)</span>
+              <div class="absolute right-2 top-1 flex gap-1 items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1 rounded shadow-sm z-10">
+                <input type="text" value="${n.height || 20}" onchange="updateSpacer('${n.id}', this.value)" class="w-10 text-xs border dark:border-gray-700 dark:bg-gray-900 rounded px-1 text-center">
+                <button onclick="moveBlock(${index}, -1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="위로"><i class="fa-solid fa-arrow-up"></i></button>
+                <button onclick="moveBlock(${index}, 1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="아래로"><i class="fa-solid fa-arrow-down"></i></button>
+                <button onclick="deleteBlock('${n.id}')" class="text-red-500 p-1 text-xs" title="삭제"><i class="fa-solid fa-trash"></i></button>
+              </div>`;
+          }
+          container.appendChild(div);
+          return;
+        }
+
+        div.className = 'group relative p-3.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-sm text-gray-800 dark:text-gray-200 shadow-sm space-y-2';
+        let titleHTML = isAdmin 
+          ? `<input type="text" value="${n.title || ''}" onchange="updateBlockTitle('${n.id}', this.value)" placeholder="블록 제목 입력" class="font-bold text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-2 py-0.5 text-xs w-full mb-1">`
+          : (n.title ? `<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm mb-1">${n.title}</h3>` : '');
+
+        if(n.type === 'text') {
+          div.innerHTML = `${titleHTML}<div contenteditable="${isAdmin}" onblur="updateBlockContent('${n.id}', this.innerText)" class="outline-none whitespace-pre-wrap">${n.content}</div>`;
+        } else if(n.type === 'image') {
+          let imgs = n.images || (n.content ? [n.content] : []);
+          let mode = n.viewMode || 'grid';
+
+          let imgHtml = '';
+          if (imgs.length === 0) {
+            imgHtml = `<div class="text-xs text-gray-400 py-4 text-center border border-dashed border-gray-200 dark:border-gray-700 rounded">등록된 이미지가 없습니다. [이미지 추가] 버튼을 눌러주세요.</div>`;
+          } else if (mode === 'grid') {
+            imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
+            imgs.forEach((imgSrc, i) => {
+              imgHtml += `<div class="relative group/img overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 cursor-pointer flex items-center justify-center p-1">
+                <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '샘플 상세보기')">
+                ${isAdmin ? `
+                  <div class="absolute top-1 right-1 flex gap-0.5 bg-black/70 rounded px-1 py-0.5">
+                    <button onclick="event.stopPropagation(); moveBlockImage('${n.id}', ${i}, -1)" class="text-white text-[10px] px-1 hover:text-gray-300" title="왼쪽으로"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="event.stopPropagation(); moveBlockImage('${n.id}', ${i}, 1)" class="text-white text-[10px] px-1 hover:text-gray-300" title="오른쪽으로"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button onclick="event.stopPropagation(); removeImageFromBlock('${n.id}', ${i})" class="text-white text-[10px] px-1 hover:text-red-400" title="삭제"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+                ` : ''}
+              </div>`;
+            });
+            imgHtml += `</div>`;
+          } else {
+            let activeIdx = activeSlides[n.id] || 0;
+            if (activeIdx >= imgs.length) activeIdx = 0;
+            let currentImg = imgs[activeIdx] || '';
+            imgHtml = `
+              <div class="relative flex flex-col items-center">
+                <div class="relative w-full max-w-xl h-80 overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-2"
+                     ontouchstart="handleTouchStart(event)" ontouchend="handleTouchEnd('${n.id}', ${imgs.length}, event)">
+                  <img src="${currentImg}" class="max-h-full max-w-full w-auto h-auto object-contain no-save cursor-pointer" onclick="openSingleLightbox('${currentImg}', '샘플 상세보기')">
+                  ${imgs.length > 1 ? `
+                    <button onclick="changeSlide('${n.id}', -1, ${imgs.length})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/80 z-10"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="changeSlide('${n.id}', 1, ${imgs.length})" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/80 z-10"><i class="fa-solid fa-chevron-right"></i></button>
+                  ` : ''}
+                </div>
+                ${imgs.length > 1 ? `
+                  <div class="flex gap-1.5 mt-2.5">
+                    ${imgs.map((_, dotIdx) => `<span onclick="setSlide('${n.id}', ${dotIdx})" class="w-2 h-2 rounded-full cursor-pointer transition-colors ${dotIdx === activeIdx ? 'bg-black dark:bg-white' : 'bg-gray-300 dark:bg-gray-700'}"></span>`).join('')}
+                  </div>
+                ` : ''}
+                ${isAdmin ? `
+                  <div class="absolute top-2 right-2 flex gap-1 bg-black/70 rounded px-2 py-1 items-center z-10">
+                    <span class="text-[10px] text-white font-mono">${activeIdx + 1} / ${imgs.length}</span>
+                    <button onclick="removeImageFromBlock('${n.id}', ${activeIdx})" class="text-white text-xs px-1 hover:text-red-400" title="현재 이미지 삭제"><i class="fa-solid fa-trash"></i></button>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }
+
+          div.innerHTML = `${titleHTML}
+            ${isAdmin ? `
+              <div class="flex gap-2 items-center text-xs mb-2 pb-2 border-b border-gray-100 dark:border-gray-800">
+                <span class="text-gray-500 dark:text-gray-400 font-semibold">보기 형식:</span>
+                <button onclick="toggleBlockViewMode('${n.id}', 'grid')" class="px-2 py-0.5 rounded border ${mode==='grid'?'bg-black text-white dark:bg-white dark:text-black':'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'}">벽돌 형식</button>
+                <button onclick="toggleBlockViewMode('${n.id}', 'slider')" class="px-2 py-0.5 rounded border ${mode==='slider'?'bg-black text-white dark:bg-white dark:text-black':'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'}">슬라이드 형식</button>
+                <button onclick="triggerBlockImageAdd('${n.id}')" class="ml-auto bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 이미지 추가</button>
+              </div>
+            ` : ''}
+            ${imgHtml}`;
+        }
+
+        if(isAdmin) {
+          div.innerHTML += `
+            <div class="absolute right-2 top-2 flex gap-1 items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1.5 py-0.5 rounded shadow-sm z-10">
+              <button onclick="moveBlock(${index}, -1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="위로"><i class="fa-solid fa-arrow-up"></i></button>
+              <button onclick="moveBlock(${index}, 1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="아래로"><i class="fa-solid fa-arrow-down"></i></button>
+              <button onclick="deleteBlock('${n.id}')" class="text-red-500 hover:text-red-700 text-xs px-1" title="삭제"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          `;
+        }
+        container.appendChild(div);
+      });
+    }
+
+    function moveBlock(index, direction) {
+      const targetIdx = index + direction;
+      if (targetIdx < 0 || targetIdx >= appData.notices.length) return;
+      const item = appData.notices.splice(index, 1)[0];
+      appData.notices.splice(targetIdx, 0, item);
+      saveData(); renderBlocks();
+    }
+    function moveBlockImage(blockId, imgIdx, direction) {
+      const b = appData.notices.find(n => n.id === blockId);
+      if(!b || !b.images) return;
+      const targetIdx = imgIdx + direction;
+      if(targetIdx < 0 || targetIdx >= b.images.length) return;
+      const imgItem = b.images.splice(imgIdx, 1)[0];
+      b.images.splice(targetIdx, 0, imgItem);
+      saveData(); renderBlocks();
+    }
+    function changeSlide(blockId, direction, maxLen) {
+      if (!activeSlides[blockId]) activeSlides[blockId] = 0;
+      activeSlides[blockId] += direction;
+      if (activeSlides[blockId] < 0) activeSlides[blockId] = maxLen - 1;
+      if (activeSlides[blockId] >= maxLen) activeSlides[blockId] = 0;
+      renderBlocks();
+    }
+    function setSlide(blockId, idx) {
+      activeSlides[blockId] = idx;
+      renderBlocks();
+    }
+    function addBlock(type) {
+      if(type === 'spacer') {
+        appData.notices.push({ id: Date.now().toString(), type: 'spacer', height: 20 });
+      } else if(type === 'image') {
+        appData.notices.push({ id: Date.now().toString(), type: 'image', title: '이미지 블록', images: [], viewMode: 'grid' });
+      } else {
+        appData.notices.push({ id: Date.now().toString(), type: 'text', title: '새 블록', content: '내용을 입력해주세요.' });
+      }
+      saveData(); renderBlocks();
+    }
+    function updateBlockTitle(id, val) {
+      const b = appData.notices.find(n => n.id === id);
+      if(b) { b.title = val; saveData(); }
+    }
+    function updateBlockContent(id, val) {
+      const b = appData.notices.find(n => n.id === id);
+      if(b) { b.content = val; saveData(); }
+    }
+    function updateSpacer(id, val) {
+      const b = appData.notices.find(n => n.id === id);
+      if(b) { b.height = Number(val) || 20; saveData(); renderBlocks(); }
+    }
+    function deleteBlock(id) {
+      appData.notices = appData.notices.filter(n => n.id !== id);
+      saveData(); renderBlocks();
+    }
+    function toggleBlockViewMode(id, mode) {
+      const b = appData.notices.find(n => n.id === id);
+      if(b) { b.viewMode = mode; saveData(); renderBlocks(); }
+    }
+    function removeImageFromBlock(blockId, imgIdx) {
+      const b = appData.notices.find(n => n.id === blockId);
+      if(b && b.images) {
+        b.images.splice(imgIdx, 1);
+        saveData(); renderBlocks();
+      }
+    }
+    function triggerBlockImageAdd(blockId) {
+      activeImageBlockId = blockId;
+      document.getElementById('blockImageFileInput').click();
+    }
+    function handleBlockImagesAdd(e) {
+      const files = e.target.files;
+      if(!files || files.length === 0 || !activeImageBlockId) return;
+      const b = appData.notices.find(n => n.id === activeImageBlockId);
+      if(!b) return;
+      if(!b.images) b.images = [];
+
+      let processedCount = 0;
+      Array.from(files).forEach(file => {
+        compressImagePreserveTransparency(file, 1000, 0.85, (dataUrl) => {
+          b.images.push(dataUrl);
+          processedCount++;
+          if(processedCount === files.length) {
+            saveData(); renderBlocks(); e.target.value = '';
+          }
+        });
+      });
+    }
+
+    // OK / NG
+    function renderGenres() {
+      const container = document.getElementById('genreContainer');
+      container.innerHTML = '';
+      if (!appData.genres) appData.genres = [];
+      
+      appData.genres.forEach((g, idx) => {
+        const card = document.createElement('div');
+        let badgeClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200';
+        let labelText = 'OK';
+        let borderClass = 'bg-emerald-50/50 dark:bg-emerald-950/25 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200';
+
+        if (g.status === 'ng') {
+          badgeClass = 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-200';
+          labelText = 'NG';
+          borderClass = 'bg-rose-50/50 dark:bg-rose-950/25 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200';
+        } else if (g.status === 'main') {
+          badgeClass = 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200';
+          labelText = '주력';
+          borderClass = 'bg-blue-50/50 dark:bg-blue-950/25 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-200';
+        } else if (g.status === 'hard') {
+          badgeClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200';
+          labelText = '어려움';
+          borderClass = 'bg-amber-50/50 dark:bg-amber-950/25 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200';
+        } else if (g.status === 'extra') {
+          badgeClass = 'bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-200';
+          labelText = '추가금';
+          borderClass = 'bg-purple-50/50 dark:bg-purple-950/25 border-purple-200 dark:border-purple-800 text-purple-900 dark:text-purple-200';
+        }
+
+        card.className = `p-3 rounded-lg border flex items-center justify-between text-xs shadow-sm ${borderClass}`;
+        
+        if (isAdmin) {
+          card.innerHTML = `
+            <div class="flex items-center gap-2 flex-1">
+              <select onchange="updateGenreStatus(${idx}, this.value)" class="bg-white dark:bg-gray-800 border rounded px-1.5 py-0.5 text-xs">
+                <option value="ok" ${g.status==='ok'?'selected':''}>OK</option>
+                <option value="ng" ${g.status==='ng'?'selected':''}>NG</option>
+                <option value="main" ${g.status==='main'?'selected':''}>주력</option>
+                <option value="hard" ${g.status==='hard'?'selected':''}>어려움</option>
+                <option value="extra" ${g.status==='extra'?'selected':''}>추가금</option>
+              </select>
+              <input type="text" value="${g.text}" onchange="updateGenreText(${idx}, this.value)" class="bg-white dark:bg-gray-800 border rounded px-2 py-0.5 flex-1">
+            </div>
+            <button onclick="deleteGenre(${idx})" class="text-red-500 hover:text-red-700 ml-2"><i class="fa-solid fa-trash"></i></button>
+          `;
+        } else {
+          card.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded font-bold text-[10px] ${badgeClass}">
+                ${labelText}
+              </span>
+              <span>${g.text}</span>
+            </div>
+          `;
+        }
+        container.appendChild(card);
+      });
+    }
+
+    function addGenreItem() {
+      if (!appData.genres) appData.genres = [];
+      appData.genres.push({ id: Date.now().toString(), text: '새로운 장르 안내', status: 'ok' });
+      saveData(); renderGenres();
+    }
+    function updateGenreStatus(idx, val) {
+      appData.genres[idx].status = val;
+      saveData(); renderGenres();
+    }
+    function updateGenreText(idx, val) {
+      appData.genres[idx].text = val;
+      saveData();
+    }
+    function deleteGenre(idx) {
+      appData.genres.splice(idx, 1);
+      saveData(); renderGenres();
+    }
+
+    function renderDeliverySpecs() {
+      const el = document.getElementById('deliverySpecsContent');
+      el.innerText = appData.deliverySpecs || '';
+      el.setAttribute('contenteditable', isAdmin);
+      if (isAdmin) {
+        el.classList.add('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-2', 'rounded');
+      } else {
+        el.classList.remove('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-2', 'rounded');
+      }
+    }
+    function updateDeliverySpecs(text) {
+      appData.deliverySpecs = text;
+      saveData();
+    }
+
+    function renderTypeNotices() {
+      if (!appData.typeNotices) {
+        appData.typeNotices = { cookie: '', baguette: '', popcorn: '' };
+      }
+      ['cookie', 'baguette', 'popcorn'].forEach(type => {
+        const el = document.getElementById(`notice-${type}-content`);
+        if (el) {
+          el.innerText = appData.typeNotices[type] || '';
+          el.setAttribute('contenteditable', isAdmin);
+          if (isAdmin) {
+            el.classList.add('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-1.5', 'rounded');
+          } else {
+            el.classList.remove('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-1.5', 'rounded');
+          }
+        }
+      });
+    }
+    function updateNoticeTypeContent(type, text) {
+      if (!appData.typeNotices) appData.typeNotices = {};
+      appData.typeNotices[type] = text;
+      saveData();
+    }
+
+    // 가격표
+    function renderPrices() {
+      ['cookie', 'baguette', 'popcorn'].forEach(type => {
+        const baseBox = document.getElementById(`price-${type}-base`);
+        const extraBox = document.getElementById(`price-${type}-extra`);
+        baseBox.innerHTML = ''; extraBox.innerHTML = '';
+        const pData = appData.prices[type] || { base: [], extra: [] };
+
+        pData.base.forEach((item, idx) => baseBox.appendChild(createPriceRow(type, item, 'base', idx)));
+        pData.extra.forEach((item, idx) => extraBox.appendChild(createExtraPriceRow(type, item, idx)));
+      });
+    }
+
+    function createPriceRow(type, item, category, idx) {
+      const row = document.createElement('div');
+      row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
+      if(isAdmin) {
+        row.innerHTML = `
+          <input type="text" value="${item.name}" onchange="editPrice('${type}', '${category}', ${idx}, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
+          <div class="flex items-center gap-1 justify-end">
+            <input type="text" value="${item.price}" onchange="editPrice('${type}', '${category}', ${idx}, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-20 text-right">
+            <button onclick="movePriceItem('${type}', '${category}', ${idx}, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
+            <button onclick="movePriceItem('${type}', '${category}', ${idx}, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
+            <button onclick="deletePrice('${type}', '${category}', ${idx})" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        `;
+      } else {
+        row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
+      }
+      return row;
+    }
+
+    function createExtraPriceRow(type, item, idx) {
+      const row = document.createElement('div');
+      row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
+      if(isAdmin) {
+        row.innerHTML = `
+          <div class="flex items-center gap-2 flex-1 mr-2">
+            <input type="text" value="${item.name}" onchange="editPrice('${type}', 'extra', ${idx}, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
+            <input type="text" value="${item.price}" onchange="editPrice('${type}', 'extra', ${idx}, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
+            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
+              <input type="checkbox" ${item.countable ? 'checked' : ''} onchange="toggleExtraCountable('${type}', ${idx}, this.checked)" class="accent-black dark:accent-white">
+            </label>
+          </div>
+          <div class="flex items-center gap-1 justify-end shrink-0">
+            <button onclick="movePriceItem('${type}', 'extra', ${idx}, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
+            <button onclick="movePriceItem('${type}', 'extra', ${idx}, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
+            <button onclick="deletePrice('${type}', 'extra', ${idx})" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        `;
+      } else {
+        row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
+      }
+      return row;
+    }
+
+    function addPriceItem(type, cat) {
+      appData.prices[type][cat].push({ name: '새 항목', price: '1,000p', countable: cat === 'extra' ? true : false });
+      saveData(); renderPrices(); renderCalcFormOptions();
+    }
+    function editPrice(type, cat, idx, key, val) {
+      appData.prices[type][cat][idx][key] = val;
+      saveData(); renderCalcFormOptions();
+    }
+    function toggleExtraCountable(type, idx, val) {
+      appData.prices[type]['extra'][idx].countable = val;
+      saveData(); renderCalcFormOptions();
+    }
+    function movePriceItem(type, cat, idx, dir) {
+      const list = appData.prices[type][cat];
+      const targetIdx = idx + dir;
+      if (targetIdx < 0 || targetIdx >= list.length) return;
+      const item = list.splice(idx, 1)[0];
+      list.splice(targetIdx, 0, item);
+      saveData(); renderPrices(); renderCalcFormOptions();
+    }
+    function deletePrice(type, cat, idx) {
+      appData.prices[type][cat].splice(idx, 1);
+      saveData(); renderPrices(); renderCalcFormOptions();
+    }
+
+    function parseItemPrice(priceStr, basePrice = 0) {
+      if (!priceStr) return { type: 'add', value: 0, raw: priceStr };
+      let clean = priceStr.toString().trim().toLowerCase();
+
+      if (clean.includes('x2') || clean.includes('*2') || clean.includes('200%') || clean.includes('X2')) {
+        return { type: 'multiply', factor: 2, raw: priceStr };
+      }
+      if (clean.includes('%')) {
+        let num = parseFloat(clean.replace('%', '').replace('+', ''));
+        if (!isNaN(num) && num >= 100) {
+          return { type: 'multiply', factor: num / 100, raw: priceStr };
+        }
+        let val = Math.round(basePrice * (num / 100));
+        let isNegative = clean.startsWith('-');
+        return { type: isNegative ? 'subtract' : 'add', value: isNegative ? -Math.abs(val) : val, raw: priceStr };
+      }
+
+      let isNegative = clean.startsWith('-') || clean.includes('할인');
+      let num = parseInt(clean.replace(/[^0-9]/g, ''), 10);
+      if (isNaN(num)) num = 0;
+
+      return {
+        type: isNegative ? 'subtract' : 'add',
+        value: isNegative ? -num : num,
+        raw: priceStr
+      };
+    }
+
+    function compressImagePreserveTransparency(file, maxWidth, quality, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.clearRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const dataUrl = canvas.toDataURL('image/png');
+          callback(dataUrl);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function toggleSamples() {
+      isSamplesOpen = !isSamplesOpen;
+      const sec = document.getElementById('sampleSectionContent');
+      const btn = document.getElementById('sampleToggleBtn');
+      if(isSamplesOpen) {
+        sec.classList.remove('hidden');
+        btn.innerHTML = '<i class="fa-solid fa-chevron-up"></i> 접기';
+      } else {
+        sec.classList.add('hidden');
+        btn.innerHTML = '<i class="fa-solid fa-chevron-down"></i> 펼치기';
+      }
+    }
+
+    function switchSampleTab(tab) {
+      currentSampleTab = tab;
+      document.querySelectorAll('.sample-tab').forEach(t => {
+        t.classList.remove('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
+        t.classList.add('border-transparent', 'text-gray-500', 'dark:text-gray-400');
+      });
+      document.getElementById(`sample-tab-${tab}`).classList.add('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
+      renderSampleTags();
+      renderSamples();
+    }
+
+    function renderSampleTags() {
+      const bar = document.getElementById('sampleTagFilterBar');
+      bar.innerHTML = '';
+      if(!appData.sampleTags[currentSampleTab]) {
+        appData.sampleTags[currentSampleTab] = ['기본'];
+      }
+      const tags = ['전체', ...appData.sampleTags[currentSampleTab]];
+      const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
+
+      tags.forEach(tag => {
+        const btn = document.createElement('button');
+        const isActive = tag === activeTag;
+        btn.className = `text-[11px] px-2.5 py-1 rounded-md border transition ${isActive ? 'bg-black text-white dark:bg-white dark:text-black border-transparent font-medium' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700'}`;
+        btn.innerText = tag;
+        btn.onclick = () => {
+          currentSampleSubTags[currentSampleTab] = tag;
+          renderSampleTags();
+          renderSamples();
+        };
+        bar.appendChild(btn);
+
+        if (isAdmin && tag !== '전체') {
+          const delBtn = document.createElement('button');
+          delBtn.className = 'text-[9px] text-red-500 hover:text-red-700 ml-[-4px] mr-1 px-1';
+          delBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+          delBtn.onclick = (e) => {
+            e.stopPropagation();
+            deleteSampleTag(tag);
+          };
+          bar.appendChild(delBtn);
+        }
+      });
+    }
+
+    function addSampleTagPrompt() {
+      const newTag = prompt("추가할 세부 태그 이름을 입력하세요:");
+      if (!newTag) return;
+      if (!appData.sampleTags[currentSampleTab]) appData.sampleTags[currentSampleTab] = [];
+      if (appData.sampleTags[currentSampleTab].includes(newTag)) {
+        alert("이미 존재하는 태그입니다.");
+        return;
+      }
+      appData.sampleTags[currentSampleTab].push(newTag);
+      saveData();
+      renderSampleTags();
+    }
+
+    function deleteSampleTag(tag) {
+      if(!confirm(`'${tag}' 태그를 삭제하시겠습니까? 해당 태그의 샘플들은 '기본' 또는 '전체'로 분류됩니다.`)) return;
+      appData.sampleTags[currentSampleTab] = appData.sampleTags[currentSampleTab].filter(t => t !== tag);
+      saveData();
+      currentSampleSubTags[currentSampleTab] = '전체';
+      renderSampleTags();
+      renderSamples();
+    }
+
+    function renderSamples() {
+      const grid = document.getElementById('sampleGrid');
+      grid.innerHTML = '';
+      const list = appData.samples[currentSampleTab] || [];
+      const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
+
+      const filtered = list.filter(s => {
+        if (activeTag === '전체') return true;
+        return s.tag === activeTag;
+      });
+
+      if(filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-8 text-xs text-gray-400">등록된 샘플이 없습니다.</div>`;
+        return;
+      }
+
+      filtered.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'relative group rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-3 shadow-sm space-y-2 cursor-pointer hover:shadow-md transition';
+        
+        let tagBadge = s.tag ? `<span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full z-10">${s.tag}</span>` : '';
+
+        if (s.single) {
+          div.onclick = () => openSingleLightbox(s.single, "샘플 상세보기");
+          div.innerHTML = `
+            ${tagBadge}
+            <div class="w-full aspect-square overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-1">
+              <img src="${s.single}" class="w-full h-full object-contain no-save">
+            </div>
+          `;
+        } else {
+          div.onclick = () => openLightbox(s.before, s.after, "샘플 상세보기");
+          div.innerHTML = `
+            ${tagBadge}
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 block text-center">원본 (Before)</span>
+                <div class="w-full aspect-square overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-1">
+                  <img src="${s.before}" class="w-full h-full object-contain no-save">
+                </div>
+              </div>
+              <div class="space-y-1">
+                <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 block text-center">가공 (After)</span>
+                <div class="w-full aspect-square overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-1">
+                  <img src="${s.after}" class="w-full h-full object-contain no-save">
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        if(isAdmin) {
+          div.innerHTML += `<button onclick="event.stopPropagation(); deleteSample('${s.id}')" class="absolute top-2 right-2 bg-black/70 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center hover:bg-red-600 z-10"><i class="fa-solid fa-xmark"></i></button>`;
+        }
+        grid.appendChild(div);
+      });
+    }
+
+    function openLightbox(beforeSrc, afterSrc, title = "샘플 상세보기") {
+      document.getElementById('lbSingleContainer').classList.add('hidden');
+      document.getElementById('lbBeforeAfterContainer').classList.remove('hidden');
+      document.getElementById('lbBeforeImg').src = beforeSrc;
+      document.getElementById('lbAfterImg').src = afterSrc;
+      document.getElementById('lightboxTitle').innerText = title;
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+    function openSingleLightbox(src, title = "샘플 상세보기") {
+      document.getElementById('lbBeforeAfterContainer').classList.add('hidden');
+      document.getElementById('lbSingleContainer').classList.remove('hidden');
+      document.getElementById('lbSingleImg').src = src;
+      document.getElementById('lightboxTitle').innerText = title;
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.add('hidden');
+    }
+
+    function openSampleUploadModal() {
+      const isPopcorn = currentSampleTab === 'popcorn';
+      document.getElementById('modalBeforeContainer').style.display = isPopcorn ? 'none' : 'block';
+      document.getElementById('modalLabelAfter').innerText = isPopcorn ? '샘플 이미지 선택' : '2. 가공본 (After) 이미지';
+      document.getElementById('modalBeforeFile').value = '';
+      document.getElementById('modalAfterFile').value = '';
+
+      const tagSelect = document.getElementById('modalSampleTagSelect');
+      tagSelect.innerHTML = '';
+      const tags = appData.sampleTags[currentSampleTab] || ['기본'];
+      tags.forEach(t => {
+        tagSelect.innerHTML += `<option value="${t}">${t}</option>`;
+      });
+
+      document.getElementById('sampleUploadModal').classList.remove('hidden');
+    }
+    function closeSampleUploadModal() {
+      document.getElementById('sampleUploadModal').classList.add('hidden');
+    }
+
+    function confirmUploadSample() {
+      const isPopcorn = currentSampleTab === 'popcorn';
+      const aFile = document.getElementById('modalAfterFile').files[0];
+      const selectedTag = document.getElementById('modalSampleTagSelect').value;
+      if(!aFile) { alert('이미지를 선택해주세요!'); return; }
+
+      if (isPopcorn) {
+        compressImagePreserveTransparency(aFile, 1000, 0.85, (aData) => {
+          if(!appData.samples[currentSampleTab]) appData.samples[currentSampleTab] = [];
+          appData.samples[currentSampleTab].push({
+            id: Date.now().toString(),
+            tag: selectedTag,
+            single: aData
+          });
+          saveData(); renderSamples(); closeSampleUploadModal();
+        });
+      } else {
+        const bFile = document.getElementById('modalBeforeFile').files[0];
+        if(!bFile) { alert('원본과 가공본 이미지 2개를 모두 선택해주세요!'); return; }
+        compressImagePreserveTransparency(bFile, 1000, 0.85, (bData) => {
+          compressImagePreserveTransparency(aFile, 1000, 0.85, (aData) => {
+            if(!appData.samples[currentSampleTab]) appData.samples[currentSampleTab] = [];
+            appData.samples[currentSampleTab].push({
+              id: Date.now().toString(),
+              tag: selectedTag,
+              before: bData,
+              after: aData
+            });
+            saveData(); renderSamples(); closeSampleUploadModal();
+          });
+        });
+      }
+    }
+
+    function deleteSample(id) {
+      appData.samples[currentSampleTab] = appData.samples[currentSampleTab].filter(s => s.id !== id);
+      saveData(); renderSamples();
+    }
+
+    function renderCalcFormOptions() {
+      const type = document.getElementById('calcType').value;
+      const baseSelect = document.getElementById('calcBaseSelect');
+      const extraGroup = document.getElementById('calcExtraCheckboxGroup');
+
+      baseSelect.innerHTML = '';
+      extraGroup.innerHTML = '';
+
+      const pData = appData.prices[type] || { base: [], extra: [] };
+
+      if(pData.base.length === 0) {
+        baseSelect.innerHTML = `<option value="0" data-raw="0" data-name="없음">종류 항목 없음 (0p)</option>`;
+      } else {
+        pData.base.forEach(b => {
+          const parsed = parseItemPrice(b.price);
+          baseSelect.innerHTML += `<option value="${parsed.value}" data-raw="${b.price}" data-name="${b.name}">${b.name} (${b.price})</option>`;
+        });
+      }
+
+      pData.extra.forEach((e, idx) => {
+        let countInputHtml = '';
+        if (e.countable) {
+          countInputHtml = `
+            <span id="extraCountContainer_${type}_${idx}" class="hidden inline-flex items-center gap-1 ml-1.5 bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" onclick="event.stopPropagation()">
+              <button type="button" onclick="adjustExtraCount('${type}', ${idx}, -1)" class="w-4 h-4 text-[10px] bg-white dark:bg-gray-700 rounded shadow-xs flex items-center justify-center font-bold">-</button>
+              <span id="extraCountVal_${type}_${idx}" class="text-[11px] font-mono w-4 text-center">1</span>
+              <button type="button" onclick="adjustExtraCount('${type}', ${idx}, 1)" class="w-4 h-4 text-[10px] bg-white dark:bg-gray-700 rounded shadow-xs flex items-center justify-center font-bold">+</button>
+            </span>
+          `;
+        }
+
+        extraGroup.innerHTML += `
+          <label class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-gray-800 dark:text-gray-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 shadow-xs select-none">
+            <input type="checkbox" value="${e.price}" data-name="${e.name}" data-idx="${idx}" onchange="toggleExtraCheck('${type}', ${idx}, this.checked)" class="calc-extra-cb accent-black dark:accent-white w-3.5 h-3.5">
+            <span>${e.name} (${e.price})</span>
+            ${countInputHtml}
+          </label>`;
+      });
+    }
+
+    function toggleExtraCheck(type, idx, checked) {
+      const container = document.getElementById(`extraCountContainer_${type}_${idx}`);
+      if(container) {
+        if(checked) container.classList.remove('hidden');
+        else container.classList.add('hidden');
+      }
+    }
+
+    function adjustExtraCount(type, idx, delta) {
+      const span = document.getElementById(`extraCountVal_${type}_${idx}`);
+      if(span) {
+        let val = parseInt(span.innerText, 10) + delta;
+        if(val < 1) val = 1;
+        span.innerText = val;
+      }
+    }
+
+    function addToCart() {
+      const typeKey = document.getElementById('calcType').value;
+      const typeName = typeKey === 'cookie' ? '쿠키' : typeKey === 'baguette' ? '바게트' : '팝콘';
+
+      const baseSelect = document.getElementById('calcBaseSelect');
+      const selectedBaseOpt = baseSelect.options[baseSelect.selectedIndex];
+      const baseName = selectedBaseOpt ? selectedBaseOpt.getAttribute('data-name') : '';
+      const baseRaw = selectedBaseOpt ? selectedBaseOpt.getAttribute('data-raw') : '0';
+      const baseParsed = parseItemPrice(baseRaw);
+
+      let sum = baseParsed.value;
+      let multiplierFactor = 1;
+      let extras = [];
+
+      document.querySelectorAll('#calcExtraCheckboxGroup input.calc-extra-cb:checked').forEach(cb => {
+        const name = cb.getAttribute('data-name');
+        const rawPrice = cb.value;
+        const itemIdx = cb.getAttribute('data-idx');
+        const typeKey = document.getElementById('calcType').value;
+        
+        let count = 1;
+        const countSpan = document.getElementById(`extraCountVal_${typeKey}_${itemIdx}`);
+        if (countSpan) {
+          count = parseInt(countSpan.innerText, 10) || 1;
+        }
+
+        for (let i = 0; i < count; i++) {
+          const parsed = parseItemPrice(rawPrice, sum);
+          extras.push({ name, raw: rawPrice, parsed });
+
+          if (parsed.type === 'multiply') {
+            multiplierFactor = Math.max(multiplierFactor, parsed.factor);
+          } else {
+            sum += parsed.value;
+          }
+        }
+      });
+
+      let itemTotal = sum * multiplierFactor;
+
+      cart.push({
+        id: Date.now().toString(),
+        typeName,
+        baseName,
+        baseRaw,
+        extras,
+        itemTotal
+      });
+
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartContainer');
+      container.innerHTML = '';
+      let grandTotal = 0;
+
+      if(cart.length === 0) {
+        container.innerHTML = `<div class="text-xs text-gray-400 py-3 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded">담긴 항목이 없습니다.</div>`;
+      } else {
+        cart.forEach((item, idx) => {
+          grandTotal += item.itemTotal;
+          const div = document.createElement('div');
+          div.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs p-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded gap-2';
+
+          let extraMap = {};
+          item.extras.forEach(e => {
+            let key = e.name + "_" + e.raw;
+            if(!extraMap[key]) extraMap[key] = { name: e.name, raw: e.raw, count: 0 };
+            extraMap[key].count++;
+          });
+          let groupedExtras = Object.values(extraMap);
+          const extraText = groupedExtras.length > 0 ? ` / 옵션: ${groupedExtras.map(e => e.count > 1 ? `${e.name}(${e.raw})(${e.count})` : `${e.name}(${e.raw})`).join(', ')}` : '';
+
+          div.innerHTML = `
+            <div class="space-y-0.5 overflow-hidden">
+              <span class="font-bold text-gray-900 dark:text-gray-100">[${item.typeName}]</span>
+              <span class="text-gray-700 dark:text-gray-300 break-words">${item.baseName}${extraText}</span>
+            </div>
+            <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+              <span class="font-bold text-gray-900 dark:text-gray-100">${item.itemTotal.toLocaleString()}p</span>
+              <button onclick="removeFromCart(${idx})" class="text-gray-400 hover:text-red-500 p-1"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      document.getElementById('cartTotal').innerText = `${grandTotal.toLocaleString()} p`;
+    }
+
+    function removeFromCart(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+    }
+
+    function copyApplicationForm() {
+      if (cart.length === 0) {
+        alert('담긴 항목이 없습니다.');
+        return;
+      }
+      let text = "";
+      let grandTotal = 0;
+
+      cart.forEach((item) => {
+        grandTotal += item.itemTotal;
+        let optNames = item.extras.length > 0 ? item.extras.map(e => e.name).join(', ') : '없음';
+        
+        let formulaParts = [item.baseRaw];
+        item.extras.forEach(e => {
+          let raw = e.raw.trim().toLowerCase();
+          if (raw.includes('x2') || raw.includes('*2') || raw.includes('200%') || raw.includes('X2')) {
+            formulaParts.push('*2');
+          } else {
+            formulaParts.push(e.raw);
+          }
+        });
+
+        let formulaStr = formulaParts.join('+');
+        formulaStr = formulaStr.replace(/\+\s*\*2/g, '*2');
+        formulaStr = formulaStr.replace(/\+\s*x2/g, '*2');
+        formulaStr = formulaStr.replace(/\+\s*-\s*/g, '-');
+
+        text += `[${item.typeName}] (옵션: ${optNames}): ${formulaStr}=${item.itemTotal.toLocaleString()}p\n`;
+      });
+
+      if (cart.length > 1) {
+        text += `총 예상 금액: ${grandTotal.toLocaleString()} p`;
+      } else {
+        text = text.trim();
+      }
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('예상 결제 금액이 클립보드에 복사되었습니다!');
+      }).catch(err => {
+        console.error('Copy failed:', err);
+        alert('복사에 실패했습니다.');
+      });
+    }
+
+    // Init
+    window.onload = () => {
+      renderBlocks();
+      renderGenres();
+      renderPrices();
+      renderSampleTags();
+      renderSamples();
+      renderDeliverySpecs();
+      renderTypeNotices();
+      renderNoticesContent();
+      renderCalcFormOptions();
+    };
+  </script>
+</body>
+</html>
