@@ -17,6 +17,8 @@
     @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
     body { font-family: 'Pretendard', sans-serif; }
     .whitespace-pre-wrap { white-space: pre-wrap; }
+    
+    /* 화살표 버튼 제거 (Firefox & Webkit) */
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     input[type=number] { -moz-appearance: textfield; }
@@ -32,12 +34,12 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen pb-20 transition-colors duration-200" oncontextmenu="return false;">
+<body class="bg-neutral-50 dark:bg-[#121212] text-neutral-900 dark:text-neutral-100 min-h-screen pb-28 transition-colors duration-200" oncontextmenu="return false;">
 
   <!-- Header -->
-  <header class="border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-900/90 backdrop-blur sticky top-0 z-40 shadow-sm">
+  <header class="border-b border-neutral-200 dark:border-[#262626] bg-white dark:bg-[#1a1a1a] sticky top-0 z-40 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-      <h1 class="font-bold text-gray-900 dark:text-gray-100 text-base tracking-tight flex items-center gap-2">
+      <h1 class="font-bold text-neutral-900 dark:text-neutral-100 text-base tracking-tight flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-black dark:bg-white"></span> 가공 샘플
       </h1>
       <div class="flex items-center gap-2">
@@ -47,7 +49,7 @@
         <a href="https://panela.link/" target="_blank" class="text-xs bg-black text-white dark:bg-white dark:text-black px-3 py-1.5 rounded-md hover:opacity-80 transition flex items-center gap-1.5 font-medium">
           <i class="fa-solid fa-link"></i> 파넬라 바로가기
         </a>
-        <button onclick="toggleDarkMode()" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-2 rounded-md border border-gray-300 dark:border-gray-700 transition" title="다크/라이트 모드 전환">
+        <button onclick="toggleDarkMode()" class="text-xs bg-neutral-100 dark:bg-[#262626] text-neutral-700 dark:text-neutral-300 p-2 rounded-md border border-neutral-300 dark:border-[#333333] transition" title="다크/라이트 모드 전환">
           <svg id="sunIcon" class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           <svg id="moonIcon" class="w-3.5 h-3.5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
         </button>
@@ -55,17 +57,17 @@
     </div>
   </header>
 
-  <!-- 퀵 내비게이션(목차) 바 -->
-  <nav class="bg-white/80 dark:bg-gray-900/80 backdrop-blur border-b border-gray-200 dark:border-gray-800 sticky top-[53px] z-30 overflow-x-auto">
+  <!-- 퀵 내비게이션 바 -->
+  <nav class="bg-white/90 dark:bg-[#1a1a1a]/90 border-b border-neutral-200 dark:border-[#262626] sticky top-[53px] z-30 overflow-x-auto">
     <div class="max-w-6xl mx-auto px-4 py-2 flex gap-2 whitespace-nowrap text-xs">
-      <a href="#section-notice" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">공지사항</a>
-      <a href="#section-genre" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">OK / NG</a>
-      <a href="#section-price" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">가격표</a>
-      <a href="#section-sample" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">샘플</a>
-      <a href="#section-delivery" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">파일</a>
-      <a href="#section-ref" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">신청시 참고사항</a>
-      <a href="#section-calc" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">금액 계산기</a>
-      <a href="#section-parts" class="px-2.5 py-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800 font-medium transition">파츠 자료집</a>
+      <a href="#section-notice" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">공지사항</a>
+      <a href="#section-genre" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">OK / NG</a>
+      <a href="#section-faq" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">FAQ</a>
+      <a href="#section-price" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">가격표</a>
+      <a href="#section-sample" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">샘플</a>
+      <a href="#section-delivery" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">파일</a>
+      <a href="#section-ref" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">신청시 참고사항</a>
+      <a href="#section-parts" class="nav-link px-2.5 py-1 rounded hover:bg-neutral-100 dark:hover:bg-[#262626] font-medium transition">파츠 자료집</a>
     </div>
   </nav>
 
@@ -74,9 +76,9 @@
 
     <!-- 1. 공지사항 -->
     <section id="section-notice" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
-      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-circle-info text-gray-500 text-sm"></i> 공지사항
+      <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#262626] pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-neutral-500 text-sm"></i> 공지사항
         </h2>
       </div>
       <div id="noticeContainer" class="space-y-3"></div>
@@ -84,232 +86,206 @@
 
     <!-- 2. OK / NG -->
     <section id="section-genre" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
-      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-list-check text-gray-500 text-sm"></i> OK / NG
+      <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#262626] pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-list-check text-neutral-500 text-sm"></i> OK / NG
         </h2>
       </div>
       <div id="genreContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+      <div id="genreExtraBlocks" class="space-y-3 pt-2"></div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="section-faq" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#262626] pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-circle-question text-neutral-500 text-sm"></i> 자주 묻는 질문 (FAQ)
+        </h2>
+      </div>
+      <div id="faqContainer" class="space-y-3"></div>
     </section>
 
     <!-- 3. 가격표 -->
     <section id="section-price" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
-      <div class="border-b border-gray-200 dark:border-gray-800 pb-2 flex justify-between items-center">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-tags text-gray-500 text-sm"></i> 가격표
+      <div class="border-b border-neutral-200 dark:border-[#262626] pb-2 flex justify-between items-center">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-tags text-neutral-500 text-sm"></i> 가격표
         </h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- 쿠키 -->
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
-            <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">쿠키</h3>
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-3">
+          <div class="flex justify-between items-center border-b border-neutral-100 dark:border-[#262626] pb-2">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-base">쿠키</h3>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
+            <h4 class="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase mb-2">기본 금액</h4>
             <div id="price-cookie-base" class="space-y-2"></div>
           </div>
-          <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
-            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">추가금 / 할인 요소</h4>
+          <div class="border-t border-neutral-100 dark:border-[#262626] pt-2.5">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase">추가금 / 할인 요소</h4>
+            </div>
             <div id="price-cookie-extra" class="space-y-2"></div>
           </div>
         </div>
 
         <!-- 바게트 -->
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
-            <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">바게트</h3>
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-3">
+          <div class="flex justify-between items-center border-b border-neutral-100 dark:border-[#262626] pb-2">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-base">바게트</h3>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
+            <h4 class="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase mb-2">기본 금액</h4>
             <div id="price-baguette-base" class="space-y-2"></div>
           </div>
-          <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
-            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">추가금 / 할인 요소</h4>
+          <div class="border-t border-neutral-100 dark:border-[#262626] pt-2.5">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase">추가금 / 할인 요소</h4>
+            </div>
             <div id="price-baguette-extra" class="space-y-2"></div>
           </div>
         </div>
 
         <!-- 팝콘 -->
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
-            <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">팝콘</h3>
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-3">
+          <div class="flex justify-between items-center border-b border-neutral-100 dark:border-[#262626] pb-2">
+            <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-base">팝콘</h3>
           </div>
           <div>
-            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
+            <h4 class="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase mb-2">기본 금액</h4>
             <div id="price-popcorn-base" class="space-y-2"></div>
           </div>
-          <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
-            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">추가금 / 할인 요소</h4>
+          <div class="border-t border-neutral-100 dark:border-[#262626] pt-2.5">
+            <div class="flex justify-between items-center mb-2">
+              <h4 class="text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase">추가금 / 할인 요소</h4>
+            </div>
             <div id="price-popcorn-extra" class="space-y-2"></div>
           </div>
         </div>
       </div>
+      <div id="priceExtraBlocks" class="space-y-3 pt-2"></div>
     </section>
 
     <!-- 4. 샘플 -->
     <section id="section-sample" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
-      <div class="border-b border-gray-200 dark:border-gray-800 pb-2 flex justify-between items-center">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-images text-gray-500 text-sm"></i> 샘플
+      <div class="border-b border-neutral-200 dark:border-[#262626] pb-2 flex justify-between items-center">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-images text-neutral-500 text-sm"></i> 샘플
         </h2>
-        <button onclick="toggleSamples()" id="sampleToggleBtn" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-1 rounded border border-gray-300 dark:border-gray-700">
-          <i class="fa-solid fa-chevron-up"></i> 접기
-        </button>
+        <div class="flex gap-2 items-center">
+          <button onclick="toggleSamples()" id="sampleToggleBtn" class="text-xs bg-neutral-100 dark:bg-[#262626] text-neutral-700 dark:text-neutral-300 px-2.5 py-1 rounded border border-neutral-300 dark:border-[#333333]">
+            <i class="fa-solid fa-chevron-up"></i> 접기
+          </button>
+        </div>
       </div>
 
       <div id="sampleSectionContent" class="space-y-4">
-        <div class="flex border-b border-gray-200 dark:border-gray-800 gap-2 items-center justify-between">
+        <div class="flex flex-col sm:flex-row border-b border-neutral-200 dark:border-[#262626] gap-2 items-start sm:items-center justify-between pb-2">
           <div class="flex gap-2">
             <button onclick="switchSampleTab('cookie')" id="sample-tab-cookie" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-black dark:border-white text-black dark:text-white">쿠키</button>
-            <button onclick="switchSampleTab('baguette')" id="sample-tab-baguette" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">바게트</button>
-            <button onclick="switchSampleTab('popcorn')" id="sample-tab-popcorn" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">팝콘</button>
+            <button onclick="switchSampleTab('baguette')" id="sample-tab-baguette" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white">바게트</button>
+            <button onclick="switchSampleTab('popcorn')" id="sample-tab-popcorn" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white">팝콘</button>
+          </div>
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <input type="text" id="sampleSearchInput" oninput="renderSamples()" placeholder="샘플 검색..." class="text-xs bg-white dark:bg-[#1a1a1a] border border-neutral-300 dark:border-[#333333] rounded px-2.5 py-1 w-36 sm:w-44 text-neutral-900 dark:text-neutral-100">
           </div>
         </div>
 
         <div id="sampleTagFilterBar" class="flex flex-wrap gap-1.5 pt-1"></div>
-        <div id="sampleGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2"></div>
+        <div id="sampleGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2"></div>
       </div>
+      <div id="sampleExtraBlocks" class="space-y-3 pt-2"></div>
     </section>
 
     <!-- 5. 파일 전달 규격 -->
     <section id="section-delivery" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
-      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-file-arrow-down text-gray-500 text-sm"></i> 파일
+      <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#262626] pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-file-arrow-down text-neutral-500 text-sm"></i> 파일
         </h2>
       </div>
-      <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm">
-        <div id="deliverySpecsContent" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none"></div>
+      <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-5 shadow-sm">
+        <div id="deliverySpecsContent" class="text-sm text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none"></div>
       </div>
+      <div id="deliveryExtraBlocks" class="space-y-3 pt-2"></div>
     </section>
 
     <!-- 6. 신청시 참고사항 -->
     <section id="section-ref" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
-      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
-        <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-gray-500 text-sm"></i> 신청시 참고사항
+      <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#262626] pb-2">
+        <h2 class="text-xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-neutral-500 text-sm"></i> 신청시 참고사항
         </h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
-          <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">쿠키</h3>
-          <div id="notice-cookie-content" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2">
+          <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm border-b border-neutral-100 dark:border-[#262626] pb-2">쿠키</h3>
+          <div id="notice-cookie-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
-          <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">바게트</h3>
-          <div id="notice-baguette-content" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2">
+          <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm border-b border-neutral-100 dark:border-[#262626] pb-2">바게트</h3>
+          <div id="notice-baguette-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
-        <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
-          <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">팝콘</h3>
-          <div id="notice-popcorn-content" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2">
+          <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm border-b border-neutral-100 dark:border-[#262626] pb-2">팝콘</h3>
+          <div id="notice-popcorn-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
       </div>
+      <div id="refExtraBlocks" class="space-y-3 pt-2"></div>
     </section>
 
-    <!-- 7. 금액 계산기 & 신청서 폼 복사 -->
-    <section id="section-calc" class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl p-6 space-y-5 max-w-2xl mx-auto scroll-mt-24">
-      <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
-        <i class="fa-solid fa-calculator text-gray-500"></i> 금액 계산기
-      </h2>
-
-      <div id="calcNoticeText" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-b border-gray-200 dark:border-gray-800 pb-3 outline-none"></div>
-
-      <div class="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 rounded-lg p-4 space-y-3">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">타입</label>
-            <select id="calcType" onchange="renderCalcFormOptions()" class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-2.5 py-2 text-xs text-gray-900 dark:text-gray-100">
-              <option value="cookie">쿠키</option>
-              <option value="baguette">바게트</option>
-              <option value="popcorn">팝콘</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">종류</label>
-            <select id="calcBaseSelect" class="w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded px-2.5 py-2 text-xs text-gray-900 dark:text-gray-100"></select>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1.5">추가 / 할인 옵션</label>
-          <div id="calcExtraCheckboxGroup" class="flex flex-wrap gap-2"></div>
-        </div>
-
-        <div class="pt-2">
-          <button onclick="addToCart()" class="w-full sm:w-auto text-xs bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 dark:text-black text-white font-medium px-4 py-2 rounded transition">
-            + 항목 담기
-          </button>
-        </div>
-      </div>
-
-      <div class="space-y-2">
-        <h3 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">담은 항목 목록</h3>
-        <div id="cartContainer" class="space-y-2"></div>
-      </div>
-
-      <div class="border-t border-gray-200 dark:border-gray-800 pt-3 flex flex-col sm:flex-row justify-between items-center gap-3">
-        <div class="flex items-center gap-2">
-          <span class="text-sm font-medium text-gray-600 dark:text-gray-400">총 금액:</span>
-          <span id="cartTotal" class="text-xl font-bold text-gray-900 dark:text-gray-100">0 p</span>
-        </div>
-        <button onclick="copyApplicationForm()" class="w-full sm:w-auto text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2.5 rounded shadow-sm transition flex items-center justify-center gap-1.5">
-          <i class="fa-solid fa-copy"></i> 예상 금액 복사하기
-        </button>
-      </div>
-    </section>
-
-    <!-- 8. 파츠 자료집 (비밀번호: thx20) -->
-    <section id="section-parts" class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl p-6 space-y-5 max-w-4xl mx-auto scroll-mt-24">
-      <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-3">
-        <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-          <i class="fa-solid fa-folder-open text-gray-500"></i> 파츠 자료집
+    <!-- 7. 파츠 자료집 -->
+    <section id="section-parts" class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] shadow-sm rounded-xl p-6 space-y-5 max-w-4xl mx-auto scroll-mt-24">
+      <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#262626] pb-3">
+        <h2 class="text-lg font-bold text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+          <i class="fa-solid fa-folder-open text-neutral-500"></i> 파츠 자료집
         </h2>
         <div class="flex items-center gap-2">
-          <button id="downloadAllPartsBtn" onclick="downloadAllPartsZip()" class="hidden text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-2.5 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition font-medium flex items-center gap-1">
+          <button id="downloadAllPartsBtn" onclick="downloadAllPartsZip()" class="hidden text-xs bg-neutral-100 dark:bg-[#262626] hover:bg-neutral-200 dark:hover:bg-[#333333] text-neutral-700 dark:text-neutral-300 px-2.5 py-1.5 rounded-md border border-neutral-300 dark:border-[#333333] transition font-medium flex items-center gap-1">
             <i class="fa-solid fa-download"></i> 전체 다운로드
           </button>
           <div id="partsUnlockContainer">
-            <button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5 font-medium">
+            <button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-neutral-100 dark:bg-[#262626] hover:bg-neutral-200 dark:hover:bg-[#333333] text-neutral-700 dark:text-neutral-300 px-3 py-1.5 rounded-md border border-neutral-300 dark:border-[#333333] transition flex items-center gap-1.5 font-medium">
               <i class="fa-solid fa-lock"></i> <span>자료집 열기</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div id="partsNoticeText" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed outline-none"></div>
+      <div id="partsNoticeText" class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed outline-none"></div>
 
-      <div id="partsLockedNotice" class="text-center py-10 text-xs text-gray-500 dark:text-gray-400 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg space-y-2">
-        <i class="fa-solid fa-lock text-2xl mb-1 text-gray-300 dark:text-gray-600 block"></i>
+      <div id="partsLockedNotice" class="text-center py-10 text-xs text-neutral-500 dark:text-neutral-400 border border-dashed border-neutral-200 dark:border-[#262626] rounded-lg space-y-2">
+        <i class="fa-solid fa-lock text-2xl mb-1 text-neutral-300 dark:text-neutral-600 block"></i>
         <p>이전에 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다.</p>
       </div>
 
       <div id="partsUnlockedContent" class="hidden space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
-            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#2a2a2a] rounded-xl p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#2a2a2a] pb-2">
               <div class="flex items-center gap-2">
-                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">쿠키 파츠</h3>
-                <button onclick="downloadCategoryZip('cookie')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="쿠키 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
+                <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm">쿠키 파츠</h3>
+                <button onclick="downloadCategoryZip('cookie')" class="text-[10px] bg-neutral-200 dark:bg-[#333333] hover:bg-neutral-300 px-1.5 py-0.5 rounded text-neutral-700 dark:text-neutral-300" title="쿠키 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
             </div>
             <div id="parts-cookie-list" class="space-y-3"></div>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
-            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+          <div class="bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#2a2a2a] rounded-xl p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#2a2a2a] pb-2">
               <div class="flex items-center gap-2">
-                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">바게트 파츠</h3>
-                <button onclick="downloadCategoryZip('baguette')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="바게트 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
+                <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm">바게트 파츠</h3>
+                <button onclick="downloadCategoryZip('baguette')" class="text-[10px] bg-neutral-200 dark:bg-[#333333] hover:bg-neutral-300 px-1.5 py-0.5 rounded text-neutral-700 dark:text-neutral-300" title="바게트 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
             </div>
             <div id="parts-baguette-list" class="space-y-3"></div>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-800/40 border border-gray-200 dark:border-gray-800 rounded-xl p-4 space-y-3">
-            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
+          <div class="bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#2a2a2a] rounded-xl p-4 space-y-3">
+            <div class="flex justify-between items-center border-b border-neutral-200 dark:border-[#2a2a2a] pb-2">
               <div class="flex items-center gap-2">
-                <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">팝콘 파츠</h3>
-                <button onclick="downloadCategoryZip('popcorn')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="팝콘 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
+                <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm">팝콘 파츠</h3>
+                <button onclick="downloadCategoryZip('popcorn')" class="text-[10px] bg-neutral-200 dark:bg-[#333333] hover:bg-neutral-300 px-1.5 py-0.5 rounded text-neutral-700 dark:text-neutral-300" title="팝콘 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
             </div>
             <div id="parts-popcorn-list" class="space-y-3"></div>
@@ -320,31 +296,49 @@
 
   </main>
 
+  <!-- 창 맨 위로 가기 버튼 -->
+  <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-24 right-4 z-40 bg-white dark:bg-[#1a1a1a] border border-neutral-300 dark:border-[#333333] text-neutral-700 dark:text-neutral-300 w-10 h-10 rounded-full shadow-lg flex items-center justify-center hover:bg-neutral-100 dark:hover:bg-[#262626] transition hidden" title="위로 가기">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- 파츠 비밀번호 입력 모달 -->
+  <div id="partsAuthModal" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-6 max-w-sm w-full space-y-4 shadow-xl">
+      <h3 class="text-base font-bold text-neutral-900 dark:text-neutral-100">파츠 자료집 열람</h3>
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">전달받은 비밀번호를 입력해주세요.</p>
+      <input type="password" id="partsPassInput" onkeydown="if(event.key==='Enter') verifyPartsPass()" class="w-full bg-neutral-50 dark:bg-[#222222] border border-neutral-300 dark:border-[#333333] rounded px-3 py-2 text-sm text-neutral-900 dark:text-white focus:outline-none" placeholder="비밀번호 입력">
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closePartsAuthModal()" class="px-3 py-1.5 text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white">취소</button>
+        <button onclick="verifyPartsPass()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded">확인</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 라이트박스 모달 -->
-  <div id="lightboxModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
-    <div class="relative max-w-2xl w-full max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-xl p-4 space-y-3 cursor-default shadow-2xl" onclick="event.stopPropagation()">
-      <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
-        <h3 id="lightboxTitle" class="text-sm font-bold text-gray-800 dark:text-gray-200">파츠 크게보기</h3>
-        <button onclick="closeLightbox()" class="text-gray-400 hover:text-black dark:hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+  <div id="lightboxModal" class="fixed inset-0 bg-black/80 hidden z-50 flex items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
+    <div class="relative max-w-4xl w-full bg-white dark:bg-[#1a1a1a] rounded-xl p-5 space-y-3 cursor-default shadow-2xl" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center border-b border-neutral-100 dark:border-[#262626] pb-2">
+        <h3 id="lightboxTitle" class="text-sm font-bold text-neutral-800 dark:text-neutral-200">샘플 상세보기</h3>
+        <button onclick="closeLightbox()" class="text-neutral-400 hover:text-black dark:hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
       </div>
       
       <div id="lbSingleContainer" class="hidden flex flex-col items-center justify-center">
-        <div class="w-full max-h-[60vh] overflow-hidden rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center p-2">
-          <img id="lbSingleImg" src="" class="max-h-[55vh] w-auto object-contain no-save">
+        <div class="w-full overflow-hidden rounded bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] flex items-center justify-center p-2 max-h-[75vh]">
+          <img id="lbSingleImg" src="" class="max-h-[75vh] w-auto h-auto object-contain no-save">
         </div>
       </div>
 
       <div id="lbBeforeAfterContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="space-y-1">
-          <span class="text-xs font-bold text-gray-500 dark:text-gray-400 block text-center">원본 (Before)</span>
-          <div class="w-full max-h-[50vh] overflow-hidden rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center p-2">
-            <img id="lbBeforeImg" src="" class="max-h-[45vh] w-auto object-contain no-save">
+          <span class="text-xs font-bold text-neutral-500 dark:text-neutral-400 block text-center">원본 (Before)</span>
+          <div class="w-full overflow-hidden rounded bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] flex items-center justify-center p-2 max-h-[75vh]">
+            <img id="lbBeforeImg" src="" class="max-h-[75vh] w-auto h-auto object-contain no-save">
           </div>
         </div>
         <div class="space-y-1">
-          <span class="text-xs font-bold text-gray-500 dark:text-gray-400 block text-center">가공 (After)</span>
-          <div class="w-full max-h-[50vh] overflow-hidden rounded bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-center p-2">
-            <img id="lbAfterImg" src="" class="max-h-[45vh] w-auto object-contain no-save">
+          <span class="text-xs font-bold text-neutral-500 dark:text-neutral-400 block text-center">가공 (After)</span>
+          <div class="w-full overflow-hidden rounded bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] flex items-center justify-center p-2 max-h-[75vh]">
+            <img id="lbAfterImg" src="" class="max-h-[75vh] w-auto h-auto object-contain no-save">
           </div>
         </div>
       </div>
@@ -356,7 +350,6 @@
     let currentSampleTab = 'cookie';
     let currentSampleSubTags = { cookie: '전체', baguette: '전체', popcorn: '전체' };
     let isSamplesOpen = true;
-    let cart = [];
     let activeSlides = {};
 
     let touchStartX = 0;
@@ -367,9 +360,21 @@
         { id: '1', type: 'text', title: '기본 공지', content: '• 올려주신 구해요 글 링크와 함께 신청 문의 주시면 신청서 요청(타입 외) 보내드립니다.\n• 최소 1시간 ~ 최대 3일 소요됩니다.' },
         { id: '2', type: 'spacer', height: 20 }
       ],
+      sectionBlocks: {
+        genre: [],
+        faq: [],
+        price: [],
+        sample: [],
+        delivery: [],
+        ref: []
+      },
       genres: [
         { id: 'g1', text: '1차, 2차, 드림, 쩜오디, 2D, 3D (장르 가림 없음)', status: 'ok' },
         { id: 'g2', text: '지나친 고어, 메카닉 등 표현이 어려운 장르', status: 'ng' }
+      ],
+      faqs: [
+        { id: 'f1', q: '신청은 어떻게 하나요?', a: '오픈채팅이나 크레페 메시지로 문의 주시면 안내해 드립니다.' },
+        { id: 'f2', q: '작업 기간은 얼마나 걸리나요?', a: '최소 1시간에서 최대 3일 소요됩니다.' }
       ],
       deliverySpecs: '• 기본 해상도: 300dpi\n• 제공 파일: 기본 최종본 및 투명화 PNG 파일\n• 파일명 규칙: 쿠키(바게트,팝콘)_기본(투명) / 다인 신청 시 A, B, C...',
       typeNotices: {
@@ -378,23 +383,22 @@
         popcorn: '• 팝콘 타입 참고사항을 입력해주세요.'
       },
       partsNotice: "토핑으로 추가하기엔 애매하나(덜 완성되었다던가, 업로드하기엔 부족한 것들...), 다용도로 잘 쓰일만한 파츠들을 등록해뒀습니다. 아직 조잡한 실력인지라 비밀번호를 걸어두었습니다만, 공개적인 곳에서의 게시만 아니라면 지인 사이에서 편히 공유해 주셔도 괜찮습니다. ^_^\n또한 신청자분께서 요청 주신 파츠가 다용도로 쓰일만하다고 판단될 경우, 신청 금액을 할인드리고 배포 파츠 자료집에 등록하는 경우도 있을 것 같습니다. 등록 전 먼저 말씀드릴 예정이니 편히 거절해 주셔도 문제 없습니다.",
-      calcNotice: "대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^^_^;;!! 제가 잘못 계산했을 수도......)",
       prices: {
         cookie: {
           base: [{ name: '일부분 파츠', price: '1,000p' }, { name: '인당 (기본 체형)', price: '2,000p' }],
           extra: [
-            { name: '동물화/소품 추가', price: '500p', countable: true },
-            { name: '표정 변화', price: '500p', countable: true },
-            { name: '지인 할인', price: '-500p', countable: false }
+            { name: '동물화/소품 추가', price: '500p' },
+            { name: '표정 변화', price: '500p' },
+            { name: '지인 할인', price: '-500p' }
           ]
         },
         baguette: {
           base: [{ name: '인당 (기본 체형)', price: '2,000p' }],
-          extra: [{ name: '소품 추가', price: '500p', countable: true }]
+          extra: [{ name: '소품 추가', price: '500p' }]
         },
         popcorn: {
           base: [{ name: '기본 체형', price: '2,000p' }],
-          extra: [{ name: '표정 변경', price: '500p', countable: true }]
+          extra: [{ name: '표정 변경', price: '500p' }]
         }
       },
       samples: { cookie: [], baguette: [], popcorn: [] },
@@ -408,46 +412,73 @@
 
     let appData = defaultData;
 
-    // data.json 파일 자동 불러오기
     async function fetchExternalData() {
       try {
         const response = await fetch('data.json?v=' + Date.now());
         if (response.ok) {
-          appData = await response.json();
+          const remoteData = await response.json();
+          appData = remoteData;
+          if (!appData.sectionBlocks) appData.sectionBlocks = { genre: [], faq: [], price: [], sample: [], delivery: [], ref: [] };
+          if (!appData.faqs) appData.faqs = [];
         }
       } catch (e) {
-        console.log('data.json 불러오기 실패 (기본 데이터 표시)');
+        console.log('data.json 로드 실패 (기본 데이터 사용)');
       }
       initAppUI();
     }
 
-    function showToast(message) {
-      let toast = document.getElementById('toastMsg');
-      if(!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toastMsg';
-        toast.className = 'fixed bottom-5 right-5 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg text-xs shadow-xl transition-opacity duration-300 opacity-0 pointer-events-none z-50 font-medium';
-        document.body.appendChild(toast);
-      }
-      toast.innerText = message;
-      toast.classList.remove('opacity-0');
-      toast.classList.add('opacity-100');
-      setTimeout(() => {
-        toast.classList.remove('opacity-100');
-        toast.classList.add('opacity-0');
-      }, 2000);
-    }
-
     function initDarkMode() {
-      const isDark = localStorage.getItem('nanagom_dark_mode') === 'true';
-      if (isDark) document.documentElement.classList.add('dark');
-      else document.documentElement.classList.remove('dark');
+      const savedMode = localStorage.getItem('nanagom_dark_mode');
+      if (savedMode !== null) {
+        if (savedMode === 'true') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } else {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
     }
     function toggleDarkMode() {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('nanagom_dark_mode', isDark);
     }
     initDarkMode();
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('scrollToTopBtn');
+      if (btn) {
+        if (window.scrollY > 300) btn.classList.remove('hidden');
+        else btn.classList.add('hidden');
+      }
+      updateActiveNav();
+    });
+
+    function updateActiveNav() {
+      const sections = ['notice', 'genre', 'faq', 'price', 'sample', 'delivery', 'ref', 'parts'];
+      const scrollPos = window.scrollY + 150;
+      sections.forEach(secId => {
+        const el = document.getElementById(`section-${secId}`);
+        const navLink = document.querySelector(`nav a[href="#section-${secId}"]`);
+        if (el && navLink) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            navLink.classList.add('bg-neutral-200', 'dark:bg-[#333333]', 'font-bold');
+          } else {
+            navLink.classList.remove('bg-neutral-200', 'dark:bg-[#333333]', 'font-bold');
+          }
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closePartsAuthModal();
+      }
+    });
 
     function updatePartsUnlockUI() {
       const notice = document.getElementById('partsLockedNotice');
@@ -465,43 +496,52 @@
         notice.classList.remove('hidden');
         content.classList.add('hidden');
         downloadAllBtn.classList.add('hidden');
-        unlockContainer.innerHTML = `<button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5 font-medium"><i class="fa-solid fa-lock"></i> <span>자료집 열기</span></button>`;
+        unlockContainer.innerHTML = `<button onclick="openPartsAuthModal()" id="partsUnlockBtn" class="text-xs bg-neutral-100 dark:bg-[#262626] hover:bg-neutral-200 dark:hover:bg-[#333333] text-neutral-700 dark:text-neutral-300 px-3 py-1.5 rounded-md border border-neutral-300 dark:border-[#333333] transition flex items-center gap-1.5 font-medium"><i class="fa-solid fa-lock"></i> <span>자료집 열기</span></button>`;
       }
     }
 
     function renderNoticesContent() {
       const pEl = document.getElementById('partsNoticeText');
-      const cEl = document.getElementById('calcNoticeText');
-      if (pEl) pEl.innerText = appData.partsNotice || '';
-      if (cEl) cEl.innerText = appData.calcNotice || '';
+      if (pEl) {
+        pEl.innerText = appData.partsNotice || '';
+      }
     }
 
     function openPartsAuthModal() {
-      const code = prompt("배포 파츠 자료집 암호를 입력해주세요:");
+      document.getElementById('partsPassInput').value = '';
+      document.getElementById('partsAuthModal').classList.remove('hidden');
+      document.getElementById('partsPassInput').focus();
+    }
+    function closePartsAuthModal() {
+      document.getElementById('partsAuthModal').classList.add('hidden');
+    }
+    function verifyPartsPass() {
+      const code = document.getElementById('partsPassInput').value;
       if (code === "thx20") {
         isPartsUnlocked = true;
+        closePartsAuthModal();
         updatePartsUnlockUI();
-        showToast("배포 파츠 자료집이 해제되었습니다.");
-      } else if (code !== null) {
-        alert("암호가 올바르지 않습니다.");
+      } else {
+        alert("비밀번호가 올바르지 않습니다.");
       }
     }
 
     async function downloadCategoryZip(type) {
       const list = appData.distributionParts[type] || [];
       if (list.length === 0) { alert('다운로드할 파츠가 없습니다.'); return; }
-      const typeName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
       const zip = new JSZip();
       list.forEach((p) => {
-        if(p.fileData && p.fileData.includes(',')) {
+        if(p.fileData.includes(',')) {
           const base64Data = p.fileData.split(',')[1];
-          zip.file(`${p.title}`, base64Data, {base64: true});
+          const ext = p.ext || 'png';
+          zip.file(`${p.title}.${ext}`, base64Data, {base64: true});
         }
       });
       const content = await zip.generateAsync({type: "blob"});
       const link = document.createElement('a');
       link.href = URL.createObjectURL(content);
-      link.download = `(스물)${typeName}_파츠.zip`;
+      const zipName = type === 'cookie' ? '쿠키파츠.zip' : type === 'baguette' ? '바게트파츠.zip' : '팝콘파츠.zip';
+      link.download = zipName;
       link.click();
     }
 
@@ -511,12 +551,14 @@
       ['cookie', 'baguette', 'popcorn'].forEach(type => {
         const list = appData.distributionParts[type] || [];
         if(list.length > 0) {
-          const folder = zip.folder(type);
+          const folderName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
+          const folder = zip.folder(folderName);
           list.forEach(p => {
             totalCount++;
-            if(p.fileData && p.fileData.includes(',')) {
+            if(p.fileData.includes(',')) {
               const base64Data = p.fileData.split(',')[1];
-              folder.file(`${p.title}`, base64Data, {base64: true});
+              const ext = p.ext || 'png';
+              folder.file(`${p.title}.${ext}`, base64Data, {base64: true});
             }
           });
         }
@@ -525,7 +567,7 @@
       const content = await zip.generateAsync({type: "blob"});
       const link = document.createElement('a');
       link.href = URL.createObjectURL(content);
-      link.download = `(스물)전체_파츠.zip`;
+      link.download = `전체파츠.zip`;
       link.click();
     }
 
@@ -534,24 +576,26 @@
         const container = document.getElementById(`parts-${type}-list`);
         container.innerHTML = '';
         const list = appData.distributionParts[type] || [];
-        const typeName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
+        const typePrefix = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
+
         if (list.length === 0) {
-          container.innerHTML = `<div class="text-[11px] text-gray-400 py-3 text-center">등록된 파츠가 없습니다.</div>`;
+          container.innerHTML = `<div class="text-[11px] text-neutral-400 py-3 text-center">등록된 파츠가 없습니다.</div>`;
           return;
         }
         list.forEach(p => {
           const div = document.createElement('div');
-          div.className = 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg p-2.5 flex items-center justify-between gap-2 shadow-xs';
-          const downloadFilename = `(스물)${typeName}_파츠_${p.title}`;
+          div.className = 'bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg p-2.5 flex items-center justify-between gap-2 shadow-xs';
+          const ext = p.ext || 'png';
+          const downloadFilename = `${typePrefix}_${p.title}.${ext}`;
           div.innerHTML = `
             <div class="flex items-center gap-2.5 overflow-hidden">
-              <div class="w-10 h-10 shrink-0 rounded bg-gray-100 dark:bg-gray-800 border overflow-hidden flex items-center justify-center p-0.5 cursor-pointer" onclick="openPartsLightbox('${p.thumbData}', '${p.title}')" title="파츠 크게보기">
+              <div class="w-10 h-10 shrink-0 rounded bg-neutral-100 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] overflow-hidden flex items-center justify-center p-0.5 cursor-pointer" onclick="openPartsLightbox('${p.thumbData}', '${p.title}')" title="파츠 크게보기">
                 <img src="${p.thumbData}" class="w-full h-full object-contain no-save">
               </div>
-              <span class="text-xs font-medium text-gray-800 dark:text-gray-200 truncate">${p.title}</span>
+              <span class="text-xs font-medium text-neutral-800 dark:text-neutral-200 truncate">${p.title}</span>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
-              <a href="${p.fileData}" download="${downloadFilename}" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300 flex items-center gap-1" title="다운로드"><i class="fa-solid fa-download"></i></a>
+              <a href="${p.fileData}" download="${downloadFilename}" class="text-xs bg-neutral-100 dark:bg-[#262626] hover:bg-neutral-200 dark:hover:bg-[#333333] px-2 py-1 rounded text-neutral-700 dark:text-neutral-300 flex items-center gap-1" title="다운로드"><i class="fa-solid fa-download"></i></a>
             </div>
           `;
           container.appendChild(div);
@@ -563,7 +607,7 @@
       document.getElementById('lbBeforeAfterContainer').classList.add('hidden');
       document.getElementById('lbSingleContainer').classList.remove('hidden');
       document.getElementById('lbSingleImg').src = imgSrc;
-      document.getElementById('lightboxTitle').innerText = "파츠 크게보기";
+      document.getElementById('lightboxTitle').innerText = title || "파츠 크게보기";
       document.getElementById('lightboxModal').classList.remove('hidden');
     }
 
@@ -574,11 +618,60 @@
       else if (touchEndX - touchStartX > 50) changeSlide(blockId, -1, maxLen);
     }
 
+    function renderSectionExtraBlocks(secKey, containerId) {
+      const container = document.getElementById(containerId);
+      if(!container) return;
+      container.innerHTML = '';
+      const list = appData.sectionBlocks[secKey] || [];
+
+      list.forEach((n) => {
+        const div = document.createElement('div');
+        if(n.type === 'spacer') {
+          div.style.height = `${n.height || 20}px`;
+          container.appendChild(div);
+          return;
+        }
+
+        div.className = 'group relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
+        let titleHTML = n.title ? `<h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm mb-1">${n.title}</h3>` : '';
+
+        if(n.type === 'text') {
+          div.innerHTML = `${titleHTML}<div class="outline-none whitespace-pre-wrap">${n.content}</div>`;
+        } else if(n.type === 'image') {
+          let imgs = n.images || (n.content ? [n.content] : []);
+          let imgHtml = '';
+          if (imgs.length === 1) {
+            let imgSrc = imgs[0];
+            imgHtml = `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
+              <img src="${imgSrc}" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
+            </div>`;
+          } else {
+            imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
+            imgs.forEach((imgSrc) => {
+              imgHtml += `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-1">
+                <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '상세보기')">
+              </div>`;
+            });
+            imgHtml += `</div>`;
+          }
+
+          div.innerHTML = `${titleHTML}${imgHtml}`;
+        }
+        container.appendChild(div);
+      });
+    }
+
+    function renderAllSectionExtraBlocks() {
+      renderSectionExtraBlocks('genre', 'genreExtraBlocks');
+      renderSectionExtraBlocks('price', 'priceExtraBlocks');
+      renderSectionExtraBlocks('sample', 'sampleExtraBlocks');
+      renderSectionExtraBlocks('delivery', 'deliveryExtraBlocks');
+      renderSectionExtraBlocks('ref', 'refExtraBlocks');
+    }
+
     function renderBlocks() {
       const container = document.getElementById('noticeContainer');
       container.innerHTML = '';
-      if(!appData.notices) return;
-
       appData.notices.forEach((n) => {
         const div = document.createElement('div');
         if(n.type === 'spacer') {
@@ -587,22 +680,24 @@
           return;
         }
 
-        div.className = 'p-3.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-sm text-gray-800 dark:text-gray-200 shadow-sm space-y-2';
-        let titleHTML = n.title ? `<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm mb-1">${n.title}</h3>` : '';
+        div.className = 'group relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
+        let titleHTML = n.title ? `<h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm mb-1">${n.title}</h3>` : '';
 
         if(n.type === 'text') {
-          div.innerHTML = `${titleHTML}<div class="whitespace-pre-wrap">${n.content}</div>`;
+          div.innerHTML = `${titleHTML}<div class="outline-none whitespace-pre-wrap">${n.content}</div>`;
         } else if(n.type === 'image') {
           let imgs = n.images || (n.content ? [n.content] : []);
           let mode = n.viewMode || 'grid';
           let imgHtml = '';
-
-          if (imgs.length === 0) {
-            imgHtml = '';
+          if (imgs.length === 1) {
+            let imgSrc = imgs[0];
+            imgHtml = `<div class="relative group/img overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
+              <img src="${imgSrc}" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
+            </div>`;
           } else if (mode === 'grid') {
             imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
             imgs.forEach((imgSrc) => {
-              imgHtml += `<div class="overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 cursor-pointer flex items-center justify-center p-1">
+              imgHtml += `<div class="relative group/img overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-1">
                 <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '샘플 상세보기')">
               </div>`;
             });
@@ -613,7 +708,7 @@
             let currentImg = imgs[activeIdx] || '';
             imgHtml = `
               <div class="relative flex flex-col items-center">
-                <div class="relative w-full max-w-xl h-80 overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-2"
+                <div class="relative w-full max-w-xl h-80 overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-2"
                      ontouchstart="handleTouchStart(event)" ontouchend="handleTouchEnd('${n.id}', ${imgs.length}, event)">
                   <img src="${currentImg}" class="max-h-full max-w-full w-auto h-auto object-contain no-save cursor-pointer" onclick="openSingleLightbox('${currentImg}', '샘플 상세보기')">
                   ${imgs.length > 1 ? `
@@ -623,12 +718,13 @@
                 </div>
                 ${imgs.length > 1 ? `
                   <div class="flex gap-1.5 mt-2.5">
-                    ${imgs.map((_, dotIdx) => `<span onclick="setSlide('${n.id}', ${dotIdx})" class="w-2 h-2 rounded-full cursor-pointer transition-colors ${dotIdx === activeIdx ? 'bg-black dark:bg-white' : 'bg-gray-300 dark:bg-gray-700'}"></span>`).join('')}
+                    ${imgs.map((_, dotIdx) => `<span onclick="setSlide('${n.id}', ${dotIdx})" class="w-2 h-2 rounded-full cursor-pointer transition-colors ${dotIdx === activeIdx ? 'bg-black dark:bg-white' : 'bg-neutral-300 dark:bg-neutral-700'}"></span>`).join('')}
                   </div>
                 ` : ''}
               </div>
             `;
           }
+
           div.innerHTML = `${titleHTML}${imgHtml}`;
         }
         container.appendChild(div);
@@ -647,39 +743,42 @@
       renderBlocks();
     }
 
+    // OK / NG
     function renderGenres() {
       const container = document.getElementById('genreContainer');
       container.innerHTML = '';
-      if (!appData.genres) return;
+      if (!appData.genres) appData.genres = [];
       
       appData.genres.forEach((g) => {
         const card = document.createElement('div');
-        let badgeClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200';
+        let badgeClass = 'bg-emerald-100 text-emerald-800 dark:bg-[#1a2e22] dark:text-emerald-200';
         let labelText = 'OK';
-        let borderClass = 'bg-emerald-50/50 dark:bg-emerald-950/25 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200';
+        let borderClass = 'bg-emerald-50/50 dark:bg-[#1a2e22]/30 border-emerald-200 dark:border-emerald-900 text-emerald-900 dark:text-emerald-200';
 
         if (g.status === 'ng') {
-          badgeClass = 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-200';
+          badgeClass = 'bg-rose-100 text-rose-800 dark:bg-[#2e1a1e] dark:text-rose-200';
           labelText = 'NG';
-          borderClass = 'bg-rose-50/50 dark:bg-rose-950/25 border-rose-200 dark:border-rose-800 text-rose-900 dark:text-rose-200';
+          borderClass = 'bg-rose-50/50 dark:bg-[#2e1a1e]/30 border-rose-200 dark:border-rose-900 text-rose-900 dark:text-rose-200';
         } else if (g.status === 'main') {
-          badgeClass = 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-200';
+          badgeClass = 'bg-blue-100 text-blue-800 dark:bg-[#1a222e] dark:text-blue-200';
           labelText = '주력';
-          borderClass = 'bg-blue-50/50 dark:bg-blue-950/25 border-blue-200 dark:border-blue-800 text-blue-900 dark:text-blue-200';
+          borderClass = 'bg-blue-50/50 dark:bg-[#1a222e]/30 border-blue-200 dark:border-blue-900 text-blue-900 dark:text-blue-200';
         } else if (g.status === 'hard') {
-          badgeClass = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200';
+          badgeClass = 'bg-amber-100 text-amber-800 dark:bg-[#2e261a] dark:text-amber-200';
           labelText = '어려움';
-          borderClass = 'bg-amber-50/50 dark:bg-amber-950/25 border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200';
+          borderClass = 'bg-amber-50/50 dark:bg-[#2e261a]/30 border-amber-200 dark:border-amber-900 text-amber-900 dark:text-amber-200';
         } else if (g.status === 'extra') {
-          badgeClass = 'bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-200';
+          badgeClass = 'bg-purple-100 text-purple-800 dark:bg-[#281a2e] dark:text-purple-200';
           labelText = '추가금';
-          borderClass = 'bg-purple-50/50 dark:bg-purple-950/25 border-purple-200 dark:border-purple-800 text-purple-900 dark:text-purple-200';
+          borderClass = 'bg-purple-50/50 dark:bg-[#281a2e]/30 border-purple-200 dark:border-purple-900 text-purple-900 dark:text-purple-200';
         }
 
         card.className = `p-3 rounded-lg border flex items-center justify-between text-xs shadow-sm ${borderClass}`;
         card.innerHTML = `
           <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 rounded font-bold text-[10px] ${badgeClass}">${labelText}</span>
+            <span class="px-2 py-0.5 rounded font-bold text-[10px] ${badgeClass}">
+              ${labelText}
+            </span>
             <span>${g.text}</span>
           </div>
         `;
@@ -687,15 +786,63 @@
       });
     }
 
+    function renderFaqs() {
+      const container = document.getElementById('faqContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      if (!appData.faqs) appData.faqs = [];
+
+      if (appData.faqs.length === 0) {
+        container.innerHTML = `<div class="text-xs text-neutral-400 py-3 text-center border border-dashed border-neutral-200 dark:border-[#333333] rounded">등록된 FAQ가 없습니다.</div>`;
+        return;
+      }
+
+      appData.faqs.forEach((faq, idx) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl overflow-hidden shadow-sm';
+        
+        div.innerHTML = `
+          <div class="flex justify-between items-center p-4 cursor-pointer select-none hover:bg-neutral-50 dark:hover:bg-[#222222] transition" onclick="toggleFaq(${idx})">
+            <div class="font-bold text-neutral-900 dark:text-neutral-100 text-sm flex items-center gap-2 flex-1 min-w-0">
+              <span class="text-neutral-400 font-mono text-xs">Q.</span>
+              <span class="truncate">${faq.q}</span>
+            </div>
+            <div class="flex items-center gap-2 ml-2 shrink-0">
+              <i id="faq-icon-${idx}" class="fa-solid fa-chevron-down text-xs text-neutral-400 transition-transform"></i>
+            </div>
+          </div>
+          <div id="faq-content-${idx}" class="hidden px-4 pb-4 pt-1 border-t border-neutral-100 dark:border-[#262626] text-xs text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap">
+            ${faq.a}
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function toggleFaq(idx) {
+      const content = document.getElementById(`faq-content-${idx}`);
+      const icon = document.getElementById(`faq-icon-${idx}`);
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
     function renderDeliverySpecs() {
       const el = document.getElementById('deliverySpecsContent');
-      if (el) el.innerText = appData.deliverySpecs || '';
+      el.innerText = appData.deliverySpecs || '';
     }
 
     function renderTypeNotices() {
+      if (!appData.typeNotices) appData.typeNotices = { cookie: '', baguette: '', popcorn: '' };
       ['cookie', 'baguette', 'popcorn'].forEach(type => {
         const el = document.getElementById(`notice-${type}-content`);
-        if (el) el.innerText = (appData.typeNotices && appData.typeNotices[type]) || '';
+        if (el) {
+          el.innerText = appData.typeNotices[type] || '';
+        }
       });
     }
 
@@ -703,52 +850,24 @@
       ['cookie', 'baguette', 'popcorn'].forEach(type => {
         const baseBox = document.getElementById(`price-${type}-base`);
         const extraBox = document.getElementById(`price-${type}-extra`);
-        if(!baseBox || !extraBox) return;
         baseBox.innerHTML = ''; extraBox.innerHTML = '';
-        const pData = (appData.prices && appData.prices[type]) || { base: [], extra: [] };
+        const pData = appData.prices[type] || { base: [], extra: [] };
 
-        pData.base.forEach((item) => {
-          const row = document.createElement('div');
-          row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
-          row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
-          baseBox.appendChild(row);
-        });
-
-        pData.extra.forEach((item) => {
-          const row = document.createElement('div');
-          row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
-          row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
-          extraBox.appendChild(row);
-        });
+        pData.base.forEach((item) => baseBox.appendChild(createPriceRow(item)));
+        pData.extra.forEach((item) => extraBox.appendChild(createPriceRow(item)));
       });
     }
 
-    function parseItemPrice(priceStr, basePrice = 0) {
-      if (!priceStr) return { type: 'add', value: 0, raw: priceStr };
-      let clean = priceStr.toString().trim().toLowerCase();
-
-      if (clean.includes('x2') || clean.includes('*2') || clean.includes('200%') || clean.includes('X2')) {
-        return { type: 'multiply', factor: 2, raw: priceStr };
-      }
-      if (clean.includes('%')) {
-        let num = parseFloat(clean.replace('%', '').replace('+', ''));
-        if (!isNaN(num) && num >= 100) {
-          return { type: 'multiply', factor: num / 100, raw: priceStr };
-        }
-        let val = Math.round(basePrice * (num / 100));
-        let isNegative = clean.startsWith('-');
-        return { type: isNegative ? 'subtract' : 'add', value: isNegative ? -Math.abs(val) : val, raw: priceStr };
-      }
-
-      let isNegative = clean.startsWith('-') || clean.includes('할인');
-      let num = parseInt(clean.replace(/[^0-9]/g, ''), 10);
-      if (isNaN(num)) num = 0;
-
-      return {
-        type: isNegative ? 'subtract' : 'add',
-        value: isNegative ? -num : num,
-        raw: priceStr
-      };
+    function createPriceRow(item) {
+      const row = document.createElement('div');
+      row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-neutral-50 dark:bg-[#222222] rounded border border-neutral-200 dark:border-[#2a2a2a] gap-2';
+      row.innerHTML = `
+        <div class="flex items-center gap-2 flex-1 min-w-0 pr-2">
+          <span class="text-neutral-700 dark:text-neutral-300 truncate">${item.name}</span>
+        </div>
+        <span class="font-mono text-neutral-900 dark:text-neutral-100 font-semibold shrink-0">${item.price}</span>
+      `;
+      return row;
     }
 
     function toggleSamples() {
@@ -768,7 +887,7 @@
       currentSampleTab = tab;
       document.querySelectorAll('.sample-tab').forEach(t => {
         t.classList.remove('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
-        t.classList.add('border-transparent', 'text-gray-500', 'dark:text-gray-400');
+        t.classList.add('border-transparent', 'text-neutral-500', 'dark:text-neutral-400');
       });
       document.getElementById(`sample-tab-${tab}`).classList.add('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
       renderSampleTags();
@@ -778,14 +897,14 @@
     function renderSampleTags() {
       const bar = document.getElementById('sampleTagFilterBar');
       bar.innerHTML = '';
-      if(!appData.sampleTags || !appData.sampleTags[currentSampleTab]) return;
+      if(!appData.sampleTags[currentSampleTab]) appData.sampleTags[currentSampleTab] = ['기본'];
       const tags = ['전체', ...appData.sampleTags[currentSampleTab]];
       const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
 
       tags.forEach(tag => {
         const btn = document.createElement('button');
         const isActive = tag === activeTag;
-        btn.className = `text-[11px] px-2.5 py-1 rounded-md border transition ${isActive ? 'bg-black text-white dark:bg-white dark:text-black border-transparent font-medium' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700'}`;
+        btn.className = `text-[11px] px-2.5 py-1 rounded-md border transition ${isActive ? 'bg-black text-white dark:bg-white dark:text-black border-transparent font-medium' : 'bg-white dark:bg-[#1a1a1a] text-neutral-700 dark:text-neutral-300 border-neutral-300 dark:border-[#333333]'}`;
         btn.innerText = tag;
         btn.onclick = () => {
           currentSampleSubTags[currentSampleTab] = tag;
@@ -799,52 +918,69 @@
     function renderSamples() {
       const grid = document.getElementById('sampleGrid');
       grid.innerHTML = '';
-      const list = (appData.samples && appData.samples[currentSampleTab]) || [];
+      const list = appData.samples[currentSampleTab] || [];
       const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
+      const searchKeyword = (document.getElementById('sampleSearchInput')?.value || '').trim().toLowerCase();
 
       const filtered = list.filter(s => {
-        if (activeTag === '전체') return true;
-        return s.tag === activeTag;
+        let tagMatch = true;
+        if (activeTag !== '전체') {
+          if (Array.isArray(s.tags)) tagMatch = s.tags.includes(activeTag);
+          else tagMatch = (s.tag === activeTag);
+        }
+        let searchMatch = true;
+        if (searchKeyword) {
+          let tagsStr = Array.isArray(s.tags) ? s.tags.join(' ') : (s.tag || '');
+          let dateStr = s.dateStr || '';
+          searchMatch = (tagsStr + ' ' + dateStr).toLowerCase().includes(searchKeyword);
+        }
+        return tagMatch && searchMatch;
       });
 
       if(filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full text-center py-8 text-xs text-gray-400">등록된 샘플이 없습니다.</div>`;
+        grid.innerHTML = `<div class="col-span-full text-center py-8 text-xs text-neutral-400">등록된 샘플이 없습니다.</div>`;
         return;
       }
 
       filtered.forEach(s => {
         const div = document.createElement('div');
-        div.className = 'relative group rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-3 shadow-sm space-y-2 cursor-pointer hover:shadow-md transition';
-        let tagBadge = s.tag ? `<span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full z-10">${s.tag}</span>` : '';
+        div.className = 'relative group rounded-xl overflow-hidden border border-neutral-200 dark:border-[#262626] bg-white dark:bg-[#1a1a1a] p-3 shadow-sm space-y-2 cursor-pointer hover:shadow-md transition';
+        
+        let tagsList = Array.isArray(s.tags) ? s.tags : (s.tag ? [s.tag] : []);
+        let tagBadges = tagsList.map(t => `<span class="bg-black/70 text-white dark:bg-white/20 text-[10px] px-2 py-0.5 rounded-full">${t}</span>`).join(' ');
+        let dateHtml = s.dateStr ? `<span class="text-xs text-neutral-400 dark:text-neutral-500 self-center font-normal">${s.dateStr}</span>` : '';
+        
+        let headerHtml = `<div class="flex items-center gap-2 mb-1 flex-wrap">${tagBadges}${dateHtml}</div>`;
 
         if (s.single) {
           div.onclick = () => openSingleLightbox(s.single, "샘플 상세보기");
           div.innerHTML = `
-            ${tagBadge}
-            <div class="w-full aspect-square overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-1">
+            ${headerHtml}
+            <div class="w-full aspect-square overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-1">
               <img src="${s.single}" class="w-full h-full object-contain no-save">
             </div>
           `;
         } else {
           div.onclick = () => openLightbox(s.before, s.after, "샘플 상세보기");
           div.innerHTML = `
-            ${tagBadge}
+            ${headerHtml}
             <div class="grid grid-cols-2 gap-2 pt-1">
               <div class="space-y-1">
-                <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 block text-center">원본 (Before)</span>
-                <div class="w-full aspect-square overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-1">
+                <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 block text-center mb-1">원본 (Before)</span>
+                <div class="w-full aspect-square overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-1">
                   <img src="${s.before}" class="w-full h-full object-contain no-save">
                 </div>
               </div>
               <div class="space-y-1">
-                <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 block text-center">가공 (After)</span>
-                <div class="w-full aspect-square overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 flex items-center justify-center p-1">
+                <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 block text-center mb-1">가공 (After)</span>
+                <div class="w-full aspect-square overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-1">
                   <img src="${s.after}" class="w-full h-full object-contain no-save">
                 </div>
               </div>
             </div>
           `;
         }
+
         grid.appendChild(div);
       });
     }
@@ -864,215 +1000,19 @@
       document.getElementById('lightboxTitle').innerText = title;
       document.getElementById('lightboxModal').classList.remove('hidden');
     }
-    function closeLightbox() {
-      document.getElementById('lightboxModal').classList.add('hidden');
-    }
-
-    function renderCalcFormOptions() {
-      const type = document.getElementById('calcType').value;
-      const baseSelect = document.getElementById('calcBaseSelect');
-      const extraGroup = document.getElementById('calcExtraCheckboxGroup');
-
-      baseSelect.innerHTML = '';
-      extraGroup.innerHTML = '';
-
-      const pData = (appData.prices && appData.prices[type]) || { base: [], extra: [] };
-
-      if(pData.base.length === 0) {
-        baseSelect.innerHTML = `<option value="0" data-raw="0" data-name="없음">종류 항목 없음 (0p)</option>`;
-      } else {
-        pData.base.forEach(b => {
-          const parsed = parseItemPrice(b.price);
-          baseSelect.innerHTML += `<option value="${parsed.value}" data-raw="${b.price}" data-name="${b.name}">${b.name} (${b.price})</option>`;
-        });
-      }
-
-      pData.extra.forEach((e, idx) => {
-        let countInputHtml = '';
-        if (e.countable) {
-          countInputHtml = `
-            <span id="extraCountContainer_${type}_${idx}" class="hidden inline-flex items-center gap-1 ml-1.5 bg-gray-100 dark:bg-gray-800 rounded px-1 py-0.5" onclick="event.stopPropagation()">
-              <button type="button" onclick="adjustExtraCount('${type}', ${idx}, -1)" class="w-4 h-4 text-[10px] bg-white dark:bg-gray-700 rounded shadow-xs flex items-center justify-center font-bold">-</button>
-              <span id="extraCountVal_${type}_${idx}" class="text-[11px] font-mono w-4 text-center">1</span>
-              <button type="button" onclick="adjustExtraCount('${type}', ${idx}, 1)" class="w-4 h-4 text-[10px] bg-white dark:bg-gray-700 rounded shadow-xs flex items-center justify-center font-bold">+</button>
-            </span>
-          `;
-        }
-
-        extraGroup.innerHTML += `
-          <label class="inline-flex items-center gap-1.5 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2.5 py-1.5 text-xs text-gray-800 dark:text-gray-200 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 shadow-xs select-none">
-            <input type="checkbox" value="${e.price}" data-name="${e.name}" data-idx="${idx}" onchange="toggleExtraCheck('${type}', ${idx}, this.checked)" class="calc-extra-cb accent-black dark:accent-white w-3.5 h-3.5">
-            <span>${e.name} (${e.price})</span>
-            ${countInputHtml}
-          </label>`;
-      });
-    }
-
-    function toggleExtraCheck(type, idx, checked) {
-      const container = document.getElementById(`extraCountContainer_${type}_${idx}`);
-      if(container) {
-        if(checked) container.classList.remove('hidden');
-        else container.classList.add('hidden');
-      }
-    }
-
-    function adjustExtraCount(type, idx, delta) {
-      const span = document.getElementById(`extraCountVal_${type}_${idx}`);
-      if(span) {
-        let val = parseInt(span.innerText, 10) + delta;
-        if(val < 1) val = 1;
-        span.innerText = val;
-      }
-    }
-
-    function addToCart() {
-      const typeKey = document.getElementById('calcType').value;
-      const typeName = typeKey === 'cookie' ? '쿠키' : typeKey === 'baguette' ? '바게트' : '팝콘';
-
-      const baseSelect = document.getElementById('calcBaseSelect');
-      const selectedBaseOpt = baseSelect.options[baseSelect.selectedIndex];
-      const baseName = selectedBaseOpt ? selectedBaseOpt.getAttribute('data-name') : '';
-      const baseRaw = selectedBaseOpt ? selectedBaseOpt.getAttribute('data-raw') : '0';
-      const baseParsed = parseItemPrice(baseRaw);
-
-      let sum = baseParsed.value;
-      let multiplierFactor = 1;
-      let extras = [];
-
-      document.querySelectorAll('#calcExtraCheckboxGroup input.calc-extra-cb:checked').forEach(cb => {
-        const name = cb.getAttribute('data-name');
-        const rawPrice = cb.value;
-        const itemIdx = cb.getAttribute('data-idx');
-        const typeKey = document.getElementById('calcType').value;
-        
-        let count = 1;
-        const countSpan = document.getElementById(`extraCountVal_${typeKey}_${itemIdx}`);
-        if (countSpan) count = parseInt(countSpan.innerText, 10) || 1;
-
-        for (let i = 0; i < count; i++) {
-          const parsed = parseItemPrice(rawPrice, sum);
-          extras.push({ name, raw: rawPrice, parsed });
-
-          if (parsed.type === 'multiply') {
-            multiplierFactor = Math.max(multiplierFactor, parsed.factor);
-          } else {
-            sum += parsed.value;
-          }
-        }
-      });
-
-      let itemTotal = sum * multiplierFactor;
-
-      cart.push({
-        id: Date.now().toString(),
-        typeName,
-        baseName,
-        baseRaw,
-        extras,
-        itemTotal
-      });
-
-      renderCart();
-    }
-
-    function renderCart() {
-      const container = document.getElementById('cartContainer');
-      container.innerHTML = '';
-      let grandTotal = 0;
-
-      if(cart.length === 0) {
-        container.innerHTML = `<div class="text-xs text-gray-400 py-3 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded">담긴 항목이 없습니다.</div>`;
-      } else {
-        cart.forEach((item, idx) => {
-          grandTotal += item.itemTotal;
-          const div = document.createElement('div');
-          div.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs p-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded gap-2';
-
-          let extraMap = {};
-          item.extras.forEach(e => {
-            let key = e.name + "_" + e.raw;
-            if(!extraMap[key]) extraMap[key] = { name: e.name, raw: e.raw, count: 0 };
-            extraMap[key].count++;
-          });
-          let groupedExtras = Object.values(extraMap);
-          const extraText = groupedExtras.length > 0 ? ` / 옵션: ${groupedExtras.map(e => e.count > 1 ? `${e.name}(${e.raw})(${e.count})` : `${e.name}(${e.raw})`).join(', ')}` : '';
-
-          div.innerHTML = `
-            <div class="space-y-0.5 overflow-hidden">
-              <span class="font-bold text-gray-900 dark:text-gray-100">[${item.typeName}]</span>
-              <span class="text-gray-700 dark:text-gray-300 break-words">${item.baseName}${extraText}</span>
-            </div>
-            <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
-              <span class="font-bold text-gray-900 dark:text-gray-100">${item.itemTotal.toLocaleString()}p</span>
-              <button onclick="removeFromCart(${idx})" class="text-gray-400 hover:text-red-500 p-1"><i class="fa-solid fa-xmark text-sm"></i></button>
-            </div>
-          `;
-          container.appendChild(div);
-        });
-      }
-
-      document.getElementById('cartTotal').innerText = `${grandTotal.toLocaleString()} p`;
-    }
-
-    function removeFromCart(idx) {
-      cart.splice(idx, 1);
-      renderCart();
-    }
-
-    function copyApplicationForm() {
-      if (cart.length === 0) {
-        alert('담긴 항목이 없습니다.');
-        return;
-      }
-      let text = "";
-      let grandTotal = 0;
-
-      cart.forEach((item) => {
-        grandTotal += item.itemTotal;
-        let optNames = item.extras.length > 0 ? item.extras.map(e => e.name).join(', ') : '없음';
-        
-        let formulaParts = [item.baseRaw];
-        item.extras.forEach(e => {
-          let raw = e.raw.trim().toLowerCase();
-          if (raw.includes('x2') || raw.includes('*2') || raw.includes('200%') || raw.includes('X2')) {
-            formulaParts.push('*2');
-          } else {
-            formulaParts.push(e.raw);
-          }
-        });
-
-        let formulaStr = formulaParts.join('+');
-        formulaStr = formulaStr.replace(/\+\s*\*2/g, '*2');
-        formulaStr = formulaStr.replace(/\+\s*x2/g, '*2');
-        formulaStr = formulaStr.replace(/\+\s*-\s*/g, '-');
-
-        text += `[${item.typeName}] (옵션: ${optNames}): ${formulaStr}=${item.itemTotal.toLocaleString()}p\n`;
-      });
-
-      if (cart.length > 1) {
-        text += `총 예상 금액: ${grandTotal.toLocaleString()} p`;
-      } else {
-        text = text.trim();
-      }
-
-      navigator.clipboard.writeText(text).then(() => {
-        showToast('예상 금액이 클립보드에 복사되었습니다!');
-      }).catch(err => {
-        console.error('Copy failed:', err);
-        alert('복사에 실패했습니다.');
-      });
-    }
+    function closeLightbox() { document.getElementById('lightboxModal').classList.add('hidden'); }
 
     function initAppUI() {
       renderBlocks();
+      renderAllSectionExtraBlocks();
       renderGenres();
+      renderFaqs();
       renderPrices();
       renderSampleTags();
       renderSamples();
       renderDeliverySpecs();
       renderTypeNotices();
       renderNoticesContent();
-      renderCalcFormOptions();
     }
 
     window.onload = () => {
