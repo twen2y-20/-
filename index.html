@@ -51,11 +51,6 @@
           <svg id="sunIcon" class="w-3.5 h-3.5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
           <svg id="moonIcon" class="w-3.5 h-3.5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
         </button>
-        <div id="adminControls">
-          <button onclick="openAuthModal()" id="adminBtn" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-700 transition flex items-center gap-1.5">
-            <i class="fa-solid fa-lock"></i> <span>편집 모드</span>
-          </button>
-        </div>
       </div>
     </div>
   </header>
@@ -77,20 +72,12 @@
   <!-- 메인 컨테이너 -->
   <main class="max-w-6xl mx-auto px-4 pt-8 space-y-12">
 
-    <!-- 백업/복원 기능 -->
-    <div id="backupSectionWrapper"></div>
-
     <!-- 1. 공지사항 -->
     <section id="section-notice" class="space-y-4 max-w-4xl mx-auto scroll-mt-24">
       <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-2">
         <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <i class="fa-solid fa-circle-info text-gray-500 text-sm"></i> 공지사항
         </h2>
-        <div class="edit-only hidden flex flex-wrap gap-1.5">
-          <button onclick="addBlock('text')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 텍스트</button>
-          <button onclick="addBlock('image')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-image"></i> 이미지 블록</button>
-          <button onclick="addBlock('spacer')" class="text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-arrows-up-down"></i> 여백</button>
-        </div>
       </div>
       <div id="noticeContainer" class="space-y-3"></div>
     </section>
@@ -101,7 +88,6 @@
         <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <i class="fa-solid fa-list-check text-gray-500 text-sm"></i> OK / NG
         </h2>
-        <button onclick="addGenreItem()" class="edit-only hidden text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 항목 추가</button>
       </div>
       <div id="genreContainer" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
     </section>
@@ -119,17 +105,13 @@
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
             <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">쿠키</h3>
-            <button onclick="addPriceItem('cookie', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
           </div>
           <div>
             <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
             <div id="price-cookie-base" class="space-y-2"></div>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
-              <button onclick="addPriceItem('cookie', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
-            </div>
+            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">추가금 / 할인 요소</h4>
             <div id="price-cookie-extra" class="space-y-2"></div>
           </div>
         </div>
@@ -138,17 +120,13 @@
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
             <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">바게트</h3>
-            <button onclick="addPriceItem('baguette', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
           </div>
           <div>
             <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
             <div id="price-baguette-base" class="space-y-2"></div>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
-              <button onclick="addPriceItem('baguette', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
-            </div>
+            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">추가금 / 할인 요소</h4>
             <div id="price-baguette-extra" class="space-y-2"></div>
           </div>
         </div>
@@ -157,17 +135,13 @@
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-4">
           <div class="flex justify-between items-center border-b border-gray-100 dark:border-gray-800 pb-2">
             <h3 class="font-bold text-gray-900 dark:text-gray-100 text-base">팝콘</h3>
-            <button onclick="addPriceItem('popcorn', 'base')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
           </div>
           <div>
             <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">기본 금액</h4>
             <div id="price-popcorn-base" class="space-y-2"></div>
           </div>
           <div class="border-t border-gray-100 dark:border-gray-800 pt-3">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">추가금 / 할인 요소</h4>
-              <button onclick="addPriceItem('popcorn', 'extra')" class="edit-only hidden text-xs text-gray-500 hover:text-black dark:hover:text-white"><i class="fa-solid fa-plus"></i> 항목추가</button>
-            </div>
+            <h4 class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase mb-2">추가금 / 할인 요소</h4>
             <div id="price-popcorn-extra" class="space-y-2"></div>
           </div>
         </div>
@@ -180,12 +154,9 @@
         <h2 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100 flex items-center gap-2">
           <i class="fa-solid fa-images text-gray-500 text-sm"></i> 샘플
         </h2>
-        <div class="flex gap-2 items-center">
-          <button onclick="openSampleUploadModal()" class="edit-only hidden text-xs bg-gray-100 dark:bg-gray-800 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 샘플 추가</button>
-          <button onclick="toggleSamples()" id="sampleToggleBtn" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-1 rounded border border-gray-300 dark:border-gray-700">
-            <i class="fa-solid fa-chevron-up"></i> 접기
-          </button>
-        </div>
+        <button onclick="toggleSamples()" id="sampleToggleBtn" class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2.5 py-1 rounded border border-gray-300 dark:border-gray-700">
+          <i class="fa-solid fa-chevron-up"></i> 접기
+        </button>
       </div>
 
       <div id="sampleSectionContent" class="space-y-4">
@@ -195,7 +166,6 @@
             <button onclick="switchSampleTab('baguette')" id="sample-tab-baguette" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">바게트</button>
             <button onclick="switchSampleTab('popcorn')" id="sample-tab-popcorn" class="sample-tab px-3 py-1.5 text-xs font-semibold border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">팝콘</button>
           </div>
-          <button onclick="addSampleTagPrompt()" class="edit-only hidden text-[11px] bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 mb-1"><i class="fa-solid fa-tag"></i> 태그 추가</button>
         </div>
 
         <div id="sampleTagFilterBar" class="flex flex-wrap gap-1.5 pt-1"></div>
@@ -211,7 +181,7 @@
         </h2>
       </div>
       <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm">
-        <div id="deliverySpecsContent" contenteditable="false" onblur="updateDeliverySpecs(this.innerText)" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none"></div>
+        <div id="deliverySpecsContent" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none"></div>
       </div>
     </section>
 
@@ -225,15 +195,15 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">쿠키</h3>
-          <div id="notice-cookie-content" contenteditable="false" onblur="updateNoticeTypeContent('cookie', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+          <div id="notice-cookie-content" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">바게트</h3>
-          <div id="notice-baguette-content" contenteditable="false" onblur="updateNoticeTypeContent('baguette', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+          <div id="notice-baguette-content" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
         <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-5 shadow-sm space-y-2">
           <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm border-b border-gray-100 dark:border-gray-800 pb-2">팝콘</h3>
-          <div id="notice-popcorn-content" contenteditable="false" onblur="updateNoticeTypeContent('popcorn', this.innerText)" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+          <div id="notice-popcorn-content" class="text-xs text-gray-800 dark:text-gray-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
         </div>
       </div>
     </section>
@@ -244,8 +214,7 @@
         <i class="fa-solid fa-calculator text-gray-500"></i> 금액 계산기
       </h2>
 
-      <!-- 계산기 참고 텍스트 (편집 가능) -->
-      <div id="calcNoticeText" contenteditable="false" onblur="updateCalcNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-b border-gray-200 dark:border-gray-800 pb-3 outline-none"></div>
+      <div id="calcNoticeText" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed border-b border-gray-200 dark:border-gray-800 pb-3 outline-none"></div>
 
       <div class="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-800 rounded-lg p-4 space-y-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -309,7 +278,7 @@
         </div>
       </div>
 
-      <div id="partsNoticeText" contenteditable="false" onblur="updatePartsNotice(this.innerText)" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed outline-none"></div>
+      <div id="partsNoticeText" class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed outline-none"></div>
 
       <div id="partsLockedNotice" class="text-center py-10 text-xs text-gray-500 dark:text-gray-400 border border-dashed border-gray-200 dark:border-gray-800 rounded-lg space-y-2">
         <i class="fa-solid fa-lock text-2xl mb-1 text-gray-300 dark:text-gray-600 block"></i>
@@ -324,7 +293,6 @@
                 <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">쿠키 파츠</h3>
                 <button onclick="downloadCategoryZip('cookie')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="쿠키 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
-              <button onclick="triggerPartsUpload('cookie')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
             </div>
             <div id="parts-cookie-list" class="space-y-3"></div>
           </div>
@@ -334,7 +302,6 @@
                 <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">바게트 파츠</h3>
                 <button onclick="downloadCategoryZip('baguette')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="바게트 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
-              <button onclick="triggerPartsUpload('baguette')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
             </div>
             <div id="parts-baguette-list" class="space-y-3"></div>
           </div>
@@ -344,7 +311,6 @@
                 <h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm">팝콘 파츠</h3>
                 <button onclick="downloadCategoryZip('popcorn')" class="text-[10px] bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 px-1.5 py-0.5 rounded text-gray-700 dark:text-gray-300" title="팝콘 카테고리 일괄 다운로드"><i class="fa-solid fa-download"></i></button>
               </div>
-              <button onclick="triggerPartsUpload('popcorn')" class="edit-only hidden text-xs bg-black text-white dark:bg-white dark:text-black px-2 py-1 rounded font-medium"><i class="fa-solid fa-plus"></i> 파츠 등록</button>
             </div>
             <div id="parts-popcorn-list" class="space-y-3"></div>
           </div>
@@ -353,31 +319,6 @@
     </section>
 
   </main>
-
-  <!-- 파츠 업로드 모달 -->
-  <div id="partsUploadModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-md w-full space-y-4 shadow-xl">
-      <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">배포 파츠 등록</h3>
-      <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">파츠 제목 (ex. 모 시나리오 겉옷 파츠 - M)</label>
-          <input type="text" id="modalPartTitle" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-2 text-gray-900 dark:text-gray-100" placeholder="제목 입력">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">1. 실제 파일 (PSD, ZIP 등)</label>
-          <input type="file" id="modalPartMainFile" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">2. 미리보기 이미지 (선택)</label>
-          <input type="file" id="modalPartThumbFile" accept="image/*" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
-        </div>
-      </div>
-      <div class="flex justify-end gap-2 pt-2 border-t border-gray-100 dark:border-gray-800">
-        <button onclick="closePartsUploadModal()" class="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">취소</button>
-        <button onclick="confirmUploadPart()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded hover:opacity-85 transition">등록</button>
-      </div>
-    </div>
-  </div>
 
   <!-- 라이트박스 모달 -->
   <div id="lightboxModal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 flex items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
@@ -410,57 +351,13 @@
     </div>
   </div>
 
-  <!-- 샘플 업로드 모달 -->
-  <div id="sampleUploadModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-md w-full space-y-4 shadow-xl">
-      <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">샘플 추가</h3>
-      <div class="space-y-3">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">세부 태그 선택</label>
-          <select id="modalSampleTagSelect" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-2 text-gray-900 dark:text-gray-100"></select>
-        </div>
-        <div id="modalBeforeContainer">
-          <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">1. 원본 (Before) 이미지</label>
-          <input type="file" id="modalBeforeFile" accept="image/*" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
-        </div>
-        <div>
-          <label id="modalLabelAfter" class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-1">2. 가공본 (After) 이미지</label>
-          <input type="file" id="modalAfterFile" accept="image/*" class="w-full text-xs border border-gray-300 dark:border-gray-700 dark:bg-gray-800 rounded p-1.5 text-gray-900 dark:text-gray-100">
-        </div>
-      </div>
-      <div class="flex justify-end gap-2 pt-2 border-t border-gray-100 dark:border-gray-800">
-        <button onclick="closeSampleUploadModal()" class="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">취소</button>
-        <button onclick="confirmUploadSample()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded hover:opacity-85 transition">등록</button>
-      </div>
-    </div>
-  </div>
-
-  <input type="file" id="blockImageFileInput" accept="image/*" multiple class="hidden" onchange="handleBlockImagesAdd(event)">
-
-  <!-- 관리자 인증 모달 -->
-  <div id="authModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 max-w-sm w-full space-y-4 shadow-xl">
-      <h3 class="text-base font-bold text-gray-900 dark:text-gray-100">편집 모드 인증</h3>
-      <p class="text-xs text-gray-500 dark:text-gray-400">관리자 코드를 입력해주세요.</p>
-      <input type="password" id="passInput" onkeydown="if(event.key==='Enter') verifyPass()" class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none" placeholder="비밀번호 입력">
-      <div class="flex justify-end gap-2 pt-2">
-        <button onclick="closeAuthModal()" class="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">취소</button>
-        <button onclick="verifyPass()" class="px-4 py-1.5 text-xs bg-black text-white dark:bg-white dark:text-black font-semibold rounded">확인</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-    const ADMIN_CODE = "twenty2020";
-    let isAdmin = false;
     let isPartsUnlocked = false;
     let currentSampleTab = 'cookie';
     let currentSampleSubTags = { cookie: '전체', baguette: '전체', popcorn: '전체' };
     let isSamplesOpen = true;
     let cart = [];
-    let activeImageBlockId = null;
     let activeSlides = {};
-    let activePartsType = null;
 
     let touchStartX = 0;
     let touchEndX = 0;
@@ -481,7 +378,7 @@
         popcorn: '• 팝콘 타입 참고사항을 입력해주세요.'
       },
       partsNotice: "토핑으로 추가하기엔 애매하나(덜 완성되었다던가, 업로드하기엔 부족한 것들...), 다용도로 잘 쓰일만한 파츠들을 등록해뒀습니다. 아직 조잡한 실력인지라 비밀번호를 걸어두었습니다만, 공개적인 곳에서의 게시만 아니라면 지인 사이에서 편히 공유해 주셔도 괜찮습니다. ^_^\n또한 신청자분께서 요청 주신 파츠가 다용도로 쓰일만하다고 판단될 경우, 신청 금액을 할인드리고 배포 파츠 자료집에 등록하는 경우도 있을 것 같습니다. 등록 전 먼저 말씀드릴 예정이니 편히 거절해 주셔도 문제 없습니다.",
-      calcNotice: "대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^_^;;!! 제가 잘못 계산했을 수도......)",
+      calcNotice: "대략적으로 가격을 파악할 수 있는 계산기입니다. 실제 결제 금액은 달라질 수 있으니 참고용으로만 사용해 주세요. (단, 왜 가격이 이만큼 달라졌지...? 하는 의문이 드신다면 편히 물어봐 주세요 ^^_^;;!! 제가 잘못 계산했을 수도......)",
       prices: {
         cookie: {
           base: [{ name: '일부분 파츠', price: '1,000p' }, { name: '인당 (기본 체형)', price: '2,000p' }],
@@ -509,19 +406,17 @@
       distributionParts: { cookie: [], baguette: [], popcorn: [] }
     };
 
-    let appData = JSON.parse(localStorage.getItem('nanagom_v20_data')) || defaultData;
+    let appData = defaultData;
 
-    // data.json 파일 자동 동기화 로직
+    // data.json 파일 자동 불러오기
     async function fetchExternalData() {
       try {
         const response = await fetch('data.json?v=' + Date.now());
         if (response.ok) {
-          const remoteData = await response.json();
-          appData = remoteData;
-          localStorage.setItem('nanagom_v20_data', JSON.stringify(appData));
+          appData = await response.json();
         }
       } catch (e) {
-        console.log('data.json 로드 취소 (로컬 스토리지 데이터 유지)');
+        console.log('data.json 불러오기 실패 (기본 데이터 표시)');
       }
       initAppUI();
     }
@@ -543,39 +438,6 @@
       }, 2000);
     }
 
-    function saveData() {
-      try {
-        localStorage.setItem('nanagom_v20_data', JSON.stringify(appData));
-        showToast("변경사항이 자동 저장되었습니다.");
-      } catch (e) {
-        console.warn('LocalStorage Quota Exceeded');
-      }
-    }
-
-    function exportDataJSON() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
-      const dlAnchorElem = document.createElement('a');
-      dlAnchorElem.setAttribute("href", dataStr);
-      dlAnchorElem.setAttribute("download", `data.json`);
-      dlAnchorElem.click();
-    }
-
-    function importDataJSON(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        try {
-          appData = JSON.parse(evt.target.result);
-          saveData();
-          location.reload();
-        } catch (err) {
-          alert('올바른 백업 JSON 파일이 아닙니다.');
-        }
-      };
-      reader.readAsText(file);
-    }
-
     function initDarkMode() {
       const isDark = localStorage.getItem('nanagom_dark_mode') === 'true';
       if (isDark) document.documentElement.classList.add('dark');
@@ -587,66 +449,13 @@
     }
     initDarkMode();
 
-    function openAuthModal() {
-      if(isAdmin) { isAdmin = false; updateAdminUI(); return; }
-      document.getElementById('authModal').classList.remove('hidden');
-      document.getElementById('passInput').focus();
-    }
-    function closeAuthModal() { document.getElementById('authModal').classList.add('hidden'); }
-    function verifyPass() {
-      if(document.getElementById('passInput').value === ADMIN_CODE) {
-        isAdmin = true; closeAuthModal(); updateAdminUI();
-      } else { alert('비밀번호가 올바르지 않습니다.'); }
-      document.getElementById('passInput').value = '';
-    }
-
-    function updateAdminUI() {
-      const btn = document.getElementById('adminBtn');
-      const backupWrapper = document.getElementById('backupSectionWrapper');
-
-      if(isAdmin) {
-        isPartsUnlocked = true;
-        btn.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-300', 'dark:bg-emerald-950', 'dark:text-emerald-300', 'dark:border-emerald-800');
-        btn.innerHTML = '<i class="fa-solid fa-lock-open"></i> <span>편집 해제</span>';
-        document.querySelectorAll('.edit-only').forEach(e => e.classList.remove('hidden'));
-        
-        backupWrapper.innerHTML = `
-          <div class="max-w-4xl mx-auto bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-lg p-3 text-xs flex justify-between items-center text-amber-900 dark:text-amber-200">
-            <span class="font-semibold"><i class="fa-solid fa-floppy-disk"></i> 데이터 관리 (백업/복원)</span>
-            <div class="flex gap-2">
-              <button onclick="exportDataJSON()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 다운로드 (data.json)</button>
-              <button onclick="document.getElementById('importJsonFile').click()" class="bg-amber-200 dark:bg-amber-800 hover:opacity-80 px-2.5 py-1 rounded font-bold">백업 파일 불러오기</button>
-              <input type="file" id="importJsonFile" accept=".json" class="hidden" onchange="importDataJSON(event)">
-            </div>
-          </div>
-        `;
-      } else {
-        isPartsUnlocked = false;
-        btn.classList.remove('bg-emerald-50', 'text-emerald-700', 'border-emerald-300', 'dark:bg-emerald-950', 'dark:text-emerald-300', 'dark:border-emerald-800');
-        btn.innerHTML = '<i class="fa-solid fa-lock"></i> <span>편집 모드</span>';
-        document.querySelectorAll('.edit-only').forEach(e => e.classList.add('hidden'));
-        backupWrapper.innerHTML = '';
-      }
-
-      updatePartsUnlockUI();
-      renderBlocks();
-      renderGenres();
-      renderPrices();
-      renderSampleTags();
-      renderSamples();
-      renderDeliverySpecs();
-      renderTypeNotices();
-      renderNoticesContent();
-      renderCalcFormOptions();
-    }
-
     function updatePartsUnlockUI() {
       const notice = document.getElementById('partsLockedNotice');
       const content = document.getElementById('partsUnlockedContent');
       const unlockContainer = document.getElementById('partsUnlockContainer');
       const downloadAllBtn = document.getElementById('downloadAllPartsBtn');
 
-      if (isPartsUnlocked || isAdmin) {
+      if (isPartsUnlocked) {
         notice.classList.add('hidden');
         content.classList.remove('hidden');
         downloadAllBtn.classList.remove('hidden');
@@ -663,28 +472,8 @@
     function renderNoticesContent() {
       const pEl = document.getElementById('partsNoticeText');
       const cEl = document.getElementById('calcNoticeText');
-
-      if (pEl) {
-        pEl.innerText = appData.partsNotice || '';
-        pEl.setAttribute('contenteditable', isAdmin);
-        if (isAdmin) pEl.classList.add('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
-        else pEl.classList.remove('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
-      }
-      if (cEl) {
-        cEl.innerText = appData.calcNotice || '';
-        cEl.setAttribute('contenteditable', isAdmin);
-        if (isAdmin) cEl.classList.add('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
-        else cEl.classList.remove('border', 'border-dashed', 'border-amber-300', 'p-2', 'rounded');
-      }
-    }
-
-    function updatePartsNotice(text) {
-      appData.partsNotice = text;
-      saveData();
-    }
-    function updateCalcNotice(text) {
-      appData.calcNotice = text;
-      saveData();
+      if (pEl) pEl.innerText = appData.partsNotice || '';
+      if (cEl) cEl.innerText = appData.calcNotice || '';
     }
 
     function openPartsAuthModal() {
@@ -698,71 +487,13 @@
       }
     }
 
-    function triggerPartsUpload(type) {
-      activePartsType = type;
-      document.getElementById('modalPartTitle').value = '';
-      document.getElementById('modalPartMainFile').value = '';
-      document.getElementById('modalPartThumbFile').value = '';
-      document.getElementById('partsUploadModal').classList.remove('hidden');
-    }
-    function closePartsUploadModal() {
-      document.getElementById('partsUploadModal').classList.add('hidden');
-    }
-
-    function confirmUploadPart() {
-      const title = document.getElementById('modalPartTitle').value.trim();
-      const mainFileIn = document.getElementById('modalPartMainFile').files[0];
-      const thumbFileIn = document.getElementById('modalPartThumbFile').files[0];
-
-      if (!title || !mainFileIn) {
-        alert('파츠 제목과 실제 파일은 필수 입력입니다!');
-        return;
-      }
-
-      const mainReader = new FileReader();
-      mainReader.onload = function(mainEvt) {
-        const mainDataUrl = mainEvt.target.result;
-
-        if (thumbFileIn) {
-          const thumbReader = new FileReader();
-          thumbReader.onload = function(thumbEvt) {
-            savePartData(title, mainDataUrl, thumbEvt.target.result);
-          };
-          thumbReader.readAsDataURL(thumbFileIn);
-        } else {
-          let defaultThumb = mainDataUrl.startsWith('data:image') ? mainDataUrl : 'https://placehold.co/100x100?text=FILE';
-          savePartData(title, mainDataUrl, defaultThumb);
-        }
-      };
-      mainReader.readAsDataURL(mainFileIn);
-    }
-
-    function savePartData(title, fileData, thumbData) {
-      if(!appData.distributionParts[activePartsType]) appData.distributionParts[activePartsType] = [];
-      appData.distributionParts[activePartsType].push({
-        id: Date.now().toString(),
-        title: title,
-        fileData: fileData,
-        thumbData: thumbData
-      });
-      saveData();
-      renderDistributionParts();
-      closePartsUploadModal();
-    }
-
-    function deleteDistributionPart(type, id) {
-      appData.distributionParts[type] = appData.distributionParts[type].filter(p => p.id !== id);
-      saveData();
-      renderDistributionParts();
-    }
-
     async function downloadCategoryZip(type) {
       const list = appData.distributionParts[type] || [];
       if (list.length === 0) { alert('다운로드할 파츠가 없습니다.'); return; }
       const typeName = type === 'cookie' ? '쿠키' : type === 'baguette' ? '바게트' : '팝콘';
       const zip = new JSZip();
       list.forEach((p) => {
-        if(p.fileData.includes(',')) {
+        if(p.fileData && p.fileData.includes(',')) {
           const base64Data = p.fileData.split(',')[1];
           zip.file(`${p.title}`, base64Data, {base64: true});
         }
@@ -783,7 +514,7 @@
           const folder = zip.folder(type);
           list.forEach(p => {
             totalCount++;
-            if(p.fileData.includes(',')) {
+            if(p.fileData && p.fileData.includes(',')) {
               const base64Data = p.fileData.split(',')[1];
               folder.file(`${p.title}`, base64Data, {base64: true});
             }
@@ -821,7 +552,6 @@
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
               <a href="${p.fileData}" download="${downloadFilename}" class="text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300 flex items-center gap-1" title="다운로드"><i class="fa-solid fa-download"></i></a>
-              ${isAdmin ? `<button onclick="deleteDistributionPart('${type}', '${p.id}')" class="text-red-500 hover:text-red-700 px-1 text-xs"><i class="fa-solid fa-trash"></i></button>` : ''}
             </div>
           `;
           container.appendChild(div);
@@ -837,66 +567,43 @@
       document.getElementById('lightboxModal').classList.remove('hidden');
     }
 
-    function handleTouchStart(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }
+    function handleTouchStart(e) { touchStartX = e.changedTouches[0].screenX; }
     function handleTouchEnd(blockId, maxLen, e) {
       touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX - touchEndX > 50) {
-        changeSlide(blockId, 1, maxLen);
-      } else if (touchEndX - touchStartX > 50) {
-        changeSlide(blockId, -1, maxLen);
-      }
+      if (touchStartX - touchEndX > 50) changeSlide(blockId, 1, maxLen);
+      else if (touchEndX - touchStartX > 50) changeSlide(blockId, -1, maxLen);
     }
 
     function renderBlocks() {
       const container = document.getElementById('noticeContainer');
       container.innerHTML = '';
-      appData.notices.forEach((n, index) => {
-        const div = document.createElement('div');
+      if(!appData.notices) return;
 
+      appData.notices.forEach((n) => {
+        const div = document.createElement('div');
         if(n.type === 'spacer') {
-          div.className = isAdmin ? 'group relative border border-dashed border-gray-300 dark:border-gray-700 rounded bg-gray-50 dark:bg-gray-900 flex items-center justify-center' : '';
           div.style.height = `${n.height || 20}px`;
-          if (isAdmin) {
-            div.innerHTML = `<span class="text-[10px] text-gray-400">여백 (${n.height || 20}px)</span>
-              <div class="absolute right-2 top-1 flex gap-1 items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1 rounded shadow-sm z-10">
-                <input type="text" value="${n.height || 20}" onchange="updateSpacer('${n.id}', this.value)" class="w-10 text-xs border dark:border-gray-700 dark:bg-gray-900 rounded px-1 text-center">
-                <button onclick="moveBlock(${index}, -1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="위로"><i class="fa-solid fa-arrow-up"></i></button>
-                <button onclick="moveBlock(${index}, 1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="아래로"><i class="fa-solid fa-arrow-down"></i></button>
-                <button onclick="deleteBlock('${n.id}')" class="text-red-500 p-1 text-xs" title="삭제"><i class="fa-solid fa-trash"></i></button>
-              </div>`;
-          }
           container.appendChild(div);
           return;
         }
 
-        div.className = 'group relative p-3.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-sm text-gray-800 dark:text-gray-200 shadow-sm space-y-2';
-        let titleHTML = isAdmin 
-          ? `<input type="text" value="${n.title || ''}" onchange="updateBlockTitle('${n.id}', this.value)" placeholder="블록 제목 입력" class="font-bold text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded px-2 py-0.5 text-xs w-full mb-1">`
-          : (n.title ? `<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm mb-1">${n.title}</h3>` : '');
+        div.className = 'p-3.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg text-sm text-gray-800 dark:text-gray-200 shadow-sm space-y-2';
+        let titleHTML = n.title ? `<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm mb-1">${n.title}</h3>` : '';
 
         if(n.type === 'text') {
-          div.innerHTML = `${titleHTML}<div contenteditable="${isAdmin}" onblur="updateBlockContent('${n.id}', this.innerText)" class="outline-none whitespace-pre-wrap">${n.content}</div>`;
+          div.innerHTML = `${titleHTML}<div class="whitespace-pre-wrap">${n.content}</div>`;
         } else if(n.type === 'image') {
           let imgs = n.images || (n.content ? [n.content] : []);
           let mode = n.viewMode || 'grid';
-
           let imgHtml = '';
+
           if (imgs.length === 0) {
-            imgHtml = `<div class="text-xs text-gray-400 py-4 text-center border border-dashed border-gray-200 dark:border-gray-700 rounded">등록된 이미지가 없습니다. [이미지 추가] 버튼을 눌러주세요.</div>`;
+            imgHtml = '';
           } else if (mode === 'grid') {
             imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
-            imgs.forEach((imgSrc, i) => {
-              imgHtml += `<div class="relative group/img overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 cursor-pointer flex items-center justify-center p-1">
+            imgs.forEach((imgSrc) => {
+              imgHtml += `<div class="overflow-hidden rounded border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 cursor-pointer flex items-center justify-center p-1">
                 <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '샘플 상세보기')">
-                ${isAdmin ? `
-                  <div class="absolute top-1 right-1 flex gap-0.5 bg-black/70 rounded px-1 py-0.5">
-                    <button onclick="event.stopPropagation(); moveBlockImage('${n.id}', ${i}, -1)" class="text-white text-[10px] px-1 hover:text-gray-300" title="왼쪽으로"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button onclick="event.stopPropagation(); moveBlockImage('${n.id}', ${i}, 1)" class="text-white text-[10px] px-1 hover:text-gray-300" title="오른쪽으로"><i class="fa-solid fa-chevron-right"></i></button>
-                    <button onclick="event.stopPropagation(); removeImageFromBlock('${n.id}', ${i})" class="text-white text-[10px] px-1 hover:text-red-400" title="삭제"><i class="fa-solid fa-xmark"></i></button>
-                  </div>
-                ` : ''}
               </div>`;
             });
             imgHtml += `</div>`;
@@ -919,57 +626,15 @@
                     ${imgs.map((_, dotIdx) => `<span onclick="setSlide('${n.id}', ${dotIdx})" class="w-2 h-2 rounded-full cursor-pointer transition-colors ${dotIdx === activeIdx ? 'bg-black dark:bg-white' : 'bg-gray-300 dark:bg-gray-700'}"></span>`).join('')}
                   </div>
                 ` : ''}
-                ${isAdmin ? `
-                  <div class="absolute top-2 right-2 flex gap-1 bg-black/70 rounded px-2 py-1 items-center z-10">
-                    <span class="text-[10px] text-white font-mono">${activeIdx + 1} / ${imgs.length}</span>
-                    <button onclick="removeImageFromBlock('${n.id}', ${activeIdx})" class="text-white text-xs px-1 hover:text-red-400" title="현재 이미지 삭제"><i class="fa-solid fa-trash"></i></button>
-                  </div>
-                ` : ''}
               </div>
             `;
           }
-
-          div.innerHTML = `${titleHTML}
-            ${isAdmin ? `
-              <div class="flex gap-2 items-center text-xs mb-2 pb-2 border-b border-gray-100 dark:border-gray-800">
-                <span class="text-gray-500 dark:text-gray-400 font-semibold">보기 형식:</span>
-                <button onclick="toggleBlockViewMode('${n.id}', 'grid')" class="px-2 py-0.5 rounded border ${mode==='grid'?'bg-black text-white dark:bg-white dark:text-black':'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'}">벽돌 형식</button>
-                <button onclick="toggleBlockViewMode('${n.id}', 'slider')" class="px-2 py-0.5 rounded border ${mode==='slider'?'bg-black text-white dark:bg-white dark:text-black':'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'}">슬라이드 형식</button>
-                <button onclick="triggerBlockImageAdd('${n.id}')" class="ml-auto bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-2 py-1 rounded text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700"><i class="fa-solid fa-plus"></i> 이미지 추가</button>
-              </div>
-            ` : ''}
-            ${imgHtml}`;
-        }
-
-        if(isAdmin) {
-          div.innerHTML += `
-            <div class="absolute right-2 top-2 flex gap-1 items-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1.5 py-0.5 rounded shadow-sm z-10">
-              <button onclick="moveBlock(${index}, -1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="위로"><i class="fa-solid fa-arrow-up"></i></button>
-              <button onclick="moveBlock(${index}, 1)" class="text-gray-500 hover:text-black dark:hover:text-white text-xs px-1" title="아래로"><i class="fa-solid fa-arrow-down"></i></button>
-              <button onclick="deleteBlock('${n.id}')" class="text-red-500 hover:text-red-700 text-xs px-1" title="삭제"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          `;
+          div.innerHTML = `${titleHTML}${imgHtml}`;
         }
         container.appendChild(div);
       });
     }
 
-    function moveBlock(index, direction) {
-      const targetIdx = index + direction;
-      if (targetIdx < 0 || targetIdx >= appData.notices.length) return;
-      const item = appData.notices.splice(index, 1)[0];
-      appData.notices.splice(targetIdx, 0, item);
-      saveData(); renderBlocks();
-    }
-    function moveBlockImage(blockId, imgIdx, direction) {
-      const b = appData.notices.find(n => n.id === blockId);
-      if(!b || !b.images) return;
-      const targetIdx = imgIdx + direction;
-      if(targetIdx < 0 || targetIdx >= b.images.length) return;
-      const imgItem = b.images.splice(imgIdx, 1)[0];
-      b.images.splice(targetIdx, 0, imgItem);
-      saveData(); renderBlocks();
-    }
     function changeSlide(blockId, direction, maxLen) {
       if (!activeSlides[blockId]) activeSlides[blockId] = 0;
       activeSlides[blockId] += direction;
@@ -981,73 +646,13 @@
       activeSlides[blockId] = idx;
       renderBlocks();
     }
-    function addBlock(type) {
-      if(type === 'spacer') {
-        appData.notices.push({ id: Date.now().toString(), type: 'spacer', height: 20 });
-      } else if(type === 'image') {
-        appData.notices.push({ id: Date.now().toString(), type: 'image', title: '이미지 블록', images: [], viewMode: 'grid' });
-      } else {
-        appData.notices.push({ id: Date.now().toString(), type: 'text', title: '새 블록', content: '내용을 입력해주세요.' });
-      }
-      saveData(); renderBlocks();
-    }
-    function updateBlockTitle(id, val) {
-      const b = appData.notices.find(n => n.id === id);
-      if(b) { b.title = val; saveData(); }
-    }
-    function updateBlockContent(id, val) {
-      const b = appData.notices.find(n => n.id === id);
-      if(b) { b.content = val; saveData(); }
-    }
-    function updateSpacer(id, val) {
-      const b = appData.notices.find(n => n.id === id);
-      if(b) { b.height = Number(val) || 20; saveData(); renderBlocks(); }
-    }
-    function deleteBlock(id) {
-      appData.notices = appData.notices.filter(n => n.id !== id);
-      saveData(); renderBlocks();
-    }
-    function toggleBlockViewMode(id, mode) {
-      const b = appData.notices.find(n => n.id === id);
-      if(b) { b.viewMode = mode; saveData(); renderBlocks(); }
-    }
-    function removeImageFromBlock(blockId, imgIdx) {
-      const b = appData.notices.find(n => n.id === blockId);
-      if(b && b.images) {
-        b.images.splice(imgIdx, 1);
-        saveData(); renderBlocks();
-      }
-    }
-    function triggerBlockImageAdd(blockId) {
-      activeImageBlockId = blockId;
-      document.getElementById('blockImageFileInput').click();
-    }
-    function handleBlockImagesAdd(e) {
-      const files = e.target.files;
-      if(!files || files.length === 0 || !activeImageBlockId) return;
-      const b = appData.notices.find(n => n.id === activeImageBlockId);
-      if(!b) return;
-      if(!b.images) b.images = [];
 
-      let processedCount = 0;
-      Array.from(files).forEach(file => {
-        compressImagePreserveTransparency(file, 1000, 0.85, (dataUrl) => {
-          b.images.push(dataUrl);
-          processedCount++;
-          if(processedCount === files.length) {
-            saveData(); renderBlocks(); e.target.value = '';
-          }
-        });
-      });
-    }
-
-    // OK / NG
     function renderGenres() {
       const container = document.getElementById('genreContainer');
       container.innerHTML = '';
-      if (!appData.genres) appData.genres = [];
+      if (!appData.genres) return;
       
-      appData.genres.forEach((g, idx) => {
+      appData.genres.forEach((g) => {
         const card = document.createElement('div');
         let badgeClass = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-200';
         let labelText = 'OK';
@@ -1072,170 +677,50 @@
         }
 
         card.className = `p-3 rounded-lg border flex items-center justify-between text-xs shadow-sm ${borderClass}`;
-        
-        if (isAdmin) {
-          card.innerHTML = `
-            <div class="flex items-center gap-2 flex-1">
-              <select onchange="updateGenreStatus(${idx}, this.value)" class="bg-white dark:bg-gray-800 border rounded px-1.5 py-0.5 text-xs">
-                <option value="ok" ${g.status==='ok'?'selected':''}>OK</option>
-                <option value="ng" ${g.status==='ng'?'selected':''}>NG</option>
-                <option value="main" ${g.status==='main'?'selected':''}>주력</option>
-                <option value="hard" ${g.status==='hard'?'selected':''}>어려움</option>
-                <option value="extra" ${g.status==='extra'?'selected':''}>추가금</option>
-              </select>
-              <input type="text" value="${g.text}" onchange="updateGenreText(${idx}, this.value)" class="bg-white dark:bg-gray-800 border rounded px-2 py-0.5 flex-1">
-            </div>
-            <button onclick="deleteGenre(${idx})" class="text-red-500 hover:text-red-700 ml-2"><i class="fa-solid fa-trash"></i></button>
-          `;
-        } else {
-          card.innerHTML = `
-            <div class="flex items-center gap-2">
-              <span class="px-2 py-0.5 rounded font-bold text-[10px] ${badgeClass}">
-                ${labelText}
-              </span>
-              <span>${g.text}</span>
-            </div>
-          `;
-        }
+        card.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded font-bold text-[10px] ${badgeClass}">${labelText}</span>
+            <span>${g.text}</span>
+          </div>
+        `;
         container.appendChild(card);
       });
     }
 
-    function addGenreItem() {
-      if (!appData.genres) appData.genres = [];
-      appData.genres.push({ id: Date.now().toString(), text: '새로운 장르 안내', status: 'ok' });
-      saveData(); renderGenres();
-    }
-    function updateGenreStatus(idx, val) {
-      appData.genres[idx].status = val;
-      saveData(); renderGenres();
-    }
-    function updateGenreText(idx, val) {
-      appData.genres[idx].text = val;
-      saveData();
-    }
-    function deleteGenre(idx) {
-      appData.genres.splice(idx, 1);
-      saveData(); renderGenres();
-    }
-
     function renderDeliverySpecs() {
       const el = document.getElementById('deliverySpecsContent');
-      el.innerText = appData.deliverySpecs || '';
-      el.setAttribute('contenteditable', isAdmin);
-      if (isAdmin) {
-        el.classList.add('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-2', 'rounded');
-      } else {
-        el.classList.remove('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-2', 'rounded');
-      }
-    }
-    function updateDeliverySpecs(text) {
-      appData.deliverySpecs = text;
-      saveData();
+      if (el) el.innerText = appData.deliverySpecs || '';
     }
 
     function renderTypeNotices() {
-      if (!appData.typeNotices) {
-        appData.typeNotices = { cookie: '', baguette: '', popcorn: '' };
-      }
       ['cookie', 'baguette', 'popcorn'].forEach(type => {
         const el = document.getElementById(`notice-${type}-content`);
-        if (el) {
-          el.innerText = appData.typeNotices[type] || '';
-          el.setAttribute('contenteditable', isAdmin);
-          if (isAdmin) {
-            el.classList.add('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-1.5', 'rounded');
-          } else {
-            el.classList.remove('border', 'border-dashed', 'border-gray-300', 'dark:border-gray-700', 'p-1.5', 'rounded');
-          }
-        }
+        if (el) el.innerText = (appData.typeNotices && appData.typeNotices[type]) || '';
       });
     }
-    function updateNoticeTypeContent(type, text) {
-      if (!appData.typeNotices) appData.typeNotices = {};
-      appData.typeNotices[type] = text;
-      saveData();
-    }
 
-    // 가격표
     function renderPrices() {
       ['cookie', 'baguette', 'popcorn'].forEach(type => {
         const baseBox = document.getElementById(`price-${type}-base`);
         const extraBox = document.getElementById(`price-${type}-extra`);
+        if(!baseBox || !extraBox) return;
         baseBox.innerHTML = ''; extraBox.innerHTML = '';
-        const pData = appData.prices[type] || { base: [], extra: [] };
+        const pData = (appData.prices && appData.prices[type]) || { base: [], extra: [] };
 
-        pData.base.forEach((item, idx) => baseBox.appendChild(createPriceRow(type, item, 'base', idx)));
-        pData.extra.forEach((item, idx) => extraBox.appendChild(createExtraPriceRow(type, item, idx)));
+        pData.base.forEach((item) => {
+          const row = document.createElement('div');
+          row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
+          row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
+          baseBox.appendChild(row);
+        });
+
+        pData.extra.forEach((item) => {
+          const row = document.createElement('div');
+          row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
+          row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
+          extraBox.appendChild(row);
+        });
       });
-    }
-
-    function createPriceRow(type, item, category, idx) {
-      const row = document.createElement('div');
-      row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
-      if(isAdmin) {
-        row.innerHTML = `
-          <input type="text" value="${item.name}" onchange="editPrice('${type}', '${category}', ${idx}, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-          <div class="flex items-center gap-1 justify-end">
-            <input type="text" value="${item.price}" onchange="editPrice('${type}', '${category}', ${idx}, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-20 text-right">
-            <button onclick="movePriceItem('${type}', '${category}', ${idx}, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('${type}', '${category}', ${idx}, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('${type}', '${category}', ${idx})" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        `;
-      } else {
-        row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
-      }
-      return row;
-    }
-
-    function createExtraPriceRow(type, item, idx) {
-      const row = document.createElement('div');
-      row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-gray-50 dark:bg-gray-800/50 rounded border border-gray-200 dark:border-gray-800';
-      if(isAdmin) {
-        row.innerHTML = `
-          <div class="flex items-center gap-2 flex-1 mr-2">
-            <input type="text" value="${item.name}" onchange="editPrice('${type}', 'extra', ${idx}, 'name', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-1/3">
-            <input type="text" value="${item.price}" onchange="editPrice('${type}', 'extra', ${idx}, 'price', this.value)" class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-2 py-0.5 text-xs rounded border border-gray-300 dark:border-gray-700 w-16 text-right">
-            <label class="text-[10px] flex items-center gap-1 text-gray-600 dark:text-gray-400 shrink-0 cursor-pointer" title="수량 선택 가능 여부">
-              <input type="checkbox" ${item.countable ? 'checked' : ''} onchange="toggleExtraCountable('${type}', ${idx}, this.checked)" class="accent-black dark:accent-white">
-            </label>
-          </div>
-          <div class="flex items-center gap-1 justify-end shrink-0">
-            <button onclick="movePriceItem('${type}', 'extra', ${idx}, -1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="위로"><i class="fa-solid fa-chevron-up"></i></button>
-            <button onclick="movePriceItem('${type}', 'extra', ${idx}, 1)" class="text-gray-400 hover:text-black dark:hover:text-white text-xs px-0.5" title="아래로"><i class="fa-solid fa-chevron-down"></i></button>
-            <button onclick="deletePrice('${type}', 'extra', ${idx})" class="text-gray-400 hover:text-red-500 text-xs px-1"><i class="fa-solid fa-xmark"></i></button>
-          </div>
-        `;
-      } else {
-        row.innerHTML = `<span class="text-gray-700 dark:text-gray-300">${item.name}</span><span class="font-mono text-gray-900 dark:text-gray-100 font-semibold">${item.price}</span>`;
-      }
-      return row;
-    }
-
-    function addPriceItem(type, cat) {
-      appData.prices[type][cat].push({ name: '새 항목', price: '1,000p', countable: cat === 'extra' ? true : false });
-      saveData(); renderPrices(); renderCalcFormOptions();
-    }
-    function editPrice(type, cat, idx, key, val) {
-      appData.prices[type][cat][idx][key] = val;
-      saveData(); renderCalcFormOptions();
-    }
-    function toggleExtraCountable(type, idx, val) {
-      appData.prices[type]['extra'][idx].countable = val;
-      saveData(); renderCalcFormOptions();
-    }
-    function movePriceItem(type, cat, idx, dir) {
-      const list = appData.prices[type][cat];
-      const targetIdx = idx + dir;
-      if (targetIdx < 0 || targetIdx >= list.length) return;
-      const item = list.splice(idx, 1)[0];
-      list.splice(targetIdx, 0, item);
-      saveData(); renderPrices(); renderCalcFormOptions();
-    }
-    function deletePrice(type, cat, idx) {
-      appData.prices[type][cat].splice(idx, 1);
-      saveData(); renderPrices(); renderCalcFormOptions();
     }
 
     function parseItemPrice(priceStr, basePrice = 0) {
@@ -1266,34 +751,6 @@
       };
     }
 
-    function compressImagePreserveTransparency(file, maxWidth, quality, callback) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          let width = img.width;
-          let height = img.height;
-
-          if (width > maxWidth) {
-            height = Math.round((height * maxWidth) / width);
-            width = maxWidth;
-          }
-
-          const canvas = document.createElement('canvas');
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.clearRect(0, 0, width, height);
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const dataUrl = canvas.toDataURL('image/png');
-          callback(dataUrl);
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-
     function toggleSamples() {
       isSamplesOpen = !isSamplesOpen;
       const sec = document.getElementById('sampleSectionContent');
@@ -1321,9 +778,7 @@
     function renderSampleTags() {
       const bar = document.getElementById('sampleTagFilterBar');
       bar.innerHTML = '';
-      if(!appData.sampleTags[currentSampleTab]) {
-        appData.sampleTags[currentSampleTab] = ['기본'];
-      }
+      if(!appData.sampleTags || !appData.sampleTags[currentSampleTab]) return;
       const tags = ['전체', ...appData.sampleTags[currentSampleTab]];
       const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
 
@@ -1338,46 +793,13 @@
           renderSamples();
         };
         bar.appendChild(btn);
-
-        if (isAdmin && tag !== '전체') {
-          const delBtn = document.createElement('button');
-          delBtn.className = 'text-[9px] text-red-500 hover:text-red-700 ml-[-4px] mr-1 px-1';
-          delBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-          delBtn.onclick = (e) => {
-            e.stopPropagation();
-            deleteSampleTag(tag);
-          };
-          bar.appendChild(delBtn);
-        }
       });
-    }
-
-    function addSampleTagPrompt() {
-      const newTag = prompt("추가할 세부 태그 이름을 입력하세요:");
-      if (!newTag) return;
-      if (!appData.sampleTags[currentSampleTab]) appData.sampleTags[currentSampleTab] = [];
-      if (appData.sampleTags[currentSampleTab].includes(newTag)) {
-        alert("이미 존재하는 태그입니다.");
-        return;
-      }
-      appData.sampleTags[currentSampleTab].push(newTag);
-      saveData();
-      renderSampleTags();
-    }
-
-    function deleteSampleTag(tag) {
-      if(!confirm(`'${tag}' 태그를 삭제하시겠습니까? 해당 태그의 샘플들은 '기본' 또는 '전체'로 분류됩니다.`)) return;
-      appData.sampleTags[currentSampleTab] = appData.sampleTags[currentSampleTab].filter(t => t !== tag);
-      saveData();
-      currentSampleSubTags[currentSampleTab] = '전체';
-      renderSampleTags();
-      renderSamples();
     }
 
     function renderSamples() {
       const grid = document.getElementById('sampleGrid');
       grid.innerHTML = '';
-      const list = appData.samples[currentSampleTab] || [];
+      const list = (appData.samples && appData.samples[currentSampleTab]) || [];
       const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
 
       const filtered = list.filter(s => {
@@ -1393,7 +815,6 @@
       filtered.forEach(s => {
         const div = document.createElement('div');
         div.className = 'relative group rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-3 shadow-sm space-y-2 cursor-pointer hover:shadow-md transition';
-        
         let tagBadge = s.tag ? `<span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full z-10">${s.tag}</span>` : '';
 
         if (s.single) {
@@ -1424,10 +845,6 @@
             </div>
           `;
         }
-
-        if(isAdmin) {
-          div.innerHTML += `<button onclick="event.stopPropagation(); deleteSample('${s.id}')" class="absolute top-2 right-2 bg-black/70 text-white w-6 h-6 rounded-full text-xs flex items-center justify-center hover:bg-red-600 z-10"><i class="fa-solid fa-xmark"></i></button>`;
-        }
         grid.appendChild(div);
       });
     }
@@ -1451,65 +868,6 @@
       document.getElementById('lightboxModal').classList.add('hidden');
     }
 
-    function openSampleUploadModal() {
-      const isPopcorn = currentSampleTab === 'popcorn';
-      document.getElementById('modalBeforeContainer').style.display = isPopcorn ? 'none' : 'block';
-      document.getElementById('modalLabelAfter').innerText = isPopcorn ? '샘플 이미지 선택' : '2. 가공본 (After) 이미지';
-      document.getElementById('modalBeforeFile').value = '';
-      document.getElementById('modalAfterFile').value = '';
-
-      const tagSelect = document.getElementById('modalSampleTagSelect');
-      tagSelect.innerHTML = '';
-      const tags = appData.sampleTags[currentSampleTab] || ['기본'];
-      tags.forEach(t => {
-        tagSelect.innerHTML += `<option value="${t}">${t}</option>`;
-      });
-
-      document.getElementById('sampleUploadModal').classList.remove('hidden');
-    }
-    function closeSampleUploadModal() {
-      document.getElementById('sampleUploadModal').classList.add('hidden');
-    }
-
-    function confirmUploadSample() {
-      const isPopcorn = currentSampleTab === 'popcorn';
-      const aFile = document.getElementById('modalAfterFile').files[0];
-      const selectedTag = document.getElementById('modalSampleTagSelect').value;
-      if(!aFile) { alert('이미지를 선택해주세요!'); return; }
-
-      if (isPopcorn) {
-        compressImagePreserveTransparency(aFile, 1000, 0.85, (aData) => {
-          if(!appData.samples[currentSampleTab]) appData.samples[currentSampleTab] = [];
-          appData.samples[currentSampleTab].push({
-            id: Date.now().toString(),
-            tag: selectedTag,
-            single: aData
-          });
-          saveData(); renderSamples(); closeSampleUploadModal();
-        });
-      } else {
-        const bFile = document.getElementById('modalBeforeFile').files[0];
-        if(!bFile) { alert('원본과 가공본 이미지 2개를 모두 선택해주세요!'); return; }
-        compressImagePreserveTransparency(bFile, 1000, 0.85, (bData) => {
-          compressImagePreserveTransparency(aFile, 1000, 0.85, (aData) => {
-            if(!appData.samples[currentSampleTab]) appData.samples[currentSampleTab] = [];
-            appData.samples[currentSampleTab].push({
-              id: Date.now().toString(),
-              tag: selectedTag,
-              before: bData,
-              after: aData
-            });
-            saveData(); renderSamples(); closeSampleUploadModal();
-          });
-        });
-      }
-    }
-
-    function deleteSample(id) {
-      appData.samples[currentSampleTab] = appData.samples[currentSampleTab].filter(s => s.id !== id);
-      saveData(); renderSamples();
-    }
-
     function renderCalcFormOptions() {
       const type = document.getElementById('calcType').value;
       const baseSelect = document.getElementById('calcBaseSelect');
@@ -1518,7 +876,7 @@
       baseSelect.innerHTML = '';
       extraGroup.innerHTML = '';
 
-      const pData = appData.prices[type] || { base: [], extra: [] };
+      const pData = (appData.prices && appData.prices[type]) || { base: [], extra: [] };
 
       if(pData.base.length === 0) {
         baseSelect.innerHTML = `<option value="0" data-raw="0" data-name="없음">종류 항목 없음 (0p)</option>`;
@@ -1589,9 +947,7 @@
         
         let count = 1;
         const countSpan = document.getElementById(`extraCountVal_${typeKey}_${itemIdx}`);
-        if (countSpan) {
-          count = parseInt(countSpan.innerText, 10) || 1;
-        }
+        if (countSpan) count = parseInt(countSpan.innerText, 10) || 1;
 
         for (let i = 0; i < count; i++) {
           const parsed = parseItemPrice(rawPrice, sum);
