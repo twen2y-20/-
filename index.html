@@ -258,7 +258,7 @@
 
       <div id="partsLockedNotice" class="text-center py-10 text-xs text-neutral-500 dark:text-neutral-400 border border-dashed border-neutral-200 dark:border-[#262626] rounded-lg space-y-2">
         <i class="fa-solid fa-lock text-2xl mb-1 text-neutral-300 dark:text-neutral-600 block"></i>
-        <p>이전에 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다.</p>
+        <p>이전에 가공 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다[cite: 1].</p>
       </div>
 
       <div id="partsUnlockedContent" class="hidden space-y-6">
@@ -410,7 +410,13 @@
       distributionParts: { cookie: [], baguette: [], popcorn: [] }
     };
 
-    let appData = defaultData;
+    let appData = JSON.parse(localStorage.getItem('nanagom_v20_data')) || defaultData;
+    if (!appData.sectionBlocks) {
+      appData.sectionBlocks = { genre: [], faq: [], price: [], sample: [], delivery: [], ref: [] };
+    }
+    if (!appData.faqs) {
+      appData.faqs = defaultData.faqs;
+    }
 
     async function fetchExternalData() {
       try {
@@ -422,7 +428,7 @@
           if (!appData.faqs) appData.faqs = [];
         }
       } catch (e) {
-        console.log('data.json 로드 실패 (기본 데이터 사용)');
+        console.log('data.json 로드 취소 (로컬 스토리지 데이터 유지)');
       }
       initAppUI();
     }
@@ -632,7 +638,7 @@
           return;
         }
 
-        div.className = 'group relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
+        div.className = 'relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
         let titleHTML = n.title ? `<h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm mb-1">${n.title}</h3>` : '';
 
         if(n.type === 'text') {
@@ -640,7 +646,8 @@
         } else if(n.type === 'image') {
           let imgs = n.images || (n.content ? [n.content] : []);
           let imgHtml = '';
-          if (imgs.length === 1) {
+          if (imgs.length === 0) return;
+          else if (imgs.length === 1) {
             let imgSrc = imgs[0];
             imgHtml = `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
               <img src="${imgSrc}" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
@@ -654,7 +661,6 @@
             });
             imgHtml += `</div>`;
           }
-
           div.innerHTML = `${titleHTML}${imgHtml}`;
         }
         container.appendChild(div);
@@ -680,7 +686,7 @@
           return;
         }
 
-        div.className = 'group relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
+        div.className = 'relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
         let titleHTML = n.title ? `<h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm mb-1">${n.title}</h3>` : '';
 
         if(n.type === 'text') {
@@ -689,15 +695,16 @@
           let imgs = n.images || (n.content ? [n.content] : []);
           let mode = n.viewMode || 'grid';
           let imgHtml = '';
-          if (imgs.length === 1) {
+          if (imgs.length === 0) return;
+          else if (imgs.length === 1) {
             let imgSrc = imgs[0];
-            imgHtml = `<div class="relative group/img overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
+            imgHtml = `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
               <img src="${imgSrc}" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
             </div>`;
           } else if (mode === 'grid') {
             imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
             imgs.forEach((imgSrc) => {
-              imgHtml += `<div class="relative group/img overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-1">
+              imgHtml += `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-1">
                 <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '샘플 상세보기')">
               </div>`;
             });
@@ -724,7 +731,6 @@
               </div>
             `;
           }
-
           div.innerHTML = `${titleHTML}${imgHtml}`;
         }
         container.appendChild(div);
@@ -786,6 +792,7 @@
       });
     }
 
+    /* FAQ 렌더링 함수 (답변 텍스트 앞의 불필요한 공백 제거 보완 적용) */
     function renderFaqs() {
       const container = document.getElementById('faqContainer');
       if (!container) return;
@@ -801,6 +808,8 @@
         const div = document.createElement('div');
         div.className = 'bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl overflow-hidden shadow-sm';
         
+        const cleanAnswer = (faq.a || '').trim();
+
         div.innerHTML = `
           <div class="flex justify-between items-center p-4 cursor-pointer select-none hover:bg-neutral-50 dark:hover:bg-[#222222] transition" onclick="toggleFaq(${idx})">
             <div class="font-bold text-neutral-900 dark:text-neutral-100 text-sm flex items-center gap-2 flex-1 min-w-0">
@@ -812,7 +821,7 @@
             </div>
           </div>
           <div id="faq-content-${idx}" class="hidden px-4 pb-4 pt-1 border-t border-neutral-100 dark:border-[#262626] text-xs text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap">
-            ${faq.a}
+            ${cleanAnswer}
           </div>
         `;
         container.appendChild(div);
@@ -860,12 +869,12 @@
 
     function createPriceRow(item) {
       const row = document.createElement('div');
-      row.className = 'flex justify-between items-center text-sm py-1.5 px-3 bg-neutral-50 dark:bg-[#222222] rounded border border-neutral-200 dark:border-[#2a2a2a] gap-2';
+      row.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm py-2 px-3 bg-neutral-50 dark:bg-[#222222] rounded border border-neutral-200 dark:border-[#2a2a2a] gap-2';
       row.innerHTML = `
-        <div class="flex items-center gap-2 flex-1 min-w-0 pr-2">
-          <span class="text-neutral-700 dark:text-neutral-300 truncate">${item.name}</span>
+        <div class="flex-1 min-w-0 pr-1">
+          <span class="text-neutral-700 dark:text-neutral-300 whitespace-normal break-words leading-relaxed text-xs sm:text-sm">${item.name}</span>
         </div>
-        <span class="font-mono text-neutral-900 dark:text-neutral-100 font-semibold shrink-0">${item.price}</span>
+        <span class="font-mono text-neutral-900 dark:text-neutral-100 font-bold shrink-0 text-xs sm:text-sm bg-neutral-200/60 dark:bg-[#333333] px-2 py-0.5 rounded">${item.price}</span>
       `;
       return row;
     }
@@ -918,11 +927,17 @@
     function renderSamples() {
       const grid = document.getElementById('sampleGrid');
       grid.innerHTML = '';
+      
+      const isPopcorn = currentSampleTab === 'popcorn';
+      grid.className = isPopcorn 
+        ? 'grid grid-cols-2 md:grid-cols-4 gap-4 pt-2' 
+        : 'grid grid-cols-1 md:grid-cols-2 gap-4 pt-2';
+
       const list = appData.samples[currentSampleTab] || [];
       const activeTag = currentSampleSubTags[currentSampleTab] || '전체';
       const searchKeyword = (document.getElementById('sampleSearchInput')?.value || '').trim().toLowerCase();
 
-      const filtered = list.filter(s => {
+      const filtered = list.filter((s) => {
         let tagMatch = true;
         if (activeTag !== '전체') {
           if (Array.isArray(s.tags)) tagMatch = s.tags.includes(activeTag);
@@ -942,7 +957,7 @@
         return;
       }
 
-      filtered.forEach(s => {
+      filtered.forEach((s) => {
         const div = document.createElement('div');
         div.className = 'relative group rounded-xl overflow-hidden border border-neutral-200 dark:border-[#262626] bg-white dark:bg-[#1a1a1a] p-3 shadow-sm space-y-2 cursor-pointer hover:shadow-md transition';
         
@@ -1013,6 +1028,7 @@
       renderDeliverySpecs();
       renderTypeNotices();
       renderNoticesContent();
+      updatePartsUnlockUI();
     }
 
     window.onload = () => {
