@@ -219,18 +219,18 @@
           <i class="fa-solid fa-triangle-exclamation text-neutral-500 text-sm"></i> 신청시 참고사항
         </h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2 h-auto">
           <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm border-b border-neutral-100 dark:border-[#262626] pb-2">쿠키</h3>
-          <div id="notice-cookie-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+          <div id="notice-cookie-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none"></div>
         </div>
-        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2">
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2 h-auto">
           <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm border-b border-neutral-100 dark:border-[#262626] pb-2">바게트</h3>
-          <div id="notice-baguette-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+          <div id="notice-baguette-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none"></div>
         </div>
-        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2">
+        <div class="bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl p-4 shadow-sm space-y-2 h-auto">
           <h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm border-b border-neutral-100 dark:border-[#262626] pb-2">팝콘</h3>
-          <div id="notice-popcorn-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none min-h-[80px]"></div>
+          <div id="notice-popcorn-content" class="text-xs text-neutral-800 dark:text-neutral-200 whitespace-pre-wrap outline-none"></div>
         </div>
       </div>
       <div id="refExtraBlocks" class="space-y-3 pt-2"></div>
@@ -258,7 +258,7 @@
 
       <div id="partsLockedNotice" class="text-center py-10 text-xs text-neutral-500 dark:text-neutral-400 border border-dashed border-neutral-200 dark:border-[#262626] rounded-lg space-y-2">
         <i class="fa-solid fa-lock text-2xl mb-1 text-neutral-300 dark:text-neutral-600 block"></i>
-        <p>이전에 가공 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다[cite: 1].</p>
+        <p>이전에 가공 커미션을 신청주셨던 분들께선 크레페 메시지로 문의주시면 배포 파츠 자료집 비밀번호를 전달드리고 있습니다.</p>
       </div>
 
       <div id="partsUnlockedContent" class="hidden space-y-6">
@@ -324,7 +324,7 @@
       
       <div id="lbSingleContainer" class="hidden flex flex-col items-center justify-center">
         <div class="w-full overflow-hidden rounded bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] flex items-center justify-center p-2 max-h-[75vh]">
-          <img id="lbSingleImg" src="" class="max-h-[75vh] w-auto h-auto object-contain no-save">
+          <img id="lbSingleImg" src="" loading="lazy" class="max-h-[75vh] w-auto h-auto object-contain no-save">
         </div>
       </div>
 
@@ -332,13 +332,13 @@
         <div class="space-y-1">
           <span class="text-xs font-bold text-neutral-500 dark:text-neutral-400 block text-center">원본 (Before)</span>
           <div class="w-full overflow-hidden rounded bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] flex items-center justify-center p-2 max-h-[75vh]">
-            <img id="lbBeforeImg" src="" class="max-h-[75vh] w-auto h-auto object-contain no-save">
+            <img id="lbBeforeImg" src="" loading="lazy" class="max-h-[75vh] w-auto h-auto object-contain no-save">
           </div>
         </div>
         <div class="space-y-1">
           <span class="text-xs font-bold text-neutral-500 dark:text-neutral-400 block text-center">가공 (After)</span>
           <div class="w-full overflow-hidden rounded bg-neutral-50 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] flex items-center justify-center p-2 max-h-[75vh]">
-            <img id="lbAfterImg" src="" class="max-h-[75vh] w-auto h-auto object-contain no-save">
+            <img id="lbAfterImg" src="" loading="lazy" class="max-h-[75vh] w-auto h-auto object-contain no-save">
           </div>
         </div>
       </div>
@@ -428,9 +428,26 @@
           if (!appData.faqs) appData.faqs = [];
         }
       } catch (e) {
-        console.log('data.json 로드 취소 (로컬 스토리지 데이터 유지)');
+        console.log('data.json 로드 취소 (기본 데이터 유지)');
       }
       initAppUI();
+    }
+
+    function showToast(message) {
+      let toast = document.getElementById('toastMsg');
+      if(!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastMsg';
+        toast.className = 'fixed bottom-16 right-5 bg-black dark:bg-white text-white dark:text-black px-4 py-2 rounded-lg text-xs shadow-xl transition-opacity duration-300 opacity-0 pointer-events-none z-50 font-medium';
+        document.body.appendChild(toast);
+      }
+      toast.innerText = message;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2000);
     }
 
     function initDarkMode() {
@@ -527,6 +544,7 @@
         isPartsUnlocked = true;
         closePartsAuthModal();
         updatePartsUnlockUI();
+        showToast("배포 파츠 자료집이 해제되었습니다.");
       } else {
         alert("비밀번호가 올바르지 않습니다.");
       }
@@ -596,7 +614,7 @@
           div.innerHTML = `
             <div class="flex items-center gap-2.5 overflow-hidden">
               <div class="w-10 h-10 shrink-0 rounded bg-neutral-100 dark:bg-[#222222] border border-neutral-200 dark:border-[#333333] overflow-hidden flex items-center justify-center p-0.5 cursor-pointer" onclick="openPartsLightbox('${p.thumbData}', '${p.title}')" title="파츠 크게보기">
-                <img src="${p.thumbData}" class="w-full h-full object-contain no-save">
+                <img src="${p.thumbData}" loading="lazy" class="w-full h-full object-contain no-save">
               </div>
               <span class="text-xs font-medium text-neutral-800 dark:text-neutral-200 truncate">${p.title}</span>
             </div>
@@ -638,7 +656,7 @@
           return;
         }
 
-        div.className = 'relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
+        div.className = 'group relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
         let titleHTML = n.title ? `<h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm mb-1">${n.title}</h3>` : '';
 
         if(n.type === 'text') {
@@ -647,16 +665,16 @@
           let imgs = n.images || (n.content ? [n.content] : []);
           let imgHtml = '';
           if (imgs.length === 0) return;
-          else if (imgs.length === 1) {
+          if (imgs.length === 1) {
             let imgSrc = imgs[0];
             imgHtml = `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
-              <img src="${imgSrc}" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
+              <img src="${imgSrc}" loading="lazy" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
             </div>`;
           } else {
             imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
             imgs.forEach((imgSrc) => {
               imgHtml += `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-1">
-                <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '상세보기')">
+                <img src="${imgSrc}" loading="lazy" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '상세보기')">
               </div>`;
             });
             imgHtml += `</div>`;
@@ -686,7 +704,7 @@
           return;
         }
 
-        div.className = 'relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
+        div.className = 'group relative p-3.5 bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-lg text-sm text-neutral-800 dark:text-neutral-200 shadow-sm space-y-2';
         let titleHTML = n.title ? `<h3 class="font-bold text-neutral-900 dark:text-neutral-100 text-sm mb-1">${n.title}</h3>` : '';
 
         if(n.type === 'text') {
@@ -696,16 +714,16 @@
           let mode = n.viewMode || 'grid';
           let imgHtml = '';
           if (imgs.length === 0) return;
-          else if (imgs.length === 1) {
+          if (imgs.length === 1) {
             let imgSrc = imgs[0];
             imgHtml = `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-2">
-              <img src="${imgSrc}" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
+              <img src="${imgSrc}" loading="lazy" class="max-h-[500px] w-auto h-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '이미지 상세보기')">
             </div>`;
           } else if (mode === 'grid') {
             imgHtml = `<div class="grid grid-cols-2 md:grid-cols-3 gap-2">`;
             imgs.forEach((imgSrc) => {
               imgHtml += `<div class="relative overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] cursor-pointer flex items-center justify-center p-1">
-                <img src="${imgSrc}" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '샘플 상세보기')">
+                <img src="${imgSrc}" loading="lazy" class="max-h-48 w-auto object-contain no-save" onclick="openSingleLightbox('${imgSrc}', '샘플 상세보기')">
               </div>`;
             });
             imgHtml += `</div>`;
@@ -717,7 +735,7 @@
               <div class="relative flex flex-col items-center">
                 <div class="relative w-full max-w-xl h-80 overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-2"
                      ontouchstart="handleTouchStart(event)" ontouchend="handleTouchEnd('${n.id}', ${imgs.length}, event)">
-                  <img src="${currentImg}" class="max-h-full max-w-full w-auto h-auto object-contain no-save cursor-pointer" onclick="openSingleLightbox('${currentImg}', '샘플 상세보기')">
+                  <img src="${currentImg}" loading="lazy" class="max-h-full max-w-full w-auto h-auto object-contain no-save cursor-pointer" onclick="openSingleLightbox('${currentImg}', '샘플 상세보기')">
                   ${imgs.length > 1 ? `
                     <button onclick="changeSlide('${n.id}', -1, ${imgs.length})" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/80 z-10"><i class="fa-solid fa-chevron-left"></i></button>
                     <button onclick="changeSlide('${n.id}', 1, ${imgs.length})" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/80 z-10"><i class="fa-solid fa-chevron-right"></i></button>
@@ -792,7 +810,7 @@
       });
     }
 
-    /* FAQ 렌더링 함수 (답변 텍스트 앞의 불필요한 공백 제거 보완 적용) */
+    /* FAQ 렌더링 함수 (모바일 잘림 방지 및 줄바꿈 최적화) */
     function renderFaqs() {
       const container = document.getElementById('faqContainer');
       if (!container) return;
@@ -807,16 +825,15 @@
       appData.faqs.forEach((faq, idx) => {
         const div = document.createElement('div');
         div.className = 'bg-white dark:bg-[#1a1a1a] border border-neutral-200 dark:border-[#262626] rounded-xl overflow-hidden shadow-sm';
-        
         const cleanAnswer = (faq.a || '').trim();
 
         div.innerHTML = `
-          <div class="flex justify-between items-center p-4 cursor-pointer select-none hover:bg-neutral-50 dark:hover:bg-[#222222] transition" onclick="toggleFaq(${idx})">
-            <div class="font-bold text-neutral-900 dark:text-neutral-100 text-sm flex items-center gap-2 flex-1 min-w-0">
-              <span class="text-neutral-400 font-mono text-xs">Q.</span>
-              <span class="truncate">${faq.q}</span>
+          <div class="flex justify-between items-start sm:items-center p-4 cursor-pointer select-none hover:bg-neutral-50 dark:hover:bg-[#222222] transition gap-2" onclick="toggleFaq(${idx})">
+            <div class="font-bold text-neutral-900 dark:text-neutral-100 text-sm flex items-start sm:items-center gap-2 flex-1 min-w-0 pr-2">
+              <span class="text-neutral-400 font-mono text-xs shrink-0 pt-0.5 sm:pt-0">Q.</span>
+              <span class="whitespace-normal break-words leading-relaxed">${faq.q}</span>
             </div>
-            <div class="flex items-center gap-2 ml-2 shrink-0">
+            <div class="flex items-center gap-2 ml-2 shrink-0 pt-0.5 sm:pt-0">
               <i id="faq-icon-${idx}" class="fa-solid fa-chevron-down text-xs text-neutral-400 transition-transform"></i>
             </div>
           </div>
@@ -869,7 +886,7 @@
 
     function createPriceRow(item) {
       const row = document.createElement('div');
-      row.className = 'flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm py-2 px-3 bg-neutral-50 dark:bg-[#222222] rounded border border-neutral-200 dark:border-[#2a2a2a] gap-2';
+      row.className = 'flex flex-row justify-between items-center text-sm py-2 px-3 bg-neutral-50 dark:bg-[#222222] rounded border border-neutral-200 dark:border-[#2a2a2a] gap-2';
       row.innerHTML = `
         <div class="flex-1 min-w-0 pr-1">
           <span class="text-neutral-700 dark:text-neutral-300 whitespace-normal break-words leading-relaxed text-xs sm:text-sm">${item.name}</span>
@@ -964,7 +981,6 @@
         let tagsList = Array.isArray(s.tags) ? s.tags : (s.tag ? [s.tag] : []);
         let tagBadges = tagsList.map(t => `<span class="bg-black/70 text-white dark:bg-white/20 text-[10px] px-2 py-0.5 rounded-full">${t}</span>`).join(' ');
         let dateHtml = s.dateStr ? `<span class="text-xs text-neutral-400 dark:text-neutral-500 self-center font-normal">${s.dateStr}</span>` : '';
-        
         let headerHtml = `<div class="flex items-center gap-2 mb-1 flex-wrap">${tagBadges}${dateHtml}</div>`;
 
         if (s.single) {
@@ -972,7 +988,7 @@
           div.innerHTML = `
             ${headerHtml}
             <div class="w-full aspect-square overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-1">
-              <img src="${s.single}" class="w-full h-full object-contain no-save">
+              <img src="${s.single}" loading="lazy" class="w-full h-full object-contain no-save">
             </div>
           `;
         } else {
@@ -983,13 +999,13 @@
               <div class="space-y-1">
                 <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 block text-center mb-1">원본 (Before)</span>
                 <div class="w-full aspect-square overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-1">
-                  <img src="${s.before}" class="w-full h-full object-contain no-save">
+                  <img src="${s.before}" loading="lazy" class="w-full h-full object-contain no-save">
                 </div>
               </div>
               <div class="space-y-1">
                 <span class="text-[10px] font-bold text-neutral-500 dark:text-neutral-400 block text-center mb-1">가공 (After)</span>
                 <div class="w-full aspect-square overflow-hidden rounded border border-neutral-100 dark:border-[#262626] bg-neutral-50 dark:bg-[#222222] flex items-center justify-center p-1">
-                  <img src="${s.after}" class="w-full h-full object-contain no-save">
+                  <img src="${s.after}" loading="lazy" class="w-full h-full object-contain no-save">
                 </div>
               </div>
             </div>
@@ -1028,7 +1044,6 @@
       renderDeliverySpecs();
       renderTypeNotices();
       renderNoticesContent();
-      updatePartsUnlockUI();
     }
 
     window.onload = () => {
